@@ -1,8 +1,8 @@
 ---
 permalink: /
-title: "academicpages is a ready-to-fork GitHub Pages template for academic personal websites"
+title: "Deep Learning course - Master in Artificial Intelligence - Universitat Politècnica de Catalunya and Barcelona Supercomputing Center"
 excerpt: "About me"
-author_profile: true
+author_profile: false
 redirect_from: 
   - /about/
     - /about.html
