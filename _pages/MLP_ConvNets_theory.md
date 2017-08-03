@@ -4,11 +4,11 @@ permalink: /mlp-convnets-theory/
 
 ## Multilayer Perceptron and Convolutional Neural Networks - Theory
 
-This document contains the first theoretical part (1/4) of the Deep Learning subject at the Master in Artificial Inteligence of the Universitat Politècnica de Catalunya. It briefly reviews the basic concepts regarding Multilayer Perceptron (MLP) and Convolutional Neural Networks (CNNs).
+This page contains the first theoretical part (1/4) of the Deep Learning subject at the Master in Artificial Inteligence of the Universitat Politècnica de Catalunya. It briefly reviews the basic concepts regarding Multilayer Perceptron (MLP) and Convolutional Neural Networks (CNNs).
 
 Table of Contents:
 
-- [A bit of history](#history)
+- [A Bit of History](#history)
 - [Rosenblatt's Perceptron](#rosenblatt)
 - [Backpropagation and Stochastic Gradient Descent](#backprop)
 - [Convolutional Neural Networks](#cnn)
@@ -17,19 +17,19 @@ Table of Contents:
 - [Activation Functions](#activations)
 - [CNN Architectures](#conv_arch)
 - [Regularization Methods](#regularization)
-- [Training Parameters](#train_params)
+- [Training Parameters](#training_params)
     - [Epochs and Batch Size](#epochs_batch)
     - [Learning Rate](#learning_rate)
     - [Other Parameters](#other_params)
     - [Adaptative Learning Methods](#adaptative_methods)
-- [CNN Inside](#inside)
+- [CNN from the Inside](#inside)
 - [CNN Applications](#apps)
 - [Bibliography](#bib)
 
 
 
 <a name='history'></a>
-### A bit of history
+### A Bit of History
 
 Neural networks have recently (i.e., 2010s) become a hot topic for both academia and industry. However, neural networks have been around for a while.
 
@@ -156,7 +156,7 @@ The convolution process increases significantly the size of the volume from laye
 <p style="text-align: center;">Effect of applying a max pooling on the data, from [25].</p>
 
 <div style="text-align:center">
-    <img src="/images/pooling2.png" width="450">
+    <img src="/images/pooling2.jpeg" width="450">
 </div>
 <p style="text-align: center;">Effect of applying a max pooling on the volume, from [25].</p>
 
@@ -192,7 +192,7 @@ ReLU are currently being used by default, as these are more efficient. ReLU also
 With all the previously described components, one must define a convolutional neural network architecture. There are certain patterns of layers that have been shown to perform particularly well, and in most cases its better to use one of those. The first popular CNN architecture was defined by Krizhevsky, Sutskever, and Hinton [26]. In their work, Krizhevsky et. al. defined a 5-layer network using convolutions, poolings, ReLUs and Dropout for regularization, and managed to win the ImageNet2012 improving the best alternative by 11%. ImageNet2012 was a image recognition problem containing 1,000, including more than 100 breeds of dogs. The training was made possible through the use of GPUs, which speed up the process significantly. 
 
 <div style="text-align:center">
-    <img src="/images/imagenet.png" width="450">
+    <img src="/images/imagenet.png" width="750">
 </div>
 <p style="text-align: center;">Results of the ImageNet challenge. By 2014 all competitors used CNNs. By 2015 human level recognition was achieved.</p>
 
@@ -277,6 +277,15 @@ The number of learning parameters to be fit has motivated the appearence of lear
 - RMSprop
 - Adam
 
+
+
+<a name='inside'></a>
+### CNN from the Inside
+
+
+
+<a name='apps'></a>
+### CNN Applications
 
 
 
