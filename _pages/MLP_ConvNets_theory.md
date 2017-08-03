@@ -1,5 +1,4 @@
 ---
-mathjax: true
 permalink: /mlp-convnets-theory/
 ---
 
@@ -28,7 +27,7 @@ Neural networks have recently (i.e., 2010s) become a hot topic for both academia
 Artificial Neural Networks (ANN) were born in 1943, through a work by Warren McCulloch and Walter Pitts [1]. In their paper, McCulloch and Pitts tried to understand how could the brain compute highly complex behaviors, using processing units as simple as neurons. Their design of single neurons was the first contribution to the field, and included the idea of weighted inputs to produce an output.
 
 <div style="text-align:center">
-    <img src="/figures/mcculloch_fig1.jpg" width="450">
+    <img src="/images/mcculloch_fig1.jpg" width="450">
 </div>
 
 <div><p style="text-align: center;">Original Figure from McCulloch and Pitts. Source [1].</p></div>
@@ -47,7 +46,7 @@ Where w is is a vector of real-valued weights, · is the dot product, and b is a
 Rosenblatt implemented the algorithm within the machine "Mark I Perceptron", a visual classifier composed by 400 photosensitive receptors (sensory units), associated with 512 stepping motors (association units), and an output of 8 neurons (response units) [3]. It contained only one layer of trainable parameters (association units). For more details see [4,9].
 
 <div style="text-align:center">
-    <img src="/figures/Mark1.png" width="450">
+    <img src="/images/Mark1.png" width="450">
 </div>
 <p style="text-align: center;">Illustration of the Mark I Perceptron from [3].</p>
 
@@ -72,7 +71,7 @@ Convolutional Neural Networks (CNN) are based on a special type of neuron: convo
 Conv neurons assume the existence of a two-dimensional structure in the data, and are connected to neurons that define squared patches of the previous layer.
 
 <div style="text-align:center">
-    <img src="/figures/convolution2.png" width="350">
+    <img src="/images/convolution2.png" width="350">
 </div>
 <p style="text-align: center;">Illustration of a conv neuron, from [13]. The Kernel in the figure corresponds to the learnt weights of the red neuron. This neuron has 9 inputs (3x3) from the previous layer.</p>
 
@@ -81,7 +80,7 @@ By doing this limited connectivity, conv layers can focus on a particular patch 
 The convolution weight sharing process considers the definition of several neurons with equal weights processing different parts of the input. A different way of understanding this process is to consider that a single filter is slided (or convolved) over all the input, to produce a set of outputs. See the next figure for a visual example.
 
 <div style="text-align:center">
-    <img src="/figures/Convolution_schematic.gif" width="350">
+    <img src="/images/Convolution_schematic.gif" width="350">
 </div>
 <p style="text-align: center;">Illustration of a filter being convolved, from [14].</p>
 
@@ -89,8 +88,8 @@ Convolving filters can have many effects. Averaging each pixel by its neighbors 
 
 
 <div style="text-align:center">
-   <img src="/figures/convolution-blur.png" width="350"><img src="/figures/generic-taj-convmatrix-blur.jpg" width="350"><br>
-   <img src="/figures/convolution-edge-detect1.png" width="350"><img src="/figures/generic-taj-convmatrix-edge-detect.jpg" width="350">
+   <img src="/images/convolution-blur.png" width="350"><img src="/images/generic-taj-convmatrix-blur.jpg" width="350"><br>
+   <img src="/images/convolution-edge-detect1.png" width="350"><img src="/images/generic-taj-convmatrix-edge-detect.jpg" width="350">
 </div>
 <p style="text-align: center;">Top: convolved filter to blur image. Bottom: Convolved filter to detect edges. From [15].</p>
 
@@ -102,15 +101,15 @@ The convolution process has many adjustable parameters. The kernel size is the m
 * Stride: When applying the same convolving filter over the image, the stride defines the number of steps to take. Minimum stride is 1.
 
 <div style="text-align:center">
-   Stride=1 <img src="/figures/Stride1.png" width="500"><br>
-   Stride=2 <img src="/figures/Stride2.png" width="500">
+   Stride=1 <img src="/images/Stride1.png" width="500"><br>
+   Stride=2 <img src="/images/Stride2.png" width="500">
 </div>
 <p style="text-align: center;">Effect of a stride of 1 or 2 on the output volume, from [16].</p>
 
 * Padding: Without padding, a convolving filter cannot be centered on the borders of an input, as there will be several missing datapoints. As a result, dimensionality decreases (see Stride example). Padding allows one to define default values (typically 0's a.k.a. zero-padding) for the datapoints outside the image. A stride of 1 and a zero-padding fitting the kernel size (e.g., $\frac{KernelSize-1)}{2}$ for odd kernel sizes) produces outputs of equal size to the input.
 
 <div style="text-align:center">
-    <img src="/figures/Pad.png" width="550">
+    <img src="/images/Pad.png" width="550">
 </div>
 <p style="text-align: center;">Example of zero-padding of 2, from [16].</p>
 
@@ -126,7 +125,7 @@ Although CNN are appropriate for any 2-dimensional type of input, in most cases 
 A single conv filter convolved over the whole input (or what is the same, a set of conv neurons sharing the same weights) produces a 2-dimensional numerical output. Such 2-dimensional output corresponds to the application of a single filter to the input volume. For every filter we have in a conv layer (i.e., for every neuron), a new 2-dimensional output is produced. As a result, a convolutional layer produces a 3-dimensional volume, where the width and height is defined by the previously defined formula, and the depth is defined by the number of neurons.
 
 <div style="text-align:center">
-    <img src="/figures/Figure_5.png" width="550">
+    <img src="/images/Figure_5.png" width="550">
 </div>
 <p style="text-align: center;">Example of 3-dimensional kernel and how this translates into volumes, from [17].</p>
 
@@ -134,7 +133,7 @@ Consider now this recently created output as the input of a consequent convoluti
 
 
 <div style="text-align:center">
-    <img src="/figures/cnn_volumes.png" width="550">
+    <img src="/images/cnn_volumes.png" width="550">
 </div>
 <p style="text-align: center;">Illustration of how CNN volumes and filters interact, from [18].</p>
 
@@ -148,13 +147,13 @@ These include:
 
 The Sigmoid: $f(x)=\frac{1}{1+e^{-x}}$
 <div style="text-align:center">
-    <img src="/figures/sigmoid.png" width="350">
+    <img src="/images/sigmoid.png" width="350">
 </div>
 <p style="text-align: center;">Sigmoid function, from [19]. See [21] for more details on activation functions.</p>
 
  The Rectified Linear Unit (ReLU): $f(x)=max(0,x)$
 <div style="text-align:center">
-    <img src="/figures/relu.jpeg" width="350">
+    <img src="/images/relu.jpeg" width="350">
 </div>
 <p style="text-align: center;">ReLU function, from [19]. See [21] for more details on activation functions.</p>
 
@@ -181,7 +180,7 @@ The batch size defines the number of images that are processed together in a for
 Batch sizes too small may be identified by a noisy function of loss over time. With a batch size equal to the dataset size, variation should be minimal (unless the learning rate is too high).
 
 <div style="text-align:center">
-    <img src="/figures/loss.jpeg" width="450">
+    <img src="/images/loss.jpeg" width="450">
 </div>
 <p style="text-align: center;">Illustration of a noisy loss function, from [22].</p>
 
@@ -192,7 +191,7 @@ Learning rate defines the amount of the total derivative of the loss that is app
 Plotting the behavior of the loss over time gives a good insight on our choice of learning rate.
 
 <div style="text-align:center">
-    <img src="/figures/learningrates.jpeg" width="450">
+    <img src="/images/learningrates.jpeg" width="450">
 </div>
 <p style="text-align: center;">Illustration on the behavior of various learning rates, from [22].</p>
 
