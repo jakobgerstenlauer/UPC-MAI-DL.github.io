@@ -15,6 +15,15 @@ Table of Contents:
     - [CNN Parameters](#cnn_params)
     - [CNN Volumes](#cnn_volumes)
 - [Activation Functions](#activations)
+- [CNN Architectures](#conv_arch)
+- [Regularization Methods](#regularization)
+- [Training Parameters](#train_params)
+    - [Epochs and Batch Size](#epochs_batch)
+    - [Learning Rate](#learning_rate)
+    - [Other Parameters](#other_params)
+    - [Adaptative Learning Methods](#adaptative_methods)
+- [CNN Inside](#inside)
+- [CNN Applications](#apps)
 - [Bibliography](#bib)
 
 
@@ -177,6 +186,7 @@ The Sigmoid: $f(x)=\frac{1}{1+e^{-x}}$
 ReLU are currently being used by default, as these are more efficient. ReLU also avoids the vanishing gradient problem through its constant slope (see [20] for more details on that).
 
 
+<a name='conv_arch'></a>
 ### Convolutional Architectures
 
 With all the previously described components, one must define a convolutional neural network architecture. There are certain patterns of layers that have been shown to perform particularly well, and in most cases its better to use one of those. The first popular CNN architecture was defined by Krizhevsky, Sutskever, and Hinton [26]. In their work, Krizhevsky et. al. defined a 5-layer network using convolutions, poolings, ReLUs and Dropout for regularization, and managed to win the ImageNet2012 improving the best alternative by 11%. ImageNet2012 was a image recognition problem containing 1,000, including more than 100 breeds of dogs. The training was made possible through the use of GPUs, which speed up the process significantly. 
@@ -192,10 +202,11 @@ The AlexNet architecture follows the pattern of pairs of conv-pooling layers, wi
 </div>
 <p style="text-align: center;">AlexNet architecture, from [26]. The network is split horizontally because it needed to be trained on two different GPUs.</p>
 
-Other relevant architectures are the VGG16/19 (by Oxford VGG research group), the Inception (first called GoogLeNet, by Google) and the ResNet (by Microsoft).
+On top of the fully-connected layers, either a Softmax or a SVM is placed, to perform the final classification. Other relevant CNN that follow this same scheme are the VGG16/19 (by Oxford VGG research group), the Inception (first called GoogLeNet, by Google) and the ResNet (by Microsoft).
 
 
 
+<a name='regularization'></a>
 ### Regularization Methods
 
 Deep neural networks have a huge learning capacity, defined by the number of parameters in the network. To avoid overfitting, there a set of regularization methods have been proposed. These include:
@@ -206,10 +217,14 @@ Deep neural networks have a huge learning capacity, defined by the number of par
 
 See [24] for further details.
 
+
+<a name='training_params'></a>
 ### Training Parameters
 
 There are many training paremeters that can be tuned, and finding a good set is not straight-forward. In most cases, its just a matter of try and error, which typically requires executing the training procedure hundreds of times. Next we review some of those.
 
+
+<a name='epochs_batch'></a>
 #### Epochs and batch size
 
 An epoch correponds to a training stage where all images in the training set are used for training once. Typically, an ANN training will require lots of epochs, as each example takes the network parameters in a different direction, and the network cannot learn all there is to learn from an image in a single sight. However when using too many epochs the network will eventually overfit.
@@ -223,6 +238,9 @@ Batch sizes too small may be identified by a noisy function of loss over time. W
 </div>
 <p style="text-align: center;">Illustration of a noisy loss function, from [22].</p>
 
+
+
+<a name='learning_rate'></a>
 #### Learning Rate
 
 Learning rate defines the amount of the total derivative of the loss that is applied on each step. Typically, applying the full derivative provides an overcorrection, and smaller steps are required. A learning rate too large will cause the neurons to make large "jumps" within the high-dimensional space being defined, and will prevent them to find global minimums. A learning rate too small may left the neuron stuck in a local minimum, or may make training unfeasibly long. Regardless, its often better to start with a small learning rate and increase it on later experiments.
@@ -235,6 +253,8 @@ Plotting the behavior of the loss over time gives a good insight on our choice o
 <p style="text-align: center;">Illustration on the behavior of various learning rates, from [22].</p>
 
 
+
+<a name='other_params'></a>
 #### Other parameters
 
 There are many other parameters that may affect the learning process. We will not detail them here, but the interested student should read about them. These include:
@@ -245,6 +265,9 @@ There are many other parameters that may affect the learning process. We will no
 
 [22] contains several tips on how to optimize all these paremeters (Hyperparameter optimization Section).
 
+
+
+<a name='adaptative_methods'></a>
 #### Adaptative learning methods
 
 The number of learning parameters to be fit has motivated the appearence of learning methods which adapt these parameters automatically. These are used instead of stochastic gradient descent, and sometimes can simplify the parameter tuning process significantly.
