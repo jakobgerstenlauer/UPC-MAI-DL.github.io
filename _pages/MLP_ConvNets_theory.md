@@ -59,7 +59,7 @@ Regardless of the technical aspects of Misnky and Papert's work, the reaction fr
 
 The backpropagation algorithm reignited the interest on ANN. Originally intended for ANN by Webos in 1974 [7], it gained attention when rediscovered by Rumelhart, Hinton and Williams in 1985 [8], and effectively finished the "AI Winter" on ANN.
 
-Simply put, the backpropagation algorithm is based on the chain rule, which allows to compute the derivative of previous layers, and thus addapt the weights of those layers as well. By doing this process iteratively, we can eventually optimize the weights of all layers in a MLP. In most cases, the change in the weights was computed using an optimization algorithm called Stochastic Gradient Descent (SGD). See [10] for a full mathematical explanation of the backprop algorithm.
+Simply put, the backpropagation algorithm is based on the chain rule, which allows to compute the derivative of previous layers, and thus addapt the weights of those layers as well. By doing this process iteratively, we can eventually optimize the weights of all layers in a MLP. In most cases, the change in the weights was computed using an optimization algorithm called Stochastic Gradient Descent (SGD). SGD iteratively estimates the best direction for optimization using a subset of the whole dataset (hence, stochastic). See [10] for a full mathematical explanation of the backprop algorithm.
 
 With a new training methodology, research on ANN became active again. LeCun et. al. [11] developed a digit recognition system using data from the US Postal Service, and showed how ANN could be used to solve complex practical problems. LeCun system included a layer of convolutional neurons, which had been previously proposed by Fukushima in 1980 [12].
 
@@ -88,8 +88,8 @@ Convolving filters can have many effects. Averaging each pixel by its neighbors 
 
 
 <div style="text-align:center">
-   <img src="/images/convolution-blur.png" width="350"><img src="/images/generic-taj-convmatrix-blur.jpg" width="350"><br>
-   <img src="/images/convolution-edge-detect1.png" width="350"><img src="/images/generic-taj-convmatrix-edge-detect.jpg" width="350">
+   <img src="/images/convolution-blur.png" width="200"><img src="/images/generic-taj-convmatrix-blur.jpg" width="300"><br>
+   <img src="/images/convolution-edge-detect1.png" width="200"><img src="/images/generic-taj-convmatrix-edge-detect.jpg" width="300">
 </div>
 <p style="text-align: center;">Top: convolved filter to blur image. Bottom: Convolved filter to detect edges. From [15].</p>
 
@@ -109,7 +109,7 @@ The convolution process has many adjustable parameters. The kernel size is the m
 * Padding: Without padding, a convolving filter cannot be centered on the borders of an input, as there will be several missing datapoints. As a result, dimensionality decreases (see Stride example). Padding allows one to define default values (typically 0's a.k.a. zero-padding) for the datapoints outside the image. A stride of 1 and a zero-padding fitting the kernel size (e.g., $\frac{KernelSize-1)}{2}$ for odd kernel sizes) produces outputs of equal size to the input.
 
 <div style="text-align:center">
-    <img src="/images/Pad.png" width="550">
+    <img src="/images/Pad.png" width="650">
 </div>
 <p style="text-align: center;">Example of zero-padding of 2, from [16].</p>
 
@@ -125,7 +125,7 @@ Although CNN are appropriate for any 2-dimensional type of input, in most cases 
 A single conv filter convolved over the whole input (or what is the same, a set of conv neurons sharing the same weights) produces a 2-dimensional numerical output. Such 2-dimensional output corresponds to the application of a single filter to the input volume. For every filter we have in a conv layer (i.e., for every neuron), a new 2-dimensional output is produced. As a result, a convolutional layer produces a 3-dimensional volume, where the width and height is defined by the previously defined formula, and the depth is defined by the number of neurons.
 
 <div style="text-align:center">
-    <img src="/images/Figure_5.png" width="550">
+    <img src="/images/Figure_5.png" width="650">
 </div>
 <p style="text-align: center;">Example of 3-dimensional kernel and how this translates into volumes, from [17].</p>
 
@@ -133,15 +133,32 @@ Consider now this recently created output as the input of a consequent convoluti
 
 
 <div style="text-align:center">
-    <img src="/images/cnn_volumes.png" width="550">
+    <img src="/images/cnn_volumes.png" width="650">
 </div>
 <p style="text-align: center;">Illustration of how CNN volumes and filters interact, from [18].</p>
+
+#### Pooling
+
+The convolution process increases significantly the size of the volume from layer to layer, typically because we will want to have at least a few tens of neurons per layer. To avoid the size of the volume to explode layer by layer, pooling layers are often added after each convolutional layer. A pooling layer exploits the same spatial information conv layer does, and aggregates data that is spatially related. The two main types of pooling are max pooling and average pooling, with the first being the most common. The other parameters to be set are the size of the pooling region and the stride.
+
+<div style="text-align:center">
+    <img src="/images/pooling1.png" width="450">
+</div>
+<p style="text-align: center;">Effect of applying a max pooling on the data, from [25].</p>
+
+<div style="text-align:center">
+    <img src="/images/pooling2.png" width="450">
+</div>
+<p style="text-align: center;">Effect of applying a max pooling on the volume, from [25].</p>
+
+Pooling layers cause a loss in spatial precision, as the network does not exactly know the location of the original value. On the other hand, pooling provides a certain degree of translation invariance, as slightly shifted input will be captured equally by the pooling layer.
+
 
 
 <a name='activations'></a>
 ### Activation Functions
 
-The biologically inspired ANN require an activation function for every neuron, which determines the neuron's output given the weighted sum of its inputs. Rosenblatt's Perceptron used the simplest one, a binary function that either activates with the value, or it does not. Nowadays more complex functions are used, all of them with a positive slope of some sort. The activation function needs to be non-linear, to provide the ANN with the capacity to learn non-linear patterns. 
+The biologically inspired ANN require an activation function for every neuron, which determines the neuron's output given the weighted sum of its inputs. Rosenblatt's Perceptron used the simplest one (Equation 1), a binary function that either activates with the value, or it does not. Nowadays more complex functions are used, all of them with a positive slope of some sort. The activation function needs to be non-linear, to provide the ANN with the capacity to learn non-linear patterns. 
 
 These include:
 
@@ -162,10 +179,32 @@ ReLU are currently being used by default, as these are more efficient. ReLU also
 
 ### Convolutional Architectures
 
+With all the previously described components, one must define a convolutional neural network architecture. There are certain patterns of layers that have been shown to perform particularly well, and in most cases its better to use one of those. The first popular CNN architecture was defined by Krizhevsky, Sutskever, and Hinton [26]. In their work, Krizhevsky et. al. defined a 5-layer network using convolutions, poolings, ReLUs and Dropout for regularization, and managed to win the ImageNet2012 improving the best alternative by 11%. ImageNet2012 was a image recognition problem containing 1,000, including more than 100 breeds of dogs. The training was made possible through the use of GPUs, which speed up the process significantly. 
+
+<div style="text-align:center">
+    <img src="/images/imagenet.png" width="450">
+</div>
+<p style="text-align: center;">Results of the ImageNet challenge. By 2014 all competitors used CNNs. By 2015 human level recognition was achieved.</p>
+
+The AlexNet architecture follows the pattern of pairs of conv-pooling layers, with a few fully-connected layers on top. This pattern has become a standard, and most CNN architectures currently use it.
+<div style="text-align:center">
+    <img src="/images/alexnet.png" width="350">
+</div>
+<p style="text-align: center;">AlexNet architecture, from [26]. The network is split horizontally because it needed to be trained on two different GPUs.</p>
+
+Other relevant architectures are the VGG16/19 (by Oxford VGG research group), the Inception (first called GoogLeNet, by Google) and the ResNet (by Microsoft).
+
 
 
 ### Regularization Methods
 
+Deep neural networks have a huge learning capacity, defined by the number of parameters in the network. To avoid overfitting, there a set of regularization methods have been proposed. These include:
+
+- L1/L2 regularization
+- Dropout
+- Batch Normalization
+
+See [24] for further details.
 
 ### Training Parameters
 
@@ -195,10 +234,30 @@ Plotting the behavior of the loss over time gives a good insight on our choice o
 </div>
 <p style="text-align: center;">Illustration on the behavior of various learning rates, from [22].</p>
 
+
+#### Other parameters
+
+There are many other parameters that may affect the learning process. We will not detail them here, but the interested student should read about them. These include:
+
+- Weight Decay
+- Weight initialization
+- Momentum
+
+[22] contains several tips on how to optimize all these paremeters (Hyperparameter optimization Section).
+
+#### Adaptative learning methods
+
+The number of learning parameters to be fit has motivated the appearence of learning methods which adapt these parameters automatically. These are used instead of stochastic gradient descent, and sometimes can simplify the parameter tuning process significantly.
+
+- Adagrad
+- Adadelta
+- RMSprop
+- Adam
+
+
+
+
 <a name='bib'></a>
-
-
-
 ## Bibliography
 
 [1] [McCulloch, Warren S., and Walter Pitts. "A logical calculus of the ideas immanent in nervous activity." The bulletin of mathematical biophysics 5.4 (1943): 115-133.](http://vordenker.de/ggphilosophy/mcculloch_a-logical-calculus.pdf)
@@ -246,3 +305,15 @@ Plotting the behavior of the loss over time gives a good insight on our choice o
 [22] [http://cs231n.github.io/neural-networks-3/](http://cs231n.github.io/neural-networks-3/)
 
 [23] [https://github.com/fchollet/keras/issues/68](https://github.com/fchollet/keras/issues/68)
+
+[24] [http://cs231n.github.io/neural-networks-2/](http://cs231n.github.io/neural-networks-2/)
+
+[25] [http://cs231n.github.io/convolutional-networks/](http://cs231n.github.io/convolutional-networks/)
+
+[26] [Krizhevsky, Alex, Ilya Sutskever, and Geoffrey E. Hinton. "Imagenet classification with deep convolutional neural networks." Advances in neural information processing systems. 2012.](http://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf)
+
+
+
+### Other uncited sources:
+
+[https://devblogs.nvidia.com/parallelforall/deep-learning-nutshell-core-concepts/](https://devblogs.nvidia.com/parallelforall/deep-learning-nutshell-core-concepts/)
