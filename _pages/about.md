@@ -8,9 +8,6 @@ redirect_from:
     - /about.html
 ---
 
-
-# Deep Learning - Master in Artificial Intelligence - Universitat Politècnica de Catalunya
-
 The Table of Contents:
 
 - [About](#about)
