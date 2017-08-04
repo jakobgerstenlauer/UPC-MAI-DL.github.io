@@ -19,6 +19,8 @@ The Table of Contents:
 - [Course Evaluation](#evaluation)
 - [Lessons](#lessons)
     - [#1 Multilayer Perceptron and Conv Nets](#mlp_convnets)
+- [Papers of interest](#papers)
+
 
 <a name='about'></a>
 ### About
@@ -76,3 +78,13 @@ Multilayer Perceptron and Conv Nets
 - [Theory](mlp-convnets-theory/)
 - [Lab guided](mlp-convnets-lab-guided/)
 - [lab autonomous](mlp-convnets-lab-autonomous/)
+
+
+
+<a name='papers'></a>
+### Papers of Interest
+
+For the evaluation of the theoretical aspects of the course, we offer a list of papers of interest which the student may chose to read and review. These loosely are categorized.
+
+[Papers of interests](papers-of-interest/)
+

@@ -68,9 +68,9 @@ Regardless of the technical aspects of Misnky and Papert's work, the reaction fr
 
 The backpropagation algorithm reignited the interest on ANN. Originally intended for ANN by Webos in 1974 [7], it gained attention when rediscovered by Rumelhart, Hinton and Williams in 1985 [8], and effectively finished the "AI Winter" on ANN.
 
-Simply put, the backpropagation algorithm is based on the chain rule, which allows to compute the derivative of previous layers, and thus addapt the weights of those layers as well. By doing this process iteratively, we can eventually optimize the weights of all layers in a MLP. In most cases, the change in the weights was computed using an optimization algorithm called Stochastic Gradient Descent (SGD). SGD iteratively estimates the best direction for optimization using a subset of the whole dataset (hence, stochastic). See [10] for a full mathematical explanation of the backprop algorithm.
+The backpropagation starts with a forward pass of an input. After the input has reached the last layer of the network, the predicted label (the network output) is compared against the ground truth label, and the error made is measured using a loss function. The computed loss is used to update the weights of the network, finding the best gradient towards minimizing the error (though a partial derivative). To train a neural net with several layers, we need to update the weights from the previous layers as well. This is accomplished by using the chain rule, which allows to compute the derivative of previous layers, and thus update the weights of those layers as well. Traditionally, the change in the weights has been computed using an optimization algorithm called Stochastic Gradient Descent (SGD). SGD iteratively estimates the best direction for optimization using a subset of the whole dataset (hence, stochastic). Since then, several alternatives have been proposed.   
 
-With a new training methodology, research on ANN became active again. LeCun et. al. [11] developed a digit recognition system using data from the US Postal Service, and showed how ANN could be used to solve complex practical problems. LeCun system included a layer of convolutional neurons, which had been previously proposed by Fukushima in 1980 [12].
+By doing this process iteratively (forward pass, loss function, backpropagate error, weight update), we can eventually optimize the weights of all layers in a MLP. See [10] for a full mathematical explanation of the backprop algorithm. With a new training methodology, research on ANN became active again. LeCun et. al. [11] developed a digit recognition system using data from the US Postal Service, and showed how ANN could be used to solve complex practical problems. LeCun system included a layer of convolutional neurons, which had been previously proposed by Fukushima in 1980 [12].
 
 <a name='cnn'></a>
 ### Convolutional Neural Networks
@@ -212,7 +212,7 @@ On top of the fully-connected layers, either a Softmax or a SVM is placed, to pe
 Deep neural networks have a huge learning capacity, defined by the number of parameters in the network. To avoid overfitting, there a set of regularization methods have been proposed. These include:
 
 - L1/L2 regularization
-- Dropout
+- Dropout [27]
 - Batch Normalization
 
 See [24] for further details.
@@ -282,10 +282,99 @@ The number of learning parameters to be fit has motivated the appearence of lear
 <a name='inside'></a>
 ### CNN from the Inside
 
+Historically, neural networks have been considered as "black box" models, as it is hard to understand what is happening within a network during or after its training. The sub-symbolic nature of the representations learnt by a neural net (i.e., lots of numerical parameters in the shape of weights between neurons) makes it impossible to provide any sort of high-level interpretation on those representations. However, since the popularization of CNNs, a significant amount of effort has been put on opening up neural networks. One of the main approches to do so is by visualizing CNN activations or filters.
+
+CNN filters of the first layers typically look like Gabor filters. These are the basic features a deep CNN learns for characterizing images. Later layers learn features which are combinations of these, such that the deeper we go in the network, the more complex patterns are learnt.
+
+<div style="text-align:center">
+    <img src="/images/filt1.png" width="450">
+    <img src="/images/filt2.png" width="450">
+</div>
+<p style="text-align: center;">Top: Visualization of the filters from the first conv layer. Bottom: Visualization of the filters from the second conv layer. From [29].</p>
+
+<div style="text-align:center">
+    <img src="/images/features.png" width="450">
+</div>
+<p style="text-align: center;">Illustration of how features from different layers grow in complexity. From Quora.</p>
+
+The Deep Visualization Toolbox is a useful tool for playing around with some of these visualizations. [Deep Visualization Toolbox video] (https://www.youtube.com/watch?v=AgkfIQ4IGaM)
 
 
 <a name='apps'></a>
 ### CNN Applications
+
+The success of CNNs have resulted in a wide variety of applications. These illustrate the power of these models at characterizing data, and their flexibility to compose more complex solutions. Here are a few examples.
+
+#### Image Classification
+
+Image classification is the basic problem CNN were designed to solve. Given a set of classes, the model has to determine which class an input image belongs to. The most popular datasets for that purpose are MNIST (hand-written digit recognition), CIFAR (low resolution images with 10 and 100 classes), and ImageNet (1,000 classes, including similar subsets such as more than 100 breeds of dogs).
+
+<div style="text-align:center">
+    <img src="/images/imagenet_cnn.png" width="450">
+</div>
+<p style="text-align: center;">Example of classification performance of a CNN on ImageNet, from [26].</p>
+
+
+#### Image Segmentation
+
+Image segmentation is the problem of finding the exact location of a given entity in an image. The output of the model is classification of pixels, where each pixel is associated with a given identified entity.PASCAL VOC is one of the most popular datasets for this task.
+
+<div style="text-align:center">
+    <img src="/images/segmentation.png" width="450">
+</div>
+<p style="text-align: center;">Example of segmentation results, from [30].</p>
+
+
+#### Style Transfer
+
+Recently, it was found that the correlation between the neuron activations of the same layer had a relation with the pictoric style of the image. For transfering the style from one image to another, first the Gram matrix of a layer is computed on the source style image. Then, on the target style image, the training procedure is modified so that the Gram matrix of the source image is taken into account. By doing so, the target image is effectively modified to look similar in style to the source image.
+
+
+<div style="text-align:center">
+    <img src="/images/style.png" width="450">
+</div>
+<p style="text-align: center;">Example of style transfer, from [31].</p>
+
+
+#### Automatic Image Colorization
+
+The purpose of image colorization is to, given an input black and white image, produce a colorization of the same image which is coherent with the contents of it. For that purpose a CNN is connected with a Deconvolutional net, which is essentially a mirrored version of a CNN. This is the same approach used for image segmentation.
+
+<div style="text-align:center">
+    <img src="/images/conv_deconv.png" width="450">
+</div>
+<p style="text-align: center;">Example of a convolutional and deconvolutional architecture, from [34].</p>
+ 
+<div style="text-align:center">
+    <img src="/images/color.png" width="450">
+</div>
+<p style="text-align: center;">Example of image colorization, from [32].</p>
+
+
+<div style="text-align:center">
+    <img src="/images/color2.png" width="450">
+</div>
+<p style="text-align: center;">Example of image colorization, from [33].</p>
+
+
+#### Image/Caption Retrieval
+
+Combining a CNN with a model for representing text, allows one to generate a shared embedding space of both modalities. A set of multimodal pipelines have been proposed with that idea in mind, and have been applied at the task of image captioning (given an image find a textual description for it) and image retrieval (given a textual caption, find a coherent image for it).
+
+<div style="text-align:center">
+    <img src="/images/caption.png" width="450">
+</div>
+<p style="text-align: center;">Example of caption retrieval, from [35].</p>
+
+#### Other applications
+
+There are many other applications of CNNs. These include:
+
+- In combination with reinforcement learning for playing ATARI videogames
+- In combination with reinforcement learning for playing GO
+- Enabling self-driving cars
+- ...
+
 
 
 
@@ -338,14 +427,32 @@ The number of learning parameters to be fit has motivated the appearence of lear
 
 [23] [https://github.com/fchollet/keras/issues/68](https://github.com/fchollet/keras/issues/68)
 
-[24] [http://cs231n.github.io/neural-networks-2/](http://cs231n.github.io/neural-networks-2/)
+[24] [hthttps://www.cs.toronto.edu/~hinton/absps/JMLRdropout.pdftp://cs231n.github.io/neural-networks-2/](http://cs231n.github.io/neural-networks-2/)
 
 [25] [http://cs231n.github.io/convolutional-networks/](http://cs231n.github.io/convolutional-networks/)
 
 [26] [Krizhevsky, Alex, Ilya Sutskever, and Geoffrey E. Hinton. "Imagenet classification with deep convolutional neural networks." Advances in neural information processing systems. 2012.](http://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf)
 
+[27] [Srivastava Nitish, Geoffrey E. Hinton, Alex Krizhevsky, Ilya Sutskever, and Ruslan Salakhutdinov. "Dropout: a simple way to prevent neural networks from overfitting." Journal of Machine Learning Research 15.1 (2014): 1929-1958.](https://www.cs.toronto.edu/~hinton/absps/JMLRdropout.pdf)
 
+[28] [Gatys, Leon A., Alexander S. Ecker, and Matthias Bethge. "A neural algorithm of artistic style." arXiv preprint arXiv:1508.06576 (2015).http://cs231n.github.io/understanding-cnn/] (http://cs231n.github.io/understanding-cnn/)
+
+[29] [Zeiler, Matthew D., and Rob Fergus. "Visualizing and understanding convolu    tional networks." European conference on computer vision. Springer, Cham, 201    4.] (https://arxiv.org/pdf/1311.2901v3.pdf)
+
+[30] [Chen, Liang-Chieh, et al. "Deeplab: Semantic image segmentation with deep convolutional nets, atrous convolution, and fully connected crfs." arXiv preprint arXiv:1606.00915 (2016).] (https://arxiv.org/pdf/1606.00915.pdf)
+
+[31] [Gatys, Leon A., Alexander S. Ecker, and Matthias Bethge. "A neural algorithm of artistic style." arXiv preprint arXiv:1508.06576 (2015).] (https://arxiv.org/pdf/1508.06576)
+
+[32] [Zhang, Richard, Phillip Isola, and Alexei A. Efros. "Colorful image colorization." European Conference on Computer Vision. Springer International Publishing, 2016.] (https://arxiv.org/pdf/1603.08511)
+
+[33] [Iizuka, Satoshi, Edgar Simo-Serra, and Hiroshi Ishikawa. "Let there be color!: joint end-to-end learning of global and local image priors for automatic image colorization with simultaneous classification." ACM Transactions on Graphics (TOG) 35.4 (2016): 110.] (https://pdfs.semanticscholar.org/5c6a/0a8d993edf86846ac7c6be335fba244a59f8.pdf)
+
+[34] [http://www.tensorflowexamples.com/2017/01/transposed-convnets-or-deconvolution.html] (http://www.tensorflowexamples.com/2017/01/transposed-convnets-or-deconvolution.html)
+
+[35] [Kiros, Ryan, Ruslan Salakhutdinov, and Richard S. Zemel. "Unifying visual-semantic embeddings with multimodal neural language models." arXiv preprint arXiv:1411.2539 (2014).] (https://arxiv.org/pdf/1411.2539)
 
 ### Other uncited sources:
 
 [https://devblogs.nvidia.com/parallelforall/deep-learning-nutshell-core-concepts/](https://devblogs.nvidia.com/parallelforall/deep-learning-nutshell-core-concepts/)
+
+[http://iamaaditya.github.io/2016/03/one-by-one-convolution/] (http://iamaaditya.github.io/2016/03/one-by-one-convolution/)
