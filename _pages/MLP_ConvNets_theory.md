@@ -55,11 +55,12 @@ Where w is is a vector of real-valued weights, · is the dot product, and b is a
 Rosenblatt implemented the algorithm within the machine "Mark I Perceptron", a visual classifier composed by 400 photosensitive receptors (sensory units), associated with 512 stepping motors (association units), and an output of 8 neurons (response units) [3]. It contained only one layer of trainable parameters (association units). For more details see [4,9].
 
 <div style="text-align:center">
-    <img src="/images/Mark1.png" width="450">
+    <img src="/images/Mark1.png" width="500">
 </div>
 <p style="text-align: center;">Illustration of the Mark I Perceptron from [3].</p>
 
-Rosenblatt acknolwedged a set of limitations of his Perceptron machine in a series of publications. Minsky and Papert published the book "Perceptrons: an introduction to computational geometry", also detailing some of those limitations. See [6] for more details. The work of Minsky and Papert had a huge impact on the public, although few people actually understood the nature of their contribution. Simply put, Minsky and Papert argue that a multilayer network (or MLP) is needed for learning certain basic functions such as XOR, and that no appropriate training algorithm existed for that kind of network.
+Rosenblatt acknolwedged a set of limitations of his Perceptron machine in a series of publications. Minsky and Papert published the book "Perceptrons: an introduction to computational geometry", also detailing some of those limitations. See [6] for more details. 
+The work of Minsky and Papert had a huge impact on the public, although few people actually understood the nature of their contribution. Simply put, Minsky and Papert argue that a multilayer network (or MLP) is needed for learning certain basic functions such as XOR, and that no appropriate training algorithm existed for that kind of network.
 
 Regardless of the technical aspects of Misnky and Papert's work, the reaction from the public was a drastic cut in funding on ANN during the 70s, until the mid 80s, in what is knows as the "AI Winter". After ANNs were almost abandoned, AI research focused on "expert systems" instead, which would also suffer their own "AI Winter" in the 90s.
 
@@ -100,7 +101,7 @@ Convolving filters can have many effects. Averaging each pixel by its neighbors 
    <img src="/images/convolution-blur.png" width="200"><img src="/images/generic-taj-convmatrix-blur.jpg" width="300"><br>
    <img src="/images/convolution-edge-detect1.png" width="200"><img src="/images/generic-taj-convmatrix-edge-detect.jpg" width="300">
 </div>
-<p style="text-align: center;">Top: convolved filter to blur image. Bottom: Convolved filter to detect edges. From [15].</p>
+<p style="text-align: center;">Top: Convolved filter to blur image. Bottom: Convolved filter to detect edges. From [15].</p>
 
 <a name='cnn_params'></a>
 #### CNN Parameters
@@ -118,7 +119,7 @@ The convolution process has many adjustable parameters. The kernel size is the m
 * Padding: Without padding, a convolving filter cannot be centered on the borders of an input, as there will be several missing datapoints. As a result, dimensionality decreases (see Stride example). Padding allows one to define default values (typically 0's a.k.a. zero-padding) for the datapoints outside the image. A stride of 1 and a zero-padding fitting the kernel size (e.g., $\frac{KernelSize-1)}{2}$ for odd kernel sizes) produces outputs of equal size to the input.
 
 <div style="text-align:center">
-    <img src="/images/Pad.png" width="650">
+    <img src="/images/Pad.png" width="750">
 </div>
 <p style="text-align: center;">Example of zero-padding of 2, from [16].</p>
 
@@ -134,7 +135,7 @@ Although CNN are appropriate for any 2-dimensional type of input, in most cases 
 A single conv filter convolved over the whole input (or what is the same, a set of conv neurons sharing the same weights) produces a 2-dimensional numerical output. Such 2-dimensional output corresponds to the application of a single filter to the input volume. For every filter we have in a conv layer (i.e., for every neuron), a new 2-dimensional output is produced. As a result, a convolutional layer produces a 3-dimensional volume, where the width and height is defined by the previously defined formula, and the depth is defined by the number of neurons.
 
 <div style="text-align:center">
-    <img src="/images/Figure_5.png" width="650">
+    <img src="/images/Figure_5.png" width="700">
 </div>
 <p style="text-align: center;">Example of 3-dimensional kernel and how this translates into volumes, from [17].</p>
 
