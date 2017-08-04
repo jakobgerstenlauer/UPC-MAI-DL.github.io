@@ -199,7 +199,7 @@ With all the previously described components, one must define a convolutional ne
 
 The AlexNet architecture follows the pattern of pairs of conv-pooling layers, with a few fully-connected layers on top. This pattern has become a standard, and most CNN architectures currently use it.
 <div style="text-align:center">
-    <img src="/images/alexnet.png" width="350">
+    <img src="/images/alexnet.png" width="550">
 </div>
 <p style="text-align: center;">AlexNet architecture, from [26]. The network is split horizontally because it needed to be trained on two different GPUs.</p>
 
@@ -288,13 +288,13 @@ Historically, neural networks have been considered as "black box" models, as it 
 CNN filters of the first layers typically look like Gabor filters. These are the basic features a deep CNN learns for characterizing images. Later layers learn features which are combinations of these, such that the deeper we go in the network, the more complex patterns are learnt.
 
 <div style="text-align:center">
-    <img src="/images/filt1.png" width="450">
-    <img src="/images/filt2.png" width="450">
+    <img src="/images/filt1.png" width="250">
+    <img src="/images/filt2.png" width="500">
 </div>
 <p style="text-align: center;">Top: Visualization of the filters from the first conv layer. Bottom: Visualization of the filters from the second conv layer. From [29].</p>
 
 <div style="text-align:center">
-    <img src="/images/features.png" width="450">
+    <img src="/images/features.png" width="650">
 </div>
 <p style="text-align: center;">Illustration of how features from different layers grow in complexity. From Quora.</p>
 
@@ -311,7 +311,7 @@ The success of CNNs have resulted in a wide variety of applications. These illus
 Image classification is the basic problem CNN were designed to solve. Given a set of classes, the model has to determine which class an input image belongs to. The most popular datasets for that purpose are MNIST (hand-written digit recognition), CIFAR (low resolution images with 10 and 100 classes), and ImageNet (1,000 classes, including similar subsets such as more than 100 breeds of dogs).
 
 <div style="text-align:center">
-    <img src="/images/imagenet_cnn.png" width="450">
+    <img src="/images/imagenet_cnn.png" width="550">
 </div>
 <p style="text-align: center;">Example of classification performance of a CNN on ImageNet, from [26].</p>
 
@@ -321,7 +321,7 @@ Image classification is the basic problem CNN were designed to solve. Given a se
 Image segmentation is the problem of finding the exact location of a given entity in an image. The output of the model is classification of pixels, where each pixel is associated with a given identified entity.PASCAL VOC is one of the most popular datasets for this task.
 
 <div style="text-align:center">
-    <img src="/images/segmentation.png" width="450">
+    <img src="/images/segmentation.png" width="550">
 </div>
 <p style="text-align: center;">Example of segmentation results, from [30].</p>
 
@@ -332,7 +332,7 @@ Recently, it was found that the correlation between the neuron activations of th
 
 
 <div style="text-align:center">
-    <img src="/images/style.png" width="450">
+    <img src="/images/style.png" width="550">
 </div>
 <p style="text-align: center;">Example of style transfer, from [31].</p>
 
@@ -342,18 +342,18 @@ Recently, it was found that the correlation between the neuron activations of th
 The purpose of image colorization is to, given an input black and white image, produce a colorization of the same image which is coherent with the contents of it. For that purpose a CNN is connected with a Deconvolutional net, which is essentially a mirrored version of a CNN. This is the same approach used for image segmentation.
 
 <div style="text-align:center">
-    <img src="/images/conv_deconv.png" width="450">
+    <img src="/images/conv_deconv.png" width="650">
 </div>
 <p style="text-align: center;">Example of a convolutional and deconvolutional architecture, from [34].</p>
  
 <div style="text-align:center">
-    <img src="/images/color.png" width="450">
+    <img src="/images/color.png" width="550">
 </div>
 <p style="text-align: center;">Example of image colorization, from [32].</p>
 
 
 <div style="text-align:center">
-    <img src="/images/color2.png" width="450">
+    <img src="/images/color2.png" width="550">
 </div>
 <p style="text-align: center;">Example of image colorization, from [33].</p>
 
@@ -363,7 +363,7 @@ The purpose of image colorization is to, given an input black and white image, p
 Combining a CNN with a model for representing text, allows one to generate a shared embedding space of both modalities. A set of multimodal pipelines have been proposed with that idea in mind, and have been applied at the task of image captioning (given an image find a textual description for it) and image retrieval (given a textual caption, find a coherent image for it).
 
 <div style="text-align:center">
-    <img src="/images/caption.png" width="450">
+    <img src="/images/caption.png" width="650">
 </div>
 <p style="text-align: center;">Example of caption retrieval, from [35].</p>
 
