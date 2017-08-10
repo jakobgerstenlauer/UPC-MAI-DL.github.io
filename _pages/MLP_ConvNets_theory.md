@@ -2,9 +2,7 @@
 permalink: /mlp-convnets-theory/
 ---
 
-## Multilayer Perceptron and Convolutional Neural Networks - Theory
-
-This page contains the first theoretical part (1/4) of the Deep Learning subject at the Master in Artificial Inteligence of the Universitat Politècnica de Catalunya. It briefly reviews the basic concepts regarding Multilayer Perceptron (MLP) and Convolutional Neural Networks (CNNs).
+This page contains the theoretical part of the MLP-CNN topic for the Deep Learning course at the Master in Artificial Inteligence of the Universitat Politècnica de Catalunya. 
 
 Table of Contents:
 
@@ -457,3 +455,5 @@ There are many other applications of CNNs. These include:
 [https://devblogs.nvidia.com/parallelforall/deep-learning-nutshell-core-concepts/](https://devblogs.nvidia.com/parallelforall/deep-learning-nutshell-core-concepts/)
 
 [http://iamaaditya.github.io/2016/03/one-by-one-convolution/] (http://iamaaditya.github.io/2016/03/one-by-one-convolution/)
+
+[http://www.robots.ox.ac.uk/~vgg/practicals/cnn/](http://www.robots.ox.ac.uk/~vgg/practicals/cnn/)
