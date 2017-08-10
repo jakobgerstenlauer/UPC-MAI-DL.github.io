@@ -7,7 +7,7 @@ This page contains the guided laboratory of the MLP-CNN topic for the Deep Learn
 Table of Contents:
 
 - [A Neural Network Playground](#playground)
-
+- [Basic NN example](#basic_nn)
 
 
 <a name='playground'></a>
@@ -16,9 +16,10 @@ Table of Contents:
 A good play to start for getting familiarized with how NN work is [tensorflow's playground](http://playground.tensorflow.org)
 
 
-### Basic MLP example
+<a name='basic_nn'></a>
+### Basic NN example
 
-Let's see a basic example on how to use Kerass for training an MLP. The following example can be find whole in the MAI-DL directory of the cluster. Here we split it in parts to review it.
+Let's see a basic example on how to use Kerass for training a simple NN. The following example can be find whole in the MAI-DL directory of the cluster. Here we split it in parts to review it.
 
 We will work with the MNIST dataset of hand-written digits.
 ```python
@@ -48,7 +49,8 @@ x_train = x_train / 255
 x_test = x_test / 255
 ```
 
-The labels of the data have to be transformed to the syntax required by the classifier (i.e., softmax)```python
+The labels of the data have to be transformed to the syntax required by the classifier (i.e., softmax)
+```python
 #Adapt the labels to the one-hot vector syntax required by the softmax
 from keras.utils import np_utils
 y_train = np_utils.to_categorical(y_train, 10)

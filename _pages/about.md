@@ -18,7 +18,7 @@ The Table of Contents:
     - [Autonomous Laboratory](#autonomous)
 - [Course Evaluation](#evaluation)
 - [Lessons](#lessons)
-    - [#1 Multilayer Perceptron and Conv Nets](#mlp_convnets)
+    - [#1 Basic Neural Nets and Conv Nets](#mlp_convnets)
 - [Papers of interest](#papers)
 
 
@@ -74,10 +74,10 @@ The experimental evaluation will be based on reports written by the student for 
 ### Lessons
 
 #### Lesson 1
-Multilayer Perceptron and Conv Nets
+Basic Neural Nets and Conv Nets
 - [Theory](mlp-convnets-theory/)
 - [Lab guided](mlp-convnets-lab-guided/)
-- [lab autonomous](mlp-convnets-lab-autonomous/)
+- [Lab autonomous](mlp-convnets-lab-autonomous/)
 
 
 
