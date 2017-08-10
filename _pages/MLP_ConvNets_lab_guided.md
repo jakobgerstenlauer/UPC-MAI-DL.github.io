@@ -8,6 +8,7 @@ Table of Contents:
 
 - [A Neural Network Playground](#playground)
 - [Basic NN example](#basic_nn)
+- [CNN example](#cnn)
 
 
 <a name='playground'></a>
@@ -19,7 +20,7 @@ A good play to start for getting familiarized with how NN work is [tensorflow's 
 <a name='basic_nn'></a>
 ### Basic NN example
 
-Let's see a basic example on how to use Kerass for training a simple NN. The following example can be find whole in the MAI-DL directory of the cluster. Here we split it in parts to review it.
+Let's see a basic example on how to use Kerass for training a simple NN. The following example can be find whole in the MAI-DL directory of the cluster, file code_lab1.py. Here we split it in parts to review it.
 
 We will work with the MNIST dataset of hand-written digits.
 ```python
@@ -84,7 +85,7 @@ After defining the model, we need to compile it before running. At this point we
 nn.compile(optimizer='sgd',loss='categorical_crossentropy',metrics=['accuracy'])
 ```
 
-With the model compile, we can now launch the training procedure. At this point we may define the batch size, and the number of epochs to run.
+With the model compiled, we can now launch the training procedure. At this point we may define the batch size, and the number of epochs to run.
 ```python
 history = nn.fit(x_train,y_train,batch_size=128,epochs=20)
 ```
@@ -153,4 +154,27 @@ nn_json = json_file.read()
 json_file.close()
 nn = model_from_json(nn_json)
 nn.load_weights(weights_file)
+```
+
+<a name='cnn'></a>
+### CNN example
+
+Convolutional neural networks are designed to process 2D data, by exploiting 2D spatial patterns. Let us now design a CNN to process the same MNIST dataset, and see if we can outperform the basic neural net of the previous example. Most of the code is the same, so in here we will only review those parts that differ significantly.
+
+Before getting into convolutions, let's start with the requirement of a validation set. While training any neural network, and particularly, deep neural networks, lots of experiments are required to adjust parameters and find the best combination. Parameters such as network architecture, learning rate, optiming algorithm, batch size, etc. By using only a train/test split when evaluating these parameters, we will eventually overfit our model to solve the test set. See an explanation of this in [this Udacity video](https://www.youtube.com/watch?v=--E5qo_XnXo).
+
+Simply put, if we use the train data for taking design decisions, we cannot know the actual performance of our model. Which is very bad. To avoid overfitting the test data while also using a set of data for tunning hyperparameters, the most common approach is to use a validation set. We may use the validation set for taking certain design decisions, and when we are done we can test the quality of our model on the test set. The important thing to remember in this case is to NEVER use the results of the test set into account when designing and training your model.
+
+In Keras, defining a validation set is easy, as we just need to specify which part of the training set will be used for validation on the fit function. Additionally, we will use measurements on the validation set to evaluate performance.
+```python
+#Start training using a 15% for validation
+history = nn.fit(x_train,y_train,batch_size=128,epochs=20, validation_split=0.15)
+```
+```python
+#Plot accuracy on the validation set
+plt.plot(history.history['val_acc'])
+```
+```python
+#Plot loss on the validation set
+plt.plot(history.history['val_loss'])
 ```
