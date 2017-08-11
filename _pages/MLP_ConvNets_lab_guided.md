@@ -6,10 +6,26 @@ This page contains the guided laboratory of the MLP-CNN topic for the Deep Learn
 
 Table of Contents:
 
+- [Deep Learning frameworks](#frameworks)
 - [A Neural Network Playground](#playground)
 - [Basic NN example](#basic_nn)
 - [CNN example](#cnn)
 
+
+<a name='frameworks'></a>
+### Deep Learning frameworks
+
+Currently there are several deep learning frameworks available for developers. These include:
+
+- Caffe
+- Caffe2
+- CNTK (Microsoft)
+- TensorFlow (Google)
+- Theano
+- Torch
+- Keras
+
+Chosing one or another depends on the developer experience and the nature of the problem. In this course we will use Keras, since it is very easy to use and provides many functionalities that facilitate many tasks. Keras is written in Python and in the background uses TensorFlow, Theano or CNTK.
 
 <a name='playground'></a>
 ### A Neural Network Playground
@@ -20,7 +36,7 @@ A good play to start for getting familiarized with how NN work is [tensorflow's 
 <a name='basic_nn'></a>
 ### Basic NN example
 
-Let's see a basic example on how to use Kerass for training a simple NN. The following example can be find whole in the MAI-DL directory of the cluster, file code_lab1.py. Here we split it in parts to review it.
+Let's see a basic example on how to use Keras for training a simple NN. The following example can be find whole in the MAI-DL directory of the cluster, file code_lab1.1.py. Here we split it in parts to review it.
 
 We will work with the MNIST dataset of hand-written digits.
 ```python
@@ -90,12 +106,12 @@ With the model compiled, we can now launch the training procedure. At this point
 history = nn.fit(x_train,y_train,batch_size=128,epochs=20)
 ```
 
-We can now evaluate the trained model on the test set.
+We can now evaluate the trained model on the test set. Test accuracy provides the real performance of our model.
 ```python
 score = nn.evaluate(x_test, y_test, verbose=0)
 ```
 
-And plot the results and information on the training procedure
+And plot the results and information of the training procedure
 ```python
 ##Store Plots
 import matplotlib
@@ -159,13 +175,13 @@ nn.load_weights(weights_file)
 <a name='cnn'></a>
 ### CNN example
 
-Convolutional neural networks are designed to process 2D data, by exploiting 2D spatial patterns. Let us now design a CNN to process the same MNIST dataset, and see if we can outperform the basic neural net of the previous example. Most of the code is the same, so in here we will only review those parts that differ significantly.
+Convolutional neural networks are designed to process 2D data, by exploiting 2D spatial patterns. Let us now design a CNN to process the same MNIST dataset, and see if we can outperform the basic neural net of the previous example. Most of the code is the same, so in here we will only review those parts that differ significantly. The whole code is in the MAI-DL directory of the cluster, file code_lab1.2.py.
 
 Before getting into convolutions, let's start with the requirement of a validation set. While training any neural network, and particularly, deep neural networks, lots of experiments are required to adjust parameters and find the best combination. Parameters such as network architecture, learning rate, optiming algorithm, batch size, etc. By using only a train/test split when evaluating these parameters, we will eventually overfit our model to solve the test set. See an explanation of this in [this Udacity video](https://www.youtube.com/watch?v=--E5qo_XnXo).
 
-Simply put, if we use the train data for taking design decisions, we cannot know the actual performance of our model. Which is very bad. To avoid overfitting the test data while also using a set of data for tunning hyperparameters, the most common approach is to use a validation set. We may use the validation set for taking certain design decisions, and when we are done we can test the quality of our model on the test set. The important thing to remember in this case is to NEVER use the results of the test set into account when designing and training your model.
+Simply put, if we use the train data for taking design decisions, the actual performance of our model cannot any longer be measured reliably on the test set. Which is very bad. To avoid overfitting the test data while also using a set of data for tunning hyperparameters, the most common approach is to use a validation set. We may use the validation set for taking certain design decisions, and when we are done we can test the quality of our model on the test set. The important thing to remember in this case is to NEVER use the results of the test set into account when designing and training your model. The test set should only be used at the end of the development process, just before deployment.
 
-In Keras, defining a validation set is easy, as we just need to specify which part of the training set will be used for validation on the fit function. Additionally, we will use measurements on the validation set to evaluate performance.
+In Keras defining a validation set is very easy, as we just need to specify which part of the training set will be used for validation on the fit function. Additionally, we will use measurements on the validation set to evaluate performance.
 ```python
 #Start training using a 15% for validation
 history = nn.fit(x_train,y_train,batch_size=128,epochs=20, validation_split=0.15)
@@ -178,3 +194,23 @@ plt.plot(history.history['val_acc'])
 #Plot loss on the validation set
 plt.plot(history.history['val_loss'])
 ```
+
+Now that we know how to validate our models, let's define a CNN. A simple network will contain 2 pairs of convolution and max pooling layers and a final fully connected layer. To input the data to the first fully connected layer, we need to flatten the output from a 3D volume to a 1D array using the Flatten layer.
+```python
+nn = Sequential()
+nn.add(Conv2D(32, kernel_size=(3, 3), activation='relu', input_shape=input_shape))
+nn.add(MaxPooling2D(pool_size=(2, 2)))
+nn.add(Conv2D(64, kernel_size=(3, 3), activation='relu'))
+nn.add(MaxPooling2D(pool_size=(2, 2)))
+nn.add(Flatten())
+nn.add(Dense(128, activation='relu'))
+nn.add(Dense(10, activation='softmax'))
+```
+
+This simple model can solve the MNIST classification problem with an accuracy over 98%. For a more complicated problem, you can try the CIFAR10 dataset (see the [dataset webpage](https://www.cs.toronto.edu/~kriz/cifar.html) to analyze the type of problem at hand.
+```python
+from keras.datasets import cifar10
+(x_train, y_train), (x_test, y_test) = cifar10.load_data()
+```
+
+Remember to adapt the code to the size of this dataset (MNIST is 28x28x1, while CIFAR10 is 32x32x3), or the input of the network will be erroneous. The problem is also a 10 class classification, so the output of the network will be the same. This is clearly a much harder problem, as the same model only achieves roughly a 49% of test accuracy. 
