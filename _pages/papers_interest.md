@@ -51,13 +51,14 @@ The next three papers should be read and reviewed together
 
 - [Kiros, Ryan, Ruslan Salakhutdinov, and Richard S. Zemel. "Unifying visual-semantic embeddings with multimodal neural language models." arXiv preprint arXiv:1411.2539 (2014).] (https://arxiv.org/pdf/1411.2539)
 
+- [Vendrov, Ivan, et al. "Order-embeddings of images and language." arXiv preprint arXiv:1511.06361 (2015).] (https://arxiv.org/pdf/1511.06361.pdf)
+
 ### Transfer Learning
 
 - [Yosinski, Jason, et al. "How transferable are features in deep neural networks?." Advances in neural information processing systems. 2014.] (https://arxiv.org/pdf/1411.1792v1.pdf)
 
 - [Sharif Razavian, Ali, et al. "CNN features off-the-shelf: an astounding baseline for recognition." Proceedings of the IEEE conference on computer vision and pattern recognition workshops. 2014.] (https://arxiv.org/pdf/1403.6382.pdf)
 
-- [] ()
 
 - [] ()
 

@@ -217,7 +217,8 @@ The learning capacity of a network is defined by its number of weights. A deep a
 
 - L1/L2 regularization: This method tries to avoid spiking values of weights by adding a penalization to their squared magnitude.
 - Dropout [27]: This method sets to zero random neurons with a certain probability during training, sparsifying the ANN connectivity in practice. Dropout is most useful on fully-connected layers.
-- Batch Normalization [39]: This method normalizes each input batch by both mean and variance, typically after fully-connected layers. It serves both as a regularizing and to solve problems related with weight initialization.
+- Batch Normalization [39]: This method normalizes each input batch by both mean and variance, typically after fully-connected layers. It serves both as a regularizing and to solve problems related with weight initialization, while also speeding up convergence.
+- Layer Normalization [44]: This method is similar to batch normalization, but mean and variance are computed at layer level. This is particularly useful for RNN (where batch normalization is not directly applicable) and fully-connected layers, but it does not work very well for conv layers. It can speed up convergence even faster than batch normalization.
 
 See [24] for further details on regularization methods.
 
@@ -280,14 +281,7 @@ There are many other parameters that may affect the learning process. We will no
 <a name='adaptative_methods'></a>
 #### Adaptative learning methods
 
-The number of parameters to be fit on learning methods like SGD (e.g., learning rate, momentum, weight decay, etc.) has motivated the appearence of learning methods which choose and adapt these parameters automatically. These are used instead of SGD, and can simplify the parameter tuning process significantly. Among the most popular alternatives, there are:
-
-- Adagrad
-- Adadelta
-- RMSprop
-- Adam
-
-See [41] for more details on these.
+The number of parameters to be fit on learning methods like SGD (e.g., learning rate, momentum, weight decay, etc.) has motivated the appearence of learning methods which choose and adapt these parameters automatically. These are used instead of SGD, and can simplify the parameter tuning process significantly. Among the most popular alternatives, there is Adagrad, Adadelta, RMSprop and Adam. See [41] for more details on these.
 
 <div style="text-align:center">
     <img src="/images/saddle_point_evaluation_optimizers.gif" width="450">
@@ -475,6 +469,8 @@ There are many other applications of CNNs. In combination with reinforcement lea
 [42] [https://becominghuman.ai/back-propagation-is-very-simple-who-made-it-complicated-97b794c97e5c](https://becominghuman.ai/back-propagation-is-very-simple-who-made-it-complicated-97b794c97e5c)
 
 [43] [https://medium.com/@karpathy/yes-you-should-understand-backprop-e2f06eab496b](https://medium.com/@karpathy/yes-you-should-understand-backprop-e2f06eab496b)
+
+[44] [Ba, Jimmy Lei, Jamie Ryan Kiros, and Geoffrey E. Hinton. "Layer normalization." arXiv preprint arXiv:1607.06450 (2016).](https://arxiv.org/pdf/1607.06450.pdf?utm_source=sciontist.com&utm_medium=refer&utm_campaign=promote)
 
 ### Other uncited sources:
 
