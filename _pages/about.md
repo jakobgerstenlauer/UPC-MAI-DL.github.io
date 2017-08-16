@@ -73,6 +73,7 @@ The experimental evaluation will be based on reports written by the student for 
 <a name='lessons'></a>
 ### Lessons
 
+<a name='mlp_convnets'></a>
 #### Lesson 1
 Basic Neural Nets and Conv Nets
 - [Theory](mlp-convnets-theory/)
