@@ -81,19 +81,19 @@ The biologically inspired ANN use an activation function for every neuron, which
 
 The most popular options are:
 
-The Sigmoid: $f(x)=\frac{1}{1+e^{-x}}$
+The Sigmoid: $$f(x)=\frac{1}{1+e^{-x}}$$
 <div style="text-align:center">
     <img src="/images/sigmoid.png" width="350">
 </div>
 <p style="text-align: center;">Sigmoid function, from [19].</p>
  
-The Tanh: $f(x)=\frac{2}{1+e^{-2x}}-1$
+The Tanh: $$f(x)=\frac{2}{1+e^{-2x}}-1$$
 <div style="text-align:center">
     <img src="/images/tanh.png" width="350">
 </div>
 <p style="text-align: center;">Tanh function, from [19].</p>
 
- The Rectified Linear Unit (ReLU): $f(x)=max(0,x)$
+ The Rectified Linear Unit (ReLU): $$f(x)=max(0,x)$$
 <div style="text-align:center">
     <img src="/images/relu.jpeg" width="350">
 </div>
