@@ -9,17 +9,17 @@ Table of Contents:
 - [A Bit of History](#history)
 - [Rosenblatt's Perceptron](#rosenblatt)
 - [Backpropagation and Stochastic Gradient Descent](#backprop)
-- [Convolutional Neural Networks](#cnn)
-    - [CNN Parameters](#cnn_params)
-    - [CNN Volumes](#cnn_volumes)
 - [Activation Functions](#activations)
-- [CNN Architectures](#conv_arch)
-- [Regularization Methods](#regularization)
 - [Training Parameters](#training_params)
     - [Epochs and Batch Size](#epochs_batch)
     - [Learning Rate](#learning_rate)
     - [Other Parameters](#other_params)
-    - [Adaptative Learning Methods](#adaptative_methods)
+- [Adaptative Learning Methods](#adaptative_methods)
+- [Convolutional Neural Networks](#cnn)
+    - [CNN Parameters](#cnn_params)
+    - [CNN Volumes](#cnn_volumes)
+- [CNN Architectures](#conv_arch)
+- [Regularization Methods](#regularization)
 - [CNN from the Inside](#inside)
 - [CNN Applications](#apps)
 - [Bibliography](#bib)
@@ -73,6 +73,100 @@ By applying the backpropagation process iteratively (forward pass of the input, 
 
 
 With this new training methodology, research on ANN became active again. LeCun et. al. [11] developed a digit recognition system using data from the US Postal Service in 1989, and showed how ANN could be used to solve complex practical problems. LeCun's system included a layer of convolutional neurons, which had been previously proposed by Fukushima in 1980 [12].
+
+<a name='activations'></a>
+### Activation Functions
+
+The biologically inspired ANN use an activation function for every neuron, which determines the neuron's output given the weighted sum of its inputs. Rosenblatt's Perceptron used the simplest one (Equation 1), a binary function that either activates with the value, or it does not. Nowadays more complex functions are used, all of them with a slope of some sort. The activation function needs to be non-linear, to provide the ANN with the capacity to learn non-linear patterns. 
+
+The most popular options are:
+
+The Sigmoid: $f(x)=\frac{1}{1+e^{-x}}$
+<div style="text-align:center">
+    <img src="/images/sigmoid.png" width="350">
+</div>
+<p style="text-align: center;">Sigmoid function, from [19].</p>
+ 
+The Tanh: $f(x)=\frac{2}{1+e^{-2x}}-1$
+<div style="text-align:center">
+    <img src="/images/tanh.png" width="350">
+</div>
+<p style="text-align: center;">Tanh function, from [19].</p>
+
+ The Rectified Linear Unit (ReLU): $f(x)=max(0,x)$
+<div style="text-align:center">
+    <img src="/images/relu.jpeg" width="350">
+</div>
+<p style="text-align: center;">ReLU function, from [19].</p>
+
+ReLU are currently being used by default in most cases, as these are more efficient. ReLU also avoids the vanishing gradient problem through its constant slope (see [20] for more details on the vanishing gradient). For more details on activation functions, see [21].
+
+
+<a name='training_params'></a>
+### Training Parameters
+
+While training a deep network, there are many training paremeters that can be tuned, and finding a good set is not straight-forward. In most cases, its just a matter of try and error, which typically requires executing the training procedure many times. Next we review some of those parameters.
+
+
+<a name='epochs_batch'></a>
+#### Epochs and batch size
+
+An epoch correponds to a training stage where all images in the training set are used for training once. Typically, an ANN training will require lots of epochs, as each example takes the network parameters in a different direction, and the network can learn more than once from the same example given the changes produced by the other examples. In most cases,  when using too many epochs the network will eventually overfit, as the network will learn to memorize the inputs after seeing them too many times. Overfitting can be identified by a decresing loss on the training set (which indicates that the network is doing increasibly better on that piece of data) together with an increase in the validation or test set (which indicates that the network is doing worse on those parts of the dataset, hence it is not generalizing).
+
+The batch size defines the number of input examples that are processed together in a single forward and backward pass of the network. In other words, is the number of inputs that the network 'sees together'. Batch size can go from 1 (one example at a time) to full dataset size. Larger batch sizes will train faster, but may be less precise [23]. The most commonly used batch sizes are 16 and 32.
+
+Batch sizes too small may be identified by a noisy function of loss over time, as the loss on one batch differs significantly from the loss of the next batch. With a batch size equal to the dataset size, variation should be minimal (unless the learning rate is too high, in which case the network cannot converge).
+
+<div style="text-align:center">
+    <img src="/images/loss.jpeg" width="450">
+</div>
+<p style="text-align: center;">Illustration of a noisy loss function, from [22].</p>
+
+
+
+<a name='learning_rate'></a>
+#### Learning Rate
+
+Learning rate defines the amount of the total derivative of the loss that is applied on each step. That is, how much the weights will be changed towards the presumed optimal. Typically, applying the full derivative (learning rate of 1) provides an overcorrection, and smaller steps are required. A learning rate too large will cause the neurons to make large "jumps" within the high-dimensional space being defined, making them unable to converge. A learning rate too small may make training unfeasibly long, as the steps taken towards the optimal weights are too small. Its often better to start with a small learning rate to get weights in the right direction, and increase it later on to improve convergence.
+
+<div style="text-align:center">
+    <img src="/images/learningrates2.jpeg" width="450">
+</div>
+<p style="text-align: center;">Illustration on the behavior of a large and small learning rate, from [40].</p>
+
+
+Plotting the behavior of the loss over time gives a good insight on our choice of learning rate.
+
+<div style="text-align:center">
+    <img src="/images/learningrates.jpeg" width="450">
+</div>
+<p style="text-align: center;">Illustration on the behavior of various learning rates, from [22].</p>
+
+
+
+<a name='other_params'></a>
+#### Other parameters
+
+There are many other parameters that may affect the learning process. We will not detail them here, these include:
+
+- Weight Decay: After each update, weights are multiplied by a factor between 0 and 1. This is a form of regularization.
+- Weight initialization: The initial weight and bias values before training starts is key for the outcome of the training. Xavier initialization is currently a popular solution.
+- Momentum: To help convergence, momentum adds a fraction of the previous weight update to the current weight update. This increases convergence if both updates were in the both direction, and smooths variations when updates go on different directions.
+
+[22] contains several tips on how to optimize all these paremeters (Hyperparameter optimization Section).
+
+
+
+<a name='adaptative_methods'></a>
+### Adaptative learning methods
+
+The number of parameters to be fit on learning methods like SGD (e.g., learning rate, momentum, weight decay, etc.) has motivated the appearence of learning methods which choose and adapt these parameters automatically. These are used instead of SGD, and can simplify the parameter tuning process significantly. Among the most popular alternatives, there is Adagrad, Adadelta, RMSprop and Adam. See [41] for more details on these.
+
+<div style="text-align:center">
+    <img src="/images/saddle_point_evaluation_optimizers.gif" width="450">
+</div>
+<p style="text-align: center;">Illustration on the behavior of various learning algorithms, from [41].</p>
+
 
 <a name='cnn'></a>
 ### Convolutional Neural Networks
@@ -167,26 +261,6 @@ The main parameters to be defined for a pooling layer are the pooling region and
 
 
 
-<a name='activations'></a>
-### Activation Functions
-
-The biologically inspired ANN require an activation function for every neuron, which determines the neuron's output given the weighted sum of its inputs. Rosenblatt's Perceptron used the simplest one (Equation 1), a binary function that either activates with the value, or it does not. Nowadays more complex functions are used, all of them with a positive slope of some sort. The activation function needs to be non-linear, to provide the ANN with the capacity to learn non-linear patterns. 
-
-The most popular options are:
-
-The Sigmoid: $f(x)=\frac{1}{1+e^{-x}}$
-<div style="text-align:center">
-    <img src="/images/sigmoid.png" width="350">
-</div>
-<p style="text-align: center;">Sigmoid function, from [19].</p>
-
- The Rectified Linear Unit (ReLU): $f(x)=max(0,x)$
-<div style="text-align:center">
-    <img src="/images/relu.jpeg" width="350">
-</div>
-<p style="text-align: center;">ReLU function, from [19].</p>
-
-ReLU are currently being used by default in most cases, as these are more efficient. ReLU also avoids the vanishing gradient problem through its constant slope (see [20] for more details on the vanishing gradient). For more details on activation functions, see [21].
 
 
 <a name='conv_arch'></a>
@@ -213,7 +287,7 @@ On top of the last fully-connected layer, either a Softmax or a SVM is placed, t
 <a name='regularization'></a>
 ### Regularization Methods
 
-The learning capacity of a network is defined by its number of weights. A deep architecture will typically have millions (AlexNet has 60M parameters, and the VGG16 has 138M parameters), and a majority of those come from the fully-connected layers as conv layers have weight sharing which decreases their number. A single fully-connected layer with 4,096 neurons, where its input layer also has 4,096 neurons, will contain 16M parameters on its own (4,096 x 4,096). A model with so many parameters can easily overfit to any training dataset, as it has the capacity to memorize it. To avoid the overfitting problem, several regularization methods have been proposed for deep architectures. These include:
+The learning capacity of a network is defined by its number of weights and its depth. A deep architecture will typically have millions (AlexNet has 60M parameters, and the VGG16 has 138M parameters), and a majority of those come from the fully-connected layers as conv layers have weight sharing which decreases their number. A single fully-connected layer with 4,096 neurons, where its input layer also has 4,096 neurons, will contain 16M parameters on its own (4,096 x 4,096). A model with so many parameters can easily overfit to any training dataset, as it has the capacity to memorize it. To avoid the overfitting problem, several regularization methods have been proposed for deep architectures. These include:
 
 - L1/L2 regularization: This method tries to avoid spiking values of weights by adding a penalization to their squared magnitude.
 - Dropout [27]: This method sets to zero random neurons with a certain probability during training, sparsifying the ANN connectivity in practice. Dropout is most useful on fully-connected layers.
@@ -223,70 +297,6 @@ The learning capacity of a network is defined by its number of weights. A deep a
 See [24] for further details on regularization methods.
 
 
-<a name='training_params'></a>
-### Training Parameters
-
-While training a deep network, there are many training paremeters that can be tuned, and finding a good set is not straight-forward. In most cases, its just a matter of try and error, which typically requires executing the training procedure many times. Next we review some of those parameters.
-
-
-<a name='epochs_batch'></a>
-#### Epochs and batch size
-
-An epoch correponds to a training stage where all images in the training set are used for training once. Typically, an ANN training will require lots of epochs, as each example takes the network parameters in a different direction, and the network can learn more than once from the same example given the changes produced by the other examples. In most cases,  when using too many epochs the network will eventually overfit, as the network will learn to memorize the inputs after seeing them too many times. Overfitting can be identified by a decresing loss on the training set (which indicates that the network is doing increasibly better on that piece of data) together with an increase in the validation or test set (which indicates that the network is doing worse on those parts of the dataset, hence it is not generalizing).
-
-The batch size defines the number of input examples that are processed together in a single forward and backward pass of the network. In other words, is the number of inputs that the network 'sees together'. Batch size can go from 1 (one example at a time) to full dataset size. Larger batch sizes will train faster, but may be less precise [23]. The most commonly used batch sizes are 16 and 32.
-
-Batch sizes too small may be identified by a noisy function of loss over time, as the loss on one batch differs significantly from the loss of the next batch. With a batch size equal to the dataset size, variation should be minimal (unless the learning rate is too high, in which case the network cannot converge).
-
-<div style="text-align:center">
-    <img src="/images/loss.jpeg" width="450">
-</div>
-<p style="text-align: center;">Illustration of a noisy loss function, from [22].</p>
-
-
-
-<a name='learning_rate'></a>
-#### Learning Rate
-
-Learning rate defines the amount of the total derivative of the loss that is applied on each step. That is, how much the weights will be changed towards the presumed optimal. Typically, applying the full derivative (learning rate of 1) provides an overcorrection, and smaller steps are required. A learning rate too large will cause the neurons to make large "jumps" within the high-dimensional space being defined, making them unable to converge. A learning rate too small may make training unfeasibly long, as the steps taken towards the optimal weights are too small. Its often better to start with a small learning rate to get weights in the right direction, and increase it later on to improve convergence.
-
-<div style="text-align:center">
-    <img src="/images/learningrates2.jpeg" width="450">
-</div>
-<p style="text-align: center;">Illustration on the behavior of a large and small learning rate, from [40].</p>
-
-
-Plotting the behavior of the loss over time gives a good insight on our choice of learning rate.
-
-<div style="text-align:center">
-    <img src="/images/learningrates.jpeg" width="450">
-</div>
-<p style="text-align: center;">Illustration on the behavior of various learning rates, from [22].</p>
-
-
-
-<a name='other_params'></a>
-#### Other parameters
-
-There are many other parameters that may affect the learning process. We will not detail them here, these include:
-
-- Weight Decay: After each update, weights are multiplied by a factor between 0 and 1. This is a form of regularization.
-- Weight initialization: The initial weight and bias values before training starts is key for the outcome of the training. Xavier initialization is currently a popular solution.
-- Momentum: To help convergence, momentum adds a fraction of the previous weight update to the current weight update. This increases convergence if both updates were in the both direction, and smooths variations when updates go on different directions.
-
-[22] contains several tips on how to optimize all these paremeters (Hyperparameter optimization Section).
-
-
-
-<a name='adaptative_methods'></a>
-#### Adaptative learning methods
-
-The number of parameters to be fit on learning methods like SGD (e.g., learning rate, momentum, weight decay, etc.) has motivated the appearence of learning methods which choose and adapt these parameters automatically. These are used instead of SGD, and can simplify the parameter tuning process significantly. Among the most popular alternatives, there is Adagrad, Adadelta, RMSprop and Adam. See [41] for more details on these.
-
-<div style="text-align:center">
-    <img src="/images/saddle_point_evaluation_optimizers.gif" width="450">
-</div>
-<p style="text-align: center;">Illustration on the behavior of various learning algorithms, from [41].</p>
 
 <a name='inside'></a>
 ### CNN from the Inside
