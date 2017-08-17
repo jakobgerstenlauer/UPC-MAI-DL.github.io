@@ -8,8 +8,8 @@ Table of Contents:
 
 - [Deep Learning frameworks](#frameworks)
 - [A Neural Network Playground](#playground)
-- [Basic NN example](#basic_nn)
-- [CNN example](#cnn)
+- Example 1: [Basic NN](#basic_nn)
+- Example 2: [CNN](#cnn)
 
 
 <a name='frameworks'></a>
@@ -25,18 +25,18 @@ Currently there are several deep learning frameworks available for developers. T
 - Torch
 - Keras
 
-Chosing one or another depends on the developer experience and the nature of the problem. In this course we will use Keras, since it is very easy to use and provides many functionalities that facilitate many tasks. Keras is written in Python and in the background uses TensorFlow, Theano or CNTK.
+Chosing one or another depends on the developer experience and the nature of the problem. In this course we will use Keras, since it is very easy to use and provides many functionalities that allows uers to start training networks in very short time. Keras is written in Python and in the background it may use TensorFlow, Theano or CNTK.
 
 <a name='playground'></a>
 ### A Neural Network Playground
 
-A good play to start for getting familiarized with how NN work is [tensorflow's playground](http://playground.tensorflow.org)
+A good play to start for getting familiarized with how NN work is [tensorflow's playground](http://playground.tensorflow.org). This site allows you to define a neural network of a few layers, to try to solve different problems. Try playing with the different problems, setting different amount of layers with varying number of neurons, and different learning rates to see how the network training behaves.
 
 
 <a name='basic_nn'></a>
-### Basic NN example
+### Example 1: Basic NN
 
-Let's see a basic example on how to use Keras for training a simple NN. The following example can be find whole in the MAI-DL directory of the cluster, file code_lab1.1.py. Here we split it in parts to review it.
+This guided laboratory introduces a basic example on how to use Keras for training a simple NN. The following example can be find whole in the MAI-DL directory of the cluster, file code_lab1.1.py. Here we split it in parts to review it.
 
 We will work with the MNIST dataset of hand-written digits.
 ```python
@@ -53,7 +53,7 @@ print 'Number of train examples', x_train.shape[0]
 print 'Size of train examples', x_train.shape[1:]
 ```
 
-We need to adapt the data to the shape of the input layer. Since its a fully connected layer (i.e., Dense), we need to flatten the RGB image. We also normalize the input, and make sure its type is correct.
+We need to adapt the data to the shape of the input layer. Since its a fully connected layer (i.e., Dense), we need to flatten the 28x28 2D image into a 1D vector of 784 values. We also normalize the input, and make sure its type is correct.
 ```python
 #Adapt the data as an input of a fully-connected (flatten to 1D)
 x_train = x_train.reshape(60000, 784)
@@ -119,13 +119,9 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 #Accuracy plot
 plt.plot(history.history['acc'])
-#No validation accuracy in this example
-#plt.plot(history.history['val_acc'])
 plt.title('model accuracy')
 plt.ylabel('accuracy')
 plt.xlabel('epoch')
-#No validation loss in this example
-#plt.legend(['train', 'test'], loc='upper left')
 plt.legend(['train'], loc='upper left')
 plt.savefig('model_accuracy.pdf')
 plt.close()
@@ -173,7 +169,7 @@ nn.load_weights(weights_file)
 ```
 
 <a name='cnn'></a>
-### CNN example
+### Example 2: CNN
 
 Convolutional neural networks are designed to process 2D data, by exploiting 2D spatial patterns. Let us now design a CNN to process the same MNIST dataset, and see if we can outperform the basic neural net of the previous example. Most of the code is the same, so in here we will only review those parts that differ significantly. The whole code is in the MAI-DL directory of the cluster, file code_lab1.2.py.
 
@@ -207,7 +203,7 @@ nn.add(Dense(128, activation='relu'))
 nn.add(Dense(10, activation='softmax'))
 ```
 
-This simple model can solve the MNIST classification problem with an accuracy over 98%. For a more complicated problem, you can try the CIFAR10 dataset (see the [dataset webpage](https://www.cs.toronto.edu/~kriz/cifar.html) to analyze the type of problem at hand.
+This simple model can solve the MNIST classification problem with an accuracy over 98%. For a more complicated problem, try the CIFAR10 dataset (see the [dataset webpage](https://www.cs.toronto.edu/~kriz/cifar.html) to analyze the type of problem at hand.
 ```python
 from keras.datasets import cifar10
 (x_train, y_train), (x_test, y_test) = cifar10.load_data()

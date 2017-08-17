@@ -2,15 +2,10 @@
 permalink: /mlp-convnets-lab-autonomous/
 ---
 
-The autonomous laboratory is open for your exploration. Using the basic code provided in the guided laboratory, students should modify it to test different settings. In this document there are a list of suggested questions you may consider to explore. There are however many other questions you may want to test. Go ahead and play with the code.
-
-Table of Contents:
-
-- [Basic NN example](#basic_nn)
-- [CNN example](#cnn)
+The autonomous laboratory is open for your exploration. Using the basic code provided in the guided laboratory, students should modify it to test different settings, and understand the effect of the various components. In this document there are a list of suggested questions you may consider to explore. It is not necessary to answer any or all these questions. The student may choose to perform different experiments, for explore different aspects of neural networks. Go ahead and play.
 
 <a name='basic_nn'></a>
-### Basic NN example
+### Example 1: Basic NN
 
 - What is the impact of using more fully connected layers?
 - What is the impact of increasing the number of neurons per layer?
@@ -21,4 +16,9 @@ Table of Contents:
 <a name='cnn'></a>
 ### CNN example
 
-- Can you train a model that overfits on the training data? How can you tell that it is overfitting?
+- Can you design and train a model that overfits on the training data (or on a subset of it)?
+- When overfitting, what is the result of applying various regularization techniques?
+- When using ReLUs, how many neurons are dead after a training?
+- Adding data augmentation improves performance?
+- How do the different learning algorithms behave for equal architectures?
+- What is the result of using different weight initializations in the training process?
