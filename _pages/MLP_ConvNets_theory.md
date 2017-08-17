@@ -81,7 +81,8 @@ The biologically inspired ANN use an activation function for every neuron, which
 
 The most popular options are:
 
-The Sigmoid: $$f(x)=\frac{1}{1+e^{-x}}$$
+The Sigmoid: 
+$$f(x)=\frac{1}{1+e^{-x}}$$
 <div style="text-align:center">
     <img src="/images/sigmoid.png" width="350">
 </div>
