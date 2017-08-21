@@ -20,5 +20,6 @@ The autonomous laboratory is open for your exploration. Using the basic code pro
 - When overfitting, what is the result of applying various regularization techniques?
 - When using ReLUs, how many neurons are dead after a training?
 - Adding data augmentation improves performance?
-- How do the different learning algorithms behave for equal architectures?
+- How do the different learning algorithms behave for equal architectures? Does regularization have the same affect when using different algorithms?
+- How hard is it to match the performance of an adaptative algorithm (e.g., Adam) by using an algorithm where parameters have to be hand tunned (e.g., SGD)?
 - What is the result of using different weight initializations in the training process?

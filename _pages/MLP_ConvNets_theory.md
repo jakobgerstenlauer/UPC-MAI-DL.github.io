@@ -15,11 +15,11 @@ Table of Contents:
     - [Learning Rate](#learning_rate)
     - [Other Parameters](#other_params)
 - [Adaptative Learning Methods](#adaptative_methods)
+- [Regularization Methods](#regularization)
 - [Convolutional Neural Networks](#cnn)
     - [CNN Parameters](#cnn_params)
     - [CNN Volumes](#cnn_volumes)
 - [CNN Architectures](#conv_arch)
-- [Regularization Methods](#regularization)
 - [CNN from the Inside](#inside)
 - [CNN Applications](#apps)
 - [Bibliography](#bib)
@@ -169,12 +169,26 @@ The number of parameters to be fit on learning methods like SGD (e.g., learning 
 <p style="text-align: center;">Illustration on the behavior of various learning algorithms, from [41].</p>
 
 
+<a name='regularization'></a>
+### Regularization Methods
+
+The learning capacity of a network is defined by its number of weights and its depth. A deep architecture will typically have millions (AlexNet has 60M parameters, and the VGG16 has 138M parameters), and a majority of those come from the fully-connected layers as conv layers have weight sharing which decreases their number. A single fully-connected layer with 4,096 neurons, where its input layer also has 4,096 neurons, will contain 16M parameters on its own (4,096 x 4,096). A model with so many parameters can easily overfit to any training dataset, as it has the capacity to memorize it. To avoid the overfitting problem, several regularization methods have been proposed for deep architectures. These include:
+
+- L1/L2 regularization: This method tries to avoid spiking values of weights by adding a penalization to their squared magnitude.
+- Dropout [27]: This method sets to zero random neurons with a certain probability during training, sparsifying the ANN connectivity in practice. Dropout is most useful on fully-connected layers.
+- Batch Normalization [39]: This method normalizes each input batch by both mean and variance, typically after fully-connected layers. It serves both as a regularizing and to solve problems related with weight initialization, while also speeding up convergence.
+- Layer Normalization [44]: This method is similar to batch normalization, but mean and variance are computed at layer level. This is particularly useful for RNN (where batch normalization is not directly applicable) and fully-connected layers, but it does not work very well for conv layers. It can speed up convergence even faster than batch normalization.
+
+See [24] for further details on regularization methods.
+
+
+
 <a name='cnn'></a>
 ### Convolutional Neural Networks
 
-Convolutional Neural Networks (CNN) are based on a special type of neuron: convolutional neurons. Typically, convolutional neurons have a limited input, e.g., are only connected with a few neurons from the previous layer. In contrast, neurons from fully-connected layers are connected to all the neurons from the previous layer.
+Convolutional Neural Networks (CNN) are based on a special type of neuron: convolutional neurons. Typically, convolutional neurons have a limited input, e.g., are only connected with a few neurons from the previous layer. In contrast, neurons from fully-connected layers are connected to all the neurons from the previous layer. The idea of convolution can be applied to an input of any dimensionality. In here we detail convolution in the context of 2D data (hence, 2D convolution), because its the most common case, and because its easier to understand. Once 2D convolution is understood, the reader should be aware that the same concepts applicable to 2D data can be applied to 3D or higher dimensionality data, by coherently increasing the dimensionality of the convolution. 
 
-For defining their input connectivity, conv neurons assume the existence of a two-dimensional structure in the data. To capture spatially consistent patterns occuring in a subset of the input, conv neurons are connected to a set of neurons from the previous layer that define squared patches.
+For defining their input connectivity, conv neurons assume the existence of a certain structure in the data (e.g., two-dimensional structure in two-dimensional data). To capture spatially consistent patterns occuring in a subset of the input, conv neurons are connected to a set of neurons from the previous layer that define squared patches (in the case of two-dimensional convolutions).
 
 <div style="text-align:center">
     <img src="/images/convolution2.png" width="350">
@@ -226,7 +240,7 @@ $$OutputSize = \frac{InputSize-KernelSize+2*Padding}{Stride}+1$$
 <a name='cnn_volumes'></a>
 #### Convolutional Volumes
 
-CNNs are appropriate for any 2-dimensional type of input, such as images. In the case of color images, each input has three channels (RGB) of equal width and height. When processing the input, all three channels should be considered at the same time by any conv filter processing the input (if a filter is processing the pixel located at [x,y], the three RGB values of the pixel should be part of the input). For that purpose, convolutional filters always use the full depth of the input. In the case of the first layer of convolutional filters are 3-dimensional where the width and height are defined by the kernel size, and the depth is 3. 
+CNNs are appropriate for any 2-dimensional inputs with implicit structural information, such as images. In the case of color images, each input has three channels (RGB) of equal width and height. When processing the input, all three channels should be considered at the same time by any conv filter processing the input (if a filter is processing the pixel located at [x,y], the three RGB values of the pixel should be part of the input). For that purpose, convolutional filters always use the full depth of the input. In the case of the first layer of convolutional filters are 3-dimensional where the width and height are defined by the kernel size, and the depth is 3. 
 
 A single conv filter convolved over the whole input produces a 2-dimensional numerical output. Such 2-dimensional output corresponds to the application of a single filter to the input volume, in a sense it represents the flat (as in 2D) interpretation of the 3D input according to the filter. For every filter we have in a conv layer (i.e., for every convolutional neuron), a different 2-dimensional output is produced. As a result, a convolutional layer produces a 3-dimensional volume, where each 2D slice of the volume corresponds to the output of a single conv neuron. The width and height of the 3D output is defined by the previously defined formula, while the depth is defined by the number of neurons in the layer.
 
@@ -282,20 +296,6 @@ The AlexNet architecture is composed by 5 pairs of conv-pooling layers, with 3 f
 <p style="text-align: center;">AlexNet architecture, from [26]. The network is split horizontally because it needed to be trained on two different GPUs.</p>
 
 On top of the last fully-connected layer, either a Softmax or a SVM is placed, to perform the final classification. Other relevant CNN that follow this same scheme are the VGG16/19 [36] (by Oxford VGG research group), the Inception (first called GoogLeNet [37], by Google) and the ResNet [38] (by Microsoft).
-
-
-
-<a name='regularization'></a>
-### Regularization Methods
-
-The learning capacity of a network is defined by its number of weights and its depth. A deep architecture will typically have millions (AlexNet has 60M parameters, and the VGG16 has 138M parameters), and a majority of those come from the fully-connected layers as conv layers have weight sharing which decreases their number. A single fully-connected layer with 4,096 neurons, where its input layer also has 4,096 neurons, will contain 16M parameters on its own (4,096 x 4,096). A model with so many parameters can easily overfit to any training dataset, as it has the capacity to memorize it. To avoid the overfitting problem, several regularization methods have been proposed for deep architectures. These include:
-
-- L1/L2 regularization: This method tries to avoid spiking values of weights by adding a penalization to their squared magnitude.
-- Dropout [27]: This method sets to zero random neurons with a certain probability during training, sparsifying the ANN connectivity in practice. Dropout is most useful on fully-connected layers.
-- Batch Normalization [39]: This method normalizes each input batch by both mean and variance, typically after fully-connected layers. It serves both as a regularizing and to solve problems related with weight initialization, while also speeding up convergence.
-- Layer Normalization [44]: This method is similar to batch normalization, but mean and variance are computed at layer level. This is particularly useful for RNN (where batch normalization is not directly applicable) and fully-connected layers, but it does not work very well for conv layers. It can speed up convergence even faster than batch normalization.
-
-See [24] for further details on regularization methods.
 
 
 
@@ -358,12 +358,12 @@ The correlation between the neuron activations of the same layer has a relation 
 
 #### Automatic Image Colorization
 
-The purpose of image colorization is to, given an input black and white image, produce a colorization of the same image which is coherent with the contents of it. For that purpose a CNN is connected with a Deconvolutional net, which is essentially a mirrored version of a CNN. This architecture is also used for image segmentation, as it allows classification at pixel-level.
+The purpose of image colorization is to, given an input black and white image, produce a colorization of the same image which is coherent with the contents of it. For that purpose a CNN is connected with a Deconvolutional net, which is essentially a mirrored version of a CNN. Beware, "deconvolution" is a controversial term (see [this lesson from Stanford](https://youtu.be/ByjaPdWXKJ4?t=20m16s)). This architecture is also used for image segmentation, as it allows classification at pixel-level (see [45] for example).
 
 <div style="text-align:center">
     <img src="/images/conv_deconv.png" width="650">
 </div>
-<p style="text-align: center;">Example of a convolutional and deconvolutional architecture, from [34].</p>
+<p style="text-align: center;">Example of a convolutional and deconvolutional architecture. Figure from [34].</p>
  
 <div style="text-align:center">
     <img src="/images/color.png" width="550">
@@ -482,6 +482,8 @@ There are many other applications of CNNs. In combination with reinforcement lea
 [43] [https://medium.com/@karpathy/yes-you-should-understand-backprop-e2f06eab496b](https://medium.com/@karpathy/yes-you-should-understand-backprop-e2f06eab496b)
 
 [44] [Ba, Jimmy Lei, Jamie Ryan Kiros, and Geoffrey E. Hinton. "Layer normalization." arXiv preprint arXiv:1607.06450 (2016).](https://arxiv.org/pdf/1607.06450.pdf?utm_source=sciontist.com&utm_medium=refer&utm_campaign=promote)
+
+[45] [Ronneberger, Olaf, Philipp Fischer, and Thomas Brox. "U-net: Convolutional networks for biomedical image segmentation." International Conference on Medical Image Computing and Computer-Assisted Intervention. Springer, Cham, 2015.](https://arxiv.org/pdf/1505.04597.pdf)
 
 ### Other uncited sources:
 
