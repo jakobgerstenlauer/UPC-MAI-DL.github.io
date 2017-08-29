@@ -161,7 +161,7 @@ There are many other parameters that may affect the learning process. We will no
 <a name='adaptative_methods'></a>
 ### Adaptative learning methods
 
-The number of parameters to be fit on learning methods like SGD (e.g., learning rate, momentum, weight decay, etc.) has motivated the appearence of learning methods which choose and adapt these parameters automatically. These are used instead of SGD, and can simplify the parameter tuning process significantly. Among the most popular alternatives, there is Adagrad, Adadelta, RMSprop and Adam. See [41] for more details on these.
+The number of parameters to be fit on learning methods like SGD (e.g., learning rate, momentum, weight decay, etc.) has motivated the appearence of learning methods which choose and adapt these parameters automatically. These are used instead of SGD, and can simplify the parameter tuning process significantly. Among the most popular alternatives, there is Adagrad, Adadelta, RMSprop and Adam. See [41,46] for more details on these.
 
 <div style="text-align:center">
     <img src="/images/saddle_point_evaluation_optimizers.gif" width="450">
@@ -484,6 +484,8 @@ There are many other applications of CNNs. In combination with reinforcement lea
 [44] [Ba, Jimmy Lei, Jamie Ryan Kiros, and Geoffrey E. Hinton. "Layer normalization." arXiv preprint arXiv:1607.06450 (2016).](https://arxiv.org/pdf/1607.06450.pdf?utm_source=sciontist.com&utm_medium=refer&utm_campaign=promote)
 
 [45] [Ronneberger, Olaf, Philipp Fischer, and Thomas Brox. "U-net: Convolutional networks for biomedical image segmentation." International Conference on Medical Image Computing and Computer-Assisted Intervention. Springer, Cham, 2015.](https://arxiv.org/pdf/1505.04597.pdf)
+
+[46] [http://blog.mrtanke.com/2016/10/24/An-overview-of-gradient-descent-optimization-algorithms/](http://blog.mrtanke.com/2016/10/24/An-overview-of-gradient-descent-optimization-algorithms/)
 
 ### Other uncited sources:
 
