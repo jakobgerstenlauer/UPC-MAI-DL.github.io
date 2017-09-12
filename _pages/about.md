@@ -85,7 +85,7 @@ Basic Neural Nets and Conv Nets
 #### Lesson 2
 Recurrent Neural Networks
 
-- [Theory]()
+- [Theory](rnn-theory)
 - [Lab guided](rnn-lab-guided)
 - [Lab autonomous](rnn-lab-autonomous)
 
