@@ -85,7 +85,7 @@ Basic Neural Nets and Conv Nets
 <a name='papers'></a>
 ### Papers of Interest
 
-For the evaluation of the theoretical aspects of the course, we offer a list of papers of interest which the student may chose to read and review. These loosely are categorized.
+For the evaluation of the theoretical aspects of the course, we offer a list of papers of interest which the student may chose to read and review. These are loosely categorized.
 
 [Papers of interests](papers-of-interest/)
 
