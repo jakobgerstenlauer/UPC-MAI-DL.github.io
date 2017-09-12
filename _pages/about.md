@@ -19,6 +19,7 @@ The Table of Contents:
 - [Course Evaluation](#evaluation)
 - [Lessons](#lessons)
     - [#1 Basic Neural Nets and Conv Nets](#mlp_convnets)
+    - [#2 Recurrent Neural Nets](#rnn_nets)
 - [Papers of interest](#papers)
 
 
@@ -80,6 +81,7 @@ Basic Neural Nets and Conv Nets
 - [Lab guided](mlp-convnets-lab-guided/)
 - [Lab autonomous](mlp-convnets-lab-autonomous/)
 
+<a name='rnn_nets'></a>
 #### Lesson 2
 Recurrent Neural Networks
 
