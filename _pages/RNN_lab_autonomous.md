@@ -2,6 +2,8 @@
 permalink: /rnn-lab-autonomous/
 ---
 
+## Recurrent Neural Networks (Autonomous Laboratory)
+
 This session is for exploring the effects of the different elements of the
 RNN using a specific dataset. In this case we are going to extend the Wind
 prediction example that we used in the previous sessions.
@@ -70,4 +72,5 @@ Do the following:
 
 * Adapt the sequence to sequence arquitecture from the summation example to this
 task
-* Study how the MSE of the predictions changes
+* Study how the MSE of the predictions changes with the length of the predicted
+sequence
