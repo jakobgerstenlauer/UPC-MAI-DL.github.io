@@ -3,7 +3,7 @@ permalink: /
 title: "Deep Learning course - Master in Artificial Intelligence - Universitat Politècnica de Catalunya and Barcelona Supercomputing Center"
 excerpt: "About me"
 author_profile: false
-redirect_from: 
+redirect_from:
   - /about/
     - /about.html
 ---
@@ -31,7 +31,7 @@ This is the official web page for the contents of the lectures from the Deep Lea
 ### Lecturers
 - Dario Garcia-Gasulla (Coordinator) (BSC, dario.garcia@bsc.es)
 - Marc Casas
-- Javier Bejar
+- Javier Bejar (UPC-CS, bejar@cs.upc.edu)
 
 
 
@@ -80,7 +80,12 @@ Basic Neural Nets and Conv Nets
 - [Lab guided](mlp-convnets-lab-guided/)
 - [Lab autonomous](mlp-convnets-lab-autonomous/)
 
+#### Lesson 2
+Recurrent Neural Networks
 
+- [Theory]()
+- [Lab guided](rnn-lab-guided)
+- [Lab autonomous](rnn-lab-autonomous)
 
 <a name='papers'></a>
 ### Papers of Interest
@@ -88,4 +93,3 @@ Basic Neural Nets and Conv Nets
 For the evaluation of the theoretical aspects of the course, we offer a list of papers of interest which the student may chose to read and review. These are loosely categorized.
 
 [Papers of interests](papers-of-interest/)
-
