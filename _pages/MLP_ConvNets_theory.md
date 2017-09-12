@@ -2,7 +2,7 @@
 permalink: /mlp-convnets-theory/
 ---
 
-This page contains the theoretical part of the MLP-CNN topic for the Deep Learning course at the Master in Artificial Inteligence of the Universitat Politècnica de Catalunya. 
+This page contains the theoretical part of the ANN-CNN topic for the Deep Learning course at the Master in Artificial Inteligence of the Universitat Politècnica de Catalunya. 
 
 Table of Contents:
 
@@ -58,7 +58,7 @@ Rosenblatt implemented the algorithm within the machine "Mark I Perceptron", a v
 <p style="text-align: center;">Illustration of the Mark I Perceptron from [3].</p>
 
 Rosenblatt acknolwedged a set of limitations of his Perceptron machine in a series of publications. At the same time, Minsky and Papert published the book "Perceptrons: an introduction to computational geometry", also detailing some of those limitations. See [6] for more details. 
-The work of Minsky and Papert had a huge impact on the public, although few people actually understood the nature of their contribution. Simply put, Minsky and Papert argue that a multilayer network (or MLP) is needed for learning certain basic functions such as XOR, while no appropriate training algorithm existed for that kind of network at the time.
+The work of Minsky and Papert had a huge impact on the public, although few people actually understood the nature of their contribution. Simply put, Minsky and Papert argue that a multilayer network is needed for learning certain basic functions such as XOR, while no appropriate training algorithm existed for that kind of network at the time.
 
 Regardless of the technical aspects of Misnky and Papert's work, the reaction from the public was a drastic cut in funding on ANN during the 70s, until the mid 80s, in what is knows as the "AI Winter". After ANNs were almost abandoned, AI research focused on "expert systems" instead, which would also suffer their own "AI Winter" in the 90s.
 
@@ -69,7 +69,7 @@ The backpropagation algorithm reignited the interest on ANN. Originally intended
 
 For training a multi-layer ANN, the backpropagation starts with a forward pass of an input. After the input has reached the last layer of the network, the label predicted by the ANN (the network output) is compared against the ground truth label, and the error made by the network is measured using a loss function. The computed loss is used to update the weights of the last layer of the network, finding the best gradient towards minimizing the error (though a partial derivative). The challenge in training multi-layer ANN resides in the complexity of optimizing the weights of layers not directly connected to the output. To solve that, the backpropagation algorithm uses the chain rule, which allows to compute the derivative of previous layers, and thus update the weights of those layers as well. Simply put, the backpropagation algorithm is capable of determining the responsability of each individual neuron for the error made by the network, regardless of the neuron location within the net. Traditionally, the change in the weights has been computed using an optimization algorithm called Stochastic Gradient Descent (SGD). SGD iteratively estimates the best direction for optimization using a subset of the whole dataset (hence, stochastic). Since then, several alternatives have been proposed. Some of these alternatives are listed later in this document in the [Adaptative Learning Methods](#adaptative_methods) section.   
 
-By applying the backpropagation process iteratively (forward pass of the input, calculate error made through loss function, backpropagate prediction error layer by layer, update neuron weights through optimization), we can eventually fit the weights of all layers in a MLP for a given problem. See [10] for a full mathematical explanation of the backprop algorithm, [42] gives simpler visual explanation, and [43] shows why it is important to understand how it works with practical examples.
+By applying the backpropagation process iteratively (forward pass of the input, calculate error made through loss function, backpropagate prediction error layer by layer, update neuron weights through optimization), we can eventually fit the weights of all layers in an ANN for a given problem. See [10] for a full mathematical explanation of the backprop algorithm, [42] gives simpler visual explanation, and [43] shows why it is important to understand how it works with practical examples.
 
 
 With this new training methodology, research on ANN became active again. LeCun et. al. [11] developed a digit recognition system using data from the US Postal Service in 1989, and showed how ANN could be used to solve complex practical problems. LeCun's system included a layer of convolutional neurons, which had been previously proposed by Fukushima in 1980 [12].
