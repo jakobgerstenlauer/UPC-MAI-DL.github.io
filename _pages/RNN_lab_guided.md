@@ -10,8 +10,9 @@ You can download the code and data for this examples from the following
 github repository [https://github.com/bejar/DLMAI](https://github.com/bejar/DLMAI)
 
 
-### Time Series Regression (Wind Speed Prediction)
-
+<details>
+<summary> Task 1: Time Series Regression (Wind Speed Prediction)</summary>
+<p>
 The goal of this example is to predict the wind speed of a geographical site
 given a window of the previous measurements.
 
@@ -35,7 +36,8 @@ stores all the data matrices. This object has the attribute `file` that tells
 you the name of the matrices. We are going to use the matix `wind90-45142`.
 
 The code of the example is in the `WindPrediction.py` file.
-
+</p>
+</summary>
 
 ### Time Series Classification (Electric Devices classification )
 
@@ -83,6 +85,15 @@ contains tweets about US airlines and the second are tweets about the
 2016 US Republican party presidential debate. Both have three classes
 (positive, negative and neutral)
 
+The code is in `Sentiment.py`. This code reads the tweets file and generates
+a vocabulary with all the different words that appear, everything that does not
+correspond with letters a-z is discarded.
+
+The size of the vocabulary can be controled with the `numwords` variable. Words
+are recoded as numbers and the tweets are recoded accordingly maintaining the
+order of the words in the
+
+
 The architecture for this task is composed by:
 
 * A first `Embedding` layer that transforms the vectors corresponding to the
@@ -103,11 +114,12 @@ Elements to play with:
 
 This example has been _borrowed_ from the Keras examples.
 
-The main idea of this example is that we can generate text by basically
+The main idea of this example is that we can generate text basically by
 predicting for a sequence of letters the next most probable letter.
+
 This is a simplification of a more computationally expensive problem that would
 be to predict the next word of a sequence of words. The good thing about this
-approach is that the number of classes to predict if just the number of characters
+approach is that the number of classes to predict is just the number of characters
 in the text instead of a huge vocabulary dataset.
 
 The data used for the example corresponds to poetry selected from different
@@ -122,6 +134,13 @@ The data and the code are in the `\TextGeneration` directory.
 
 The data is transformed to one-hot encoding for building the classifier, assuming
 that the number of classes is the number of unique characters in the text.
+
+The code is in `TextGenerator.py`. This code reads the data file and generates
+a training set by sequentially extracting windows of size `maxlen` moving
+the window `step` number of characters every iteration. For each window the class
+correspond to the next character. The classes are transformed to one-hot encoding
+of the size the number of different characters in the text.
+
 
 The architecture for this task is composed by:
 
