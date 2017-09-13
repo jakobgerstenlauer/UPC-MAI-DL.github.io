@@ -98,6 +98,7 @@ Elements to play with:
 * The dropout
 * The number of layers
 
+
 ### Sequence Classification (Text Generation)
 
 This example has been _borrowed_ from the Keras examples.
