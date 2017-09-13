@@ -11,7 +11,7 @@ github repository [https://github.com/bejar/DLMAI](https://github.com/bejar/DLMA
 
 
 <details>
-<summary> Task 1: Time Series Regression (Wind Speed Prediction)</summary>
+<summary> ##Task 1: Time Series Regression (Wind Speed Prediction)</summary>
 <p>
 The goal of this example is to predict the wind speed of a geographical site
 given a window of the previous measurements.
@@ -39,7 +39,9 @@ The code of the example is in the `WindPrediction.py` file.
 </p>
 </details>
 
-### Time Series Classification (Electric Devices classification )
+<details>
+<summary>### Task 2: Time Series Classification (Electric Devices classification )</summary>
+<p>
 
 The goal of this example is to classify a set of time series corresponding to
 the daily power consumption of household devices to one of seven categories.
@@ -71,7 +73,8 @@ Elements to play with:
 * The type of RNN (LSTM, GRU, SimpleRNN)
 * The dropout
 * The number of layers
-
+</p>
+</details>
 
 ### Sequence Classification (Twitter sentiment analysis)
 
