@@ -12,7 +12,7 @@ github repository [https://github.com/bejar/DLMAI](https://github.com/bejar/DLMA
 
 <details>
 <summary> ##Task 1: Time Series Regression (Wind Speed Prediction)</summary>
-<p>
+
 The goal of this example is to predict the wind speed of a geographical site
 given a window of the previous measurements.
 
@@ -36,7 +36,7 @@ stores all the data matrices. This object has the attribute `file` that tells
 you the name of the matrices. We are going to use the matix `wind90-45142`.
 
 The code of the example is in the `WindPrediction.py` file.
-</p>
+
 </details>
 
 <details>
