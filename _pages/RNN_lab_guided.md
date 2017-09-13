@@ -82,14 +82,15 @@ The data has been _borrowed_ from the
 (ElectricDevices dataset)
 
 Each example has 96 attributes corresponding to a measure of the power consumption
-every 15 minutes of a whole day. The classes correspond to
+of a household device every 15 minutes of a whole day. The classes correspond to
+coputer/television, dishwasher, fridge, heater, kettle, oven and washing machine.
 
 All the details can be found in the paper:
 
 > Lines, J.; Bagnall, A.; Caiger-Smith, P., Anderson, S.
 **Classification of Household Devices by Electricity Usage
-Profiles Intelligent**,  Data Engineering and Automated Learning
-- IDEAL 2011: 12th International Conference, Norwich, UK,
+Profiles**, Intelligent Data Engineering and Automated Learning, IDEAL 2011:
+ 12th International Conference, Norwich, UK,
 September 7-9, 2011. Proceedings, Springer Berlin Heidelberg,
 2011, 403-412
 
@@ -99,17 +100,17 @@ The data and the code are in the `\Electric` directory. There are two datafiles:
 * `ElectricDevices_TEST.csv`
 
 The code of the example is in the `ElectricClass.py` file. The code loads the
- training and test sets
+ training and test sets and trains the RNN.
 
 The architecture for this task is composed by:
 
-* A first RNN layer with input size the length of the training window with an
+* A first RNN layer with input size the length of the sequence (96) with an
  attribute per element in the sequence.
 * Optionally several stacked RNN layers
-* A dense layer with softmax activation of size the number of classes
+* A dense layer with softmax activation of size the number of classes (7)
 
 The optimizer used is `SDG`,
-the loss funtion is the categorical crossentropy.
+the loss function is the categorical crossentropy.
 
 Elements to play with:
 
@@ -119,7 +120,6 @@ Elements to play with:
 * Batch size
 * Number of epochs
 * Use other optimizer like `RMSprop`, `adagrad` or `adam`
-
 
 - - - -
 
@@ -132,7 +132,7 @@ The data and the code are in the `\Sentiment` directory.
 
 There are two datasets `Airlines.csv` and `Presidential.csv`. The first one
 contains tweets about US airlines and the second are tweets about the
-2016 US Republican party presidential debate. Both have three classes
+2016 US Republican party presidential candidates debate. Both have three classes
 (positive, negative and neutral)
 
 The code is in `Sentiment.py`. This code reads the tweets file and generates
@@ -141,8 +141,9 @@ correspond with letters a-z is discarded.
 
 The size of the vocabulary can be controled with the `numwords` variable. Words
 are recoded as numbers and the tweets are recoded accordingly maintaining the
-order of the words in the
-
+order of the words in the tweets. The tweets are transformed to a matrix with
+the length of the longest tweet as the number of columns, so shorter tweets are
+padded with zeros.
 
 The architecture for this task is composed by:
 
@@ -151,6 +152,10 @@ tweets to an embedded space
 * At least one RNN layer
 * A dense layer with softmax activation of size three (the number of classes)
 
+The optimizer used is `SDG`,
+the loss function is the categorical crossentropy.
+
+
 Elements to play with:
 
 * The number of words in the vocabulary of the tweets
@@ -158,6 +163,9 @@ Elements to play with:
 * The type of RNN (LSTM, GRU, SimpleRNN)
 * The dropout
 * The number of layers
+* Batch size
+* Number of epochs
+* Use other optimizer like `RMSprop`, `adagrad` or `adam`
 
 - - - -
 
@@ -183,28 +191,56 @@ For this example four datasets of different length have been generated
 
 The data and the code are in the `\TextGeneration` directory.
 
-The data is transformed to one-hot encoding for building the classifier, assuming
-that the number of classes is the number of unique characters in the text.
+The data is transformed to a classification task assuming
+that the number of classes is the number of unique characters in the text and the
+attributes are windows of the text of a specific length.
 
-The code is in `TextGenerator.py`. This code reads the data file and generates
+The code is in `TextGenerator.py`. This code reads the data file (by default
+`poetry4.txt`) and generates
 a training set by sequentially extracting windows of size `maxlen` moving
 the window `step` number of characters every iteration. For each window the class
-correspond to the next character. The classes are transformed to one-hot encoding
-of the size the number of different characters in the text.
+correspond to the next character.
 
+The attributes of the sequences and the classes are transformed to a one-hot
+encoding of the size the number of different characters in the text.
+
+After training the model the text is generated providing a random seed of size
+`maxlen` to the model to obtain the prediction, the prediction is added to the
+seed and the leftmost character is discarded. This is repeated several times
+to obtain the text.
+
+ The prediction of the next character is obtained as a probability distribution,
+ this distribution is not used directly but is sampled to be able to obtain
+ more diversity from the text rebalancing the probabilities obtained from the
+ model (see funcion `sample`).
 
 The architecture for this task is composed by:
 
 * A first RNN layer with input size the length of the training window with as
  many attributes per element in the sequence as unique characters.
 * Optionally several stacked RNN layers
-* A dense layer with softmax activation of size the number or characters
+* A dense layer with softmax activation of size the number of characters
+
+The optimizer used is `adam`,
+the loss function is the categorical crossentropy.
 
 Elements to play with:
 
+* The length of the window and the step used to move the window
+* The size of the input file (use for example the small data file)
 * The type of RNN (LSTM, GRU, SimpleRNN)
 * The dropout
 * The number of layers
+* Batch size
+* Number of epochs
+* Use other optimizer like `SGD`, `RMSprop` or `adagrad`
+
+There is no good way for validating the results of this task, we can judge
+subjectively the quality of the generated poetry, but judging the quality
+of poetry is a hairy matter.
+
+We can look for more objective things like the variety of the vocabulary, the
+distribution of the words or the number of incorrect words, for example.
 
 - - - -
 
@@ -221,4 +257,36 @@ The output sequences are the correct answer to the addition.
 The main advantage of this examples is that it is very easy to generate examples
 for the problem and it is easy to coverge to a solution with 99% of accuracy.
 
-The architecture for this problem is the following:
+The dataset is generated as one-hot encoding vectors of the sequence representing
+the addition, the corresponding sequence (the result) is coded in the same way.
+The sequences have a maximum length, the ones that are shorter are padded at the
+end.
+
+The program has also the possibility of reversing the input sequences because
+this seems to work well in other tasks.
+
+
+The architecture for this task is the following:
+
+* A first RNN layer with input size the length the maximum length the addition can have
+ many attributes per element in the sequence as unique characters.
+* The output of this layer is repeated using a `RepeatVector` layer with an output
+size of the maximum number of digits plus one (plus one because for example 2+9=11)
+* Optionally several stacked RNN layers that return all the sequence of states
+* A time distributed layer that passes all the time slices generated by the RNN for each input to the next layer
+* A dense layer with softmax activation of size the number or characters, so we have
+a softmax classifier for each element of the sequence.
+
+The optimizer used is `adam`,
+the loss function is the categorical crossentropy.
+
+Elements to play with:
+
+* The size of the additions
+* The number of examples generated
+* The type of RNN (LSTM, GRU, SimpleRNN)
+* The dropout
+* The number of layers of the decoder
+* Batch size
+* Number of epochs
+* Use other optimizer like `SGD`, `RMSprop` or `adagrad`
