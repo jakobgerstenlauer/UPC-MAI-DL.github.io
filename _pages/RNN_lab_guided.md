@@ -83,7 +83,6 @@ contains tweets about US airlines and the second are tweets about the
 2016 US Republican party presidential debate. Both have three classes
 (positive, negative and neutral)
 
-
 The architecture for this task is composed by:
 
 * A first `Embedding` layer that transforms the vectors corresponding to the
