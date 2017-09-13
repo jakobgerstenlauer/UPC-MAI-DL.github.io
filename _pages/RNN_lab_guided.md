@@ -55,7 +55,21 @@ The data and the code are in the `\Electric` directory. There are two datafiles:
 * `ElectricDevices_TRAIN.csv`
 * `ElectricDevices_TEST.csv`
 
-The code of the example is in the `ElctricClass.py` file.
+The code of the example is in the `ElectricClass.py` file.
+
+The architecture for this task is composed by:
+
+* A first RNN layer with input size the length of the training window with an
+ attribute per element in the sequence.
+* Optionally several stacked RNN layers
+* A dense layer with softmax activation of size the number of classes
+
+Elements to play with:
+
+* The type of RNN (LSTM, GRU, SimpleRNN)
+* The dropout
+* The number of layers
+
 
 ### Sequence Classification (Twitter sentiment analysis)
 
@@ -64,11 +78,30 @@ if it is positive, negative or neutral.
 
 The data and the code are in the `\Sentiment` directory.
 
+There are two datasets `Airlines.csv` and 'Presidential.csv'. The first one
+contains tweets about US airlines and the second are tweets about the
+2016 US Republican party presidential debate. Both have three classes
+(positive, negative and neutral)
+
+
+The architecture for this task is composed by:
+
+* A first `Embedding` layer that transforms the vectors corresponding to the
+tweets to an embedded space
+* At least one RNN layer
+* A dense layer with softmax activation of size three (the number of classes)
+
+Elements to play with:
+
+* The number of words in the vocabulary of the tweets
+* The size of the embedding
+* The type of RNN (LSTM, GRU, SimpleRNN)
+* The dropout
+* The number of layers
 
 ### Sequence Classification (Text Generation)
 
-This example has been _borrowed_ from the Keras examples (that was also borrowed
- from ).
+This example has been _borrowed_ from the Keras examples.
 
 The main idea of this example is that we can generate text by basically
 predicting for a sequence of letters the next most probable letter.
@@ -82,10 +115,26 @@ English authors. The main reason for choosing poetry instead of narrative is
 mainly that poetry has a more relaxed grammar, sentences are shorter and usually
 the main topic of the text is expressed in a limited number of words.
 
-For this example four datasets of different length have been generated. Each
-dataset is included in the next.
+For this example four datasets of different length have been generated
+(poetry1.txt to poetry4.txt). Each dataset is included in the next one.
 
 The data and the code are in the `\TextGeneration` directory.
+
+The data is transformed to one-hot encoding for building the classifier, assuming
+that the number of classes is the number of unique characters in the text.
+
+The architecture for this task is composed by:
+
+* A first RNN layer with input size the length of the training window with as
+ many attributes per element in the sequence as unique characters.
+* Optionally several stacked RNN layers
+* A dense layer with softmax activation of size the number or characters
+
+Elements to play with:
+
+* The type of RNN (LSTM, GRU, SimpleRNN)
+* The dropout
+* The number of layers
 
 
 ### Sequence to sequence (Addition)
