@@ -2,7 +2,7 @@
 permalink: /rnn-lab-guided/
 ---
 
-## Recurrent Neural Networks (Autonomous Laboratory)
+# Recurrent Neural Networks (Autonomous Laboratory)
 
 This page contains the guided laboratory of the RNN topic for the Deep Learning course at the Master in Artificial Inteligence of the Universitat Politècnica de Catalunya.
 
@@ -10,8 +10,7 @@ You can download the code and data for this examples from the following
 github repository [https://github.com/bejar/DLMAI](https://github.com/bejar/DLMAI)
 
 
-<details>
-<summary> ##Task 1: Time Series Regression (Wind Speed Prediction)</summary>
+## Task 1: Time Series Regression (Wind Speed Prediction)</summary>
 
 The goal of this example is to predict the wind speed of a geographical site
 given a window of the previous measurements.
@@ -37,11 +36,9 @@ you the name of the matrices. We are going to use the matix `wind90-45142`.
 
 The code of the example is in the `WindPrediction.py` file.
 
-</details>
+- - - -
 
-<details>
-<summary>### Task 2: Time Series Classification (Electric Devices classification )</summary>
-<p>
+## Task 2: Time Series Classification (Electric Devices classification )
 
 The goal of this example is to classify a set of time series corresponding to
 the daily power consumption of household devices to one of seven categories.
@@ -73,10 +70,10 @@ Elements to play with:
 * The type of RNN (LSTM, GRU, SimpleRNN)
 * The dropout
 * The number of layers
-</p>
-</details>
 
-### Sequence Classification (Twitter sentiment analysis)
+- - - -
+
+### Task 3: Sequence Classification (Twitter sentiment analysis)
 
 The goal of this example is to classifiy the sentiment of a tweet according to
 if it is positive, negative or neutral.
@@ -112,8 +109,9 @@ Elements to play with:
 * The dropout
 * The number of layers
 
+- - - -
 
-### Sequence Classification (Text Generation)
+### Task 4: Sequence Classification (Text Generation)
 
 This example has been _borrowed_ from the Keras examples.
 
@@ -158,8 +156,9 @@ Elements to play with:
 * The dropout
 * The number of layers
 
+- - - -
 
-### Sequence to sequence (Addition)
+### Task 5: Sequence to sequence (Addition)
 
 This example has also been _borrowed_ from the Keras examples.
 
