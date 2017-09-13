@@ -32,7 +32,7 @@ close (they are in the vertices of a 2 km square).
 
 Do the following:
 
- * Use the previous architecture (you have now also 4 varibles) and study how
+ * Use the previous architecture (you have now also 4 variables) and study how
  the MSE changes if you change the size of the units (more/less memory),
 the dropout and the lenth of the input window.
  * **Optional:** Experiment what happens if you  include as initial
