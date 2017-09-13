@@ -37,7 +37,7 @@ you the name of the matrices. We are going to use the matix `wind90-45142`.
 
 The code of the example is in the `WindPrediction.py` file.
 </p>
-</summary>
+</details>
 
 ### Time Series Classification (Electric Devices classification )
 
