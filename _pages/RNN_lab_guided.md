@@ -2,15 +2,14 @@
 permalink: /rnn-lab-guided/
 ---
 
-# Recurrent Neural Networks (Autonomous Laboratory)
 
-This page contains the guided laboratory of the RNN topic for the Deep Learning course at the Master in Artificial Inteligence of the Universitat Politècnica de Catalunya.
+This page contains the **guided laboratory of the RNN topic** for the Deep Learning course at the Master in Artificial Inteligence of the Universitat Politècnica de Catalunya.
 
 You can download the code and data for this examples from the following
 github repository [https://github.com/bejar/DLMAI](https://github.com/bejar/DLMAI)
 
 
-## Task 1: Time Series Regression (Wind Speed Prediction)</summary>
+## Task 1: Time Series Regression (Wind Speed Prediction)
 
 The goal of this example is to predict the wind speed of a geographical site
 given a window of the previous measurements.
@@ -73,14 +72,14 @@ Elements to play with:
 
 - - - -
 
-### Task 3: Sequence Classification (Twitter sentiment analysis)
+## Task 3: Sequence Classification (Twitter sentiment analysis)
 
 The goal of this example is to classifiy the sentiment of a tweet according to
 if it is positive, negative or neutral.
 
 The data and the code are in the `\Sentiment` directory.
 
-There are two datasets `Airlines.csv` and 'Presidential.csv'. The first one
+There are two datasets `Airlines.csv` and `Presidential.csv`. The first one
 contains tweets about US airlines and the second are tweets about the
 2016 US Republican party presidential debate. Both have three classes
 (positive, negative and neutral)
@@ -111,7 +110,7 @@ Elements to play with:
 
 - - - -
 
-### Task 4: Sequence Classification (Text Generation)
+## Task 4: Sequence Classification (Text Generation)
 
 This example has been _borrowed_ from the Keras examples.
 
@@ -158,7 +157,7 @@ Elements to play with:
 
 - - - -
 
-### Task 5: Sequence to sequence (Addition)
+## Task 5: Sequence to sequence (Addition)
 
 This example has also been _borrowed_ from the Keras examples.
 
