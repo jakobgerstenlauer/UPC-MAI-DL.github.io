@@ -4,12 +4,12 @@ permalink: /rnn-lab-autonomous/
 
 ## Recurrent Neural Networks (Autonomous Laboratory)
 
-This session is for exploring the effects of the different elements of the
-RNN using a specific dataset. In this case we are going to extend the Wind
-prediction example that we used in the previous sessions.
+This session is for exploring the effects of the different elements of 
+RNNs using a specific dataset. In this case we are going to extend the Wind
+prediction example that we used in the previous session.
 
-In the original example we predicted on step of the future wind (next 15 minutes)
-using a window of previous measurements. we can extend the problem in different
+In the original example we predicted one step of the future wind (next 15 minutes)
+using a window of previous measurements. We can extend the problem in different
 ways:
 
 ### Complementary variables
@@ -22,12 +22,12 @@ Do the following:
 
 * Modify the arquitecture adequately for the input
 * Study how the MSE changes if you change the size of the units (more/less memory),
-the dropout and the lenth of the input window.
+the dropout and the length of the input window.
 
 ### Complementary sites
 
 In the original experiment we predicted the **wind speed** using the data from
-one site, the dataset included three additional sites that are geographically
+one site, the dataset includes three additional sites that are geographically
 close (they are in the vertices of a 2 km square).
 
 Do the following:
@@ -35,17 +35,16 @@ Do the following:
  * Use the previous architecture (you have now also 4 variables) and study how
  the MSE changes if you change the size of the units (more/less memory),
 the dropout and the lenth of the input window.
- * **Optional:** Experiment what happens if you  include as initial
- Pooling layer (average, maxpool) so instead of the wind in the site you have
- the maximum/average wind speed of the four sites as input.
+ 
 
 ### Multi step prediction
 
-We can obtain a multi step prediction using the same model simply adding the
-value predicted to the current set of measurements and discarding the oldest one.
+We can obtain a multi step prediction using the original model simply adding the
+value predicted to the current set of measurements and discarding the oldest one, 
+just like in the text generation example.
 
 The new prediction will be two steps ahead, n-1 measurements will be actual
-observatrions and one will be a predicted one.
+observations and one will be a predicted one.
 
 Perform some experiment using this method and observe:
 
@@ -54,13 +53,7 @@ Perform some experiment using this method and observe:
 
 For comparing the MSE you should separate the predictions according on how far
 are the measurements. That is, compute the MSE for the one step prediction, then
-for the second step prediction, and so on. The number of elements in the MSE
-computation must be the same to be able to compare.
-
-For example, if you compute the one and two step predictions for a set
-consecutive windows, the first window will predict instants $t$ as first step
-prediction and $t+1$ as second step prediction, but you will have no second step
-prediction for instant $t$.
+for the second step prediction, and so on. 
 
 ### Sequence to sequence prediction
 
