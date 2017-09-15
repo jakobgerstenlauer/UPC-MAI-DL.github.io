@@ -60,12 +60,11 @@ scp source_path username@dt01.bsc.es:target_path
 
 Within MinoTauro, data transfer, and the rest of computing clusters of BSC, there is a unique GPFS file system. Students should work only in their home directory, typically ```/home/nct00/username```.
 
-``` 
 The materials for this guided laboratory can be copied to your home from here:
 ```shell
 cp -r /gpfs/projects/bsc28/MAI-DL ~
 ``` 
-Once you have a code you want to run (like the example code code_lab1.1.py), you must submit a job. Jobs will get in a queue and be computed in order. To submit a job, it is convenient to use a launcher file (see the launcher example launcher_lab1_mt.cmd). Make sure the paths in the launcher all point to your directories. "initialdir" indicates the source path for the execution, and the line "merovingian2712 code.py" should refer to the location of the file you wish to execute.
+Once you have a code you want to run (like the example code code_lab1.1.py), you must submit a job. Jobs will get in a queue and are computed in order. To submit a job, it is convenient to use a launcher file (see the launcher example launcher_lab1_mt.cmd). Make sure the paths in the launcher all point to your directories. "initialdir" indicates the source path for the execution, and the line "merovingian2712 code.py" should refer to the location of the file you wish to execute.
 
 The other main parameter of the launcher is the wall_clock_limit. Its important to optimize resources, so try to set limits not too large. Keep in mind that the job will be cancelled once the limit is reached, even if the job is still running. Longer jobs have lower priority, and will take more time to get out of the queue.
 

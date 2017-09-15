@@ -2,7 +2,9 @@
 permalink: /mlp-convnets-lab-autonomous/
 ---
 
-The autonomous laboratory is open for your exploration. Using the basic code provided in the guided laboratory, students should modify it to test different settings, and understand the effect of the various components. In this document there are a list of suggested questions you may consider to explore. It is not necessary to answer any or all these questions. The student may choose to perform different experiments, for explore different aspects of neural networks. Go ahead and play.
+The autonomous laboratory is open for your exploration. Using the basic code provided in the guided laboratory, students should modify it to test different settings, and understand the effect of the various components. You could use any dataset you wish. The list of datasets available at Keras can be found [here](https://keras.io/datasets/), but using one of those is not a requirement.
+
+In this document there are a list of suggested questions you may consider to explore. It is not necessary to answer any or all these questions. The student may choose to perform different experiments, for explore different aspects of neural networks. Go ahead and play.
 
 <a name='basic_nn'></a>
 ### Example 1: Basic NN
