@@ -2,7 +2,7 @@
 permalink: /rnn-theory/
 ---
 
-This page contains the theoretical part of the ANN-CNN topic for the Deep Learning course at the Master in Artificial Inteligence of the Universitat Politècnica de Catalunya.
+This page contains the theoretical part of the RNN topic for the Deep Learning course at the Master in Artificial Inteligence of the Universitat Politècnica de Catalunya.
 
 ## Recurrent Neural Networks
 
