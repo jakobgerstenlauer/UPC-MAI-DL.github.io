@@ -78,6 +78,7 @@ The next three papers should be read and reviewed together
 
   - [Ankit Kumar, Ozan Irsoy, Peter Ondruska, Mohit Iyyer, James Bradbury, Ishaan Gulrajani, Victor Zhong, Romain Paulus, Richard Socher, "Ask Me Anything: Dynamic Memory Networks for Natural Language Processing"](http://arxiv.org/abs/1506.07285)
 
+
 - [] ()
 
 - [] ()
