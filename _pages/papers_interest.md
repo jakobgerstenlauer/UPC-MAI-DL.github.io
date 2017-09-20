@@ -59,10 +59,24 @@ The next three papers should be read and reviewed together
 
 - [Sharif Razavian, Ali, et al. "CNN features off-the-shelf: an astounding baseline for recognition." Proceedings of the IEEE conference on computer vision and pattern recognition workshops. 2014.] (https://arxiv.org/pdf/1403.6382.pdf)
 
+### Recurrent Neural Networks
 
-- [] ()
+-  [Alex Graves Generating Sequences With Recurrent Neural Networks](https://arxiv.org/pdf/1308.0850)
 
-- [] ()
+
+- [Kyunghyun Cho, Bart van Berrienboer, Caglar Gulcehre, Dzmitry Bahdanau, Fethi Bougares, Holger Schwenk, and Yoshua Bengio, Learning Phrase Representations using RNN Encoder-Decoder for Statistical Machine Translation, arXiv:1406.1078 / EMNLP 2014](http://arxiv.org/pdf/1406.1078)
+
+ - [Ilya Sutskever, Oriol Vinyals, and Quoc V. Le, Sequence to Sequence Learning with Neural Networks, arXiv:1409.3215 / NIPS 2014](http://papers.nips.cc/paper/5346-sequence-to-sequence-learning-with-neural-networks.pdf)
+
+ - [A.Graves, G. Wayne, and I. Danihelka., Neural Turing Machines, arXiv preprint arXiv:1410.5401](http://arxiv.org/pdf/1410.5401)
+
+ - [Mike Schuster and Kuldip K. Paliwal, Bidirectional Recurrent Neural Networks, Trans. on Signal Processing 1997](http://www.di.ufpe.br/%7Efnj/RNA/bibliografia/BRNN.pdf)
+
+  - [Nal Kalchbrenner, Ivo Danihelka, and Alex Graves, Grid Long Short-Term Memory, arXiv:1507.01526](http://arxiv.org/pdf/1507.01526)
+
+  - [Kai Sheng Tai, Richard Socher, and Christopher D. Manning, Improved Semantic Representations From Tree-Structured Long Short-Term Memory Networks, arXiv:1503.00075 / ACL 2015](http://arxiv.org/pdf/1503.00075)
+
+  - [Ankit Kumar, Ozan Irsoy, Peter Ondruska, Mohit Iyyer, James Bradbury, Ishaan Gulrajani, Victor Zhong, Romain Paulus, Richard Socher, "Ask Me Anything: Dynamic Memory Networks for Natural Language Processing"](http://arxiv.org/abs/1506.07285)
 
 - [] ()
 
