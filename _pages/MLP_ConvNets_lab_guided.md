@@ -9,9 +9,13 @@ Table of Contents:
 - [Deep Learning frameworks](#frameworks)
 - [A Neural Network Playground](#playground)
 - [MinoTauro Instructions](#minotauro)
+- Keras Datasets: [Keras Datasets](#keras_dataset)
 - Example 1: [Basic NN](#basic_nn)
 - Example 2: [CNN](#cnn)
 
+---
+
+---
 
 <a name='frameworks'></a>
 ### Deep Learning frameworks
@@ -28,11 +32,18 @@ Currently there are several deep learning frameworks available for developers. T
 
 Chosing one or another depends on the developer experience and the nature of the problem. In this course we will use Keras, since it is very easy to use and provides many functionalities that allows uers to start training networks in very short time. Keras is written in Python and in the background it may use TensorFlow, Theano or CNTK.
 
+---
+
+---
+
 <a name='playground'></a>
 ### A Neural Network Playground
 
 A good play to start for getting familiarized with how NN work is [tensorflow's playground](http://playground.tensorflow.org). This site allows you to define a neural network of a few layers, to try to solve different problems. Try playing with the different problems, setting different amount of layers with varying number of neurons, and different learning rates to see how the network training behaves.
 
+---
+
+---
 
 <a name='minotauro'></a>
 ### MinoTauro Instructions
@@ -58,13 +69,53 @@ scp username@dt01.bsc.es:source_path target_path
 scp source_path username@dt01.bsc.es:target_path
 ```
 
-Within MinoTauro, data transfer, and the rest of computing clusters of BSC, there is a unique GPFS file system. Students should work only in their home directory, typically ```/home/nct00/username```.
+Within MinoTauro, data transfer, and the rest of computing clusters of BSC, there is a unique GPFS file system. Students should work only in their home directory, typically ```/home/nct01/username```.
 
+<span style="color:#18932A">
 The materials for this guided laboratory can be copied to your home from here:
+</span>
 ```shell
-cp -r /gpfs/projects/bsc28/MAI-DL ~
+cp -r /home/nct00/nct00001/.testdir/MAI-DL ~
 ``` 
-Once you have a code you want to run (like the example code code_lab1.1.py), you must submit a job. Jobs will get in a queue and are computed in order. To submit a job, it is convenient to use a launcher file (see the launcher example launcher_lab1_mt.cmd). Make sure the paths in the launcher all point to your directories. "initialdir" indicates the source path for the execution, and the line "merovingian2712 code.py" should refer to the location of the file you wish to execute.
+<span style="color:#18932A">
+After copy the MAI-DL folder into your home your home structure should look similar to:
+</span>
+```
+your_home
+  ├── MAI-DL
+      └── lab_1
+          ├── code_lab1.1.py	# first exercise
+          ├── code_lab1.2.py	# second exercise
+          ├── launcher_lab1_mt.cmd	# launcher of jobs
+          ├── logs
+          └── README.txt
+```
+
+<span style="color:#18932A">
+Once you have a code you want to run (like the example code code_lab1.1.py), you must submit a job. Jobs will get in a queue and are computed in order. To submit a job, it is convenient to use a launcher file. See as an example the launcher_lab1_mt.cmd: 
+</span>
+
+```
+#!/bin/bash
+# @ job_name = code_lab1.2
+# @ initialdir = /home/nct01/nct01025/	# source path for the execution [optional]
+# @ class = training	# queue where to put the job
+# @ output= %j.out 	# name format of the output file
+# @ error= %j.err 	# name format of the output file
+# @ total_tasks= 1 
+# @ gpus_per_node= 1	# number of gpus
+# @ cpus_per_task= 1
+# @ features= k80
+# @ wall_clock_limit= 00:05:00	# limit of time
+
+module purge
+module load merovingian
+# merovingian2712 will be the equivalent to call python in a normal environment
+# the parameter is the file you want to execute
+merovingian2712 $HOME/MAI-DL/lab_1/code_lab1.1.py
+```
+
+Make sure the paths in the launcher all point to your directories. "initialdir" indicates the source path for the execution, and the line "merovingian2712 code.py" should refer to the location of the file you wish to execute.
 
 The other main parameter of the launcher is the wall_clock_limit. Its important to optimize resources, so try to set limits not too large. Keep in mind that the job will be cancelled once the limit is reached, even if the job is still running. Longer jobs have lower priority, and will take more time to get out of the queue.
 
@@ -76,12 +127,43 @@ To check the status of a job do:
 ```shell
 mnq
 ```
-A job may be in queue or running. Finished jobs do not appear, but the output files should be generated, as well as the standard output (*.out) and error files (*err)
+A job may be in queue or running. Finished jobs do not appear, but the output files should be generated, as well as the standard output (*.out) and error files (*err). This files are generated in the initialdir folder (make sure that the specified folder exists). If this is not provided will be generated at the directory where we launched the job (that is the current one).
 
+---
 
+---
+
+<a name='keras_dataset'></a>
+### Keras Datasets
+<span style="color:#18932A">
+Keras have included in its API some datasets making the loading of them very easy by the use of a single command
+</span>
+```python
+(x_train, y_train), (x_test, y_test) = mnist.load_data()  # loading of MNIST dataset
+```
+<span style="color:#18932A">
+However, it requires access to Internet to download them, at least the first time. Once the datasete is downloaded for the first time this is stored at ```~/.keras/datasets/```.
+Hence, since from Minotauro we have not access to Internet we will download the datasets that we want to use into our personal computer anc copy it in the *~/.keras/datasets/* folder in our home at Minotauro. Example with MNIST dataset:
+</span>
+```python
+# from our pc
+wget https://s3.amazonaws.com/img-datasets/mnist.pkl.gz
+scp mnist.pkl.gz <your_user>@dt01.bsc.es:/<your_home>/.keras/datasets/
+# if the copy fails check that the folder exists, if not create it
+```
+
+---
+
+---
 
 <a name='basic_nn'></a>
 ### Example 1: Basic NN
+
+
+<span style="color:#C63434">
+Notice that the syntaxis used in this snippets is for Keras 1.1.1 which is the installed version at Minotauro.
+If you use this code in a different environent check the [Keras Official Website](http://keras.io) to validate the syntax.
+</span>
 
 This guided laboratory introduces a basic example on how to use Keras for training a simple NN. The following example can be find whole in the MAI-DL directory of the cluster, file code_lab1.1.py. Here we split it in parts to review it.
 
@@ -143,6 +225,12 @@ from keras.util import plot_model
 plot_model(nn, to_file='nn.png', show_shapes=true)
 ```
 
+<span style="color:#C63434">
+Notice that this lines are commented on the job placed at Minotauro. That is because Minotauro have not installed the required libraries.
+If you want to use it you can install Keras in you personal computer, design the model as shown in above and plot the model. Since if you use keras in you personal computer its version will be greater the above lines are written according the new syntaxis.
+</span>
+
+
 After defining the model, we need to compile it before running. At this point we define which optimizer we wish to use (e.g., SGD), how is the loss computed (e.g., categorical cross-entropy) and which metric we use to evaluate the model (e.g., accuracy)
 ```python
 nn.compile(optimizer='sgd',loss='categorical_crossentropy',metrics=['accuracy'])
@@ -150,7 +238,7 @@ nn.compile(optimizer='sgd',loss='categorical_crossentropy',metrics=['accuracy'])
 
 With the model compiled, we can now launch the training procedure. At this point we may define the batch size, and the number of epochs to run.
 ```python
-history = nn.fit(x_train,y_train,batch_size=128,epochs=20)
+history = nn.fit(x_train,y_train,batch_size=128,nb_epoch=20)
 ```
 
 We can now evaluate the trained model on the test set. Test accuracy provides the real performance of our model.
@@ -214,6 +302,9 @@ json_file.close()
 nn = model_from_json(nn_json)
 nn.load_weights(weights_file)
 ```
+---
+
+---
 
 <a name='cnn'></a>
 ### Example 2: CNN
@@ -227,7 +318,7 @@ Simply put, if we use the train data for taking design decisions, the actual per
 In Keras defining a validation set is very easy, as we just need to specify which part of the training set will be used for validation on the fit function. Additionally, we will use measurements on the validation set to evaluate performance.
 ```python
 #Start training using a 15% for validation
-history = nn.fit(x_train,y_train,batch_size=128,epochs=20, validation_split=0.15)
+history = nn.fit(x_train,y_train,batch_size=128,nb_epoch=20, validation_split=0.15)
 ```
 ```python
 #Plot accuracy on the validation set
@@ -241,9 +332,9 @@ plt.plot(history.history['val_loss'])
 Now that we know how to validate our models, let's define a CNN. A simple network will contain 2 pairs of convolution and max pooling layers and a final fully connected layer. To input the data to the first fully connected layer, we need to flatten the output from a 3D volume to a 1D array using the Flatten layer.
 ```python
 nn = Sequential()
-nn.add(Conv2D(32, kernel_size=(3, 3), activation='relu', input_shape=input_shape))
+nn.add(Conv2D(32, 3, 3, activation='relu', input_shape=input_shape))
 nn.add(MaxPooling2D(pool_size=(2, 2)))
-nn.add(Conv2D(64, kernel_size=(3, 3), activation='relu'))
+nn.add(Conv2D(64, 3, 3, activation='relu'))
 nn.add(MaxPooling2D(pool_size=(2, 2)))
 nn.add(Flatten())
 nn.add(Dense(128, activation='relu'))
