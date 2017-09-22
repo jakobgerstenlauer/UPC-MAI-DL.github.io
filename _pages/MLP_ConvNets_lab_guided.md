@@ -2,10 +2,6 @@
 permalink: /mlp-convnets-lab-guided/
 ---
 
-<span style="color:#18932A">
-test
-</span>
-
 This page contains the guided laboratory of the MLP-CNN topic for the Deep Learning course at the Master in Artificial Inteligence of the Universitat Politècnica de Catalunya.
 
 Table of Contents:
