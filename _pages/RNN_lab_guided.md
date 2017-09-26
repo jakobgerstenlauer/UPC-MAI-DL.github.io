@@ -58,6 +58,9 @@ computes the regression as output.
 The optimizer used is `RMSprop` (Keras documentation recommends it for for RNN),
 the loss function is the mean square error (MSE).
 
+ In this problem we can use as baseline the MSE of the persistence model, that is,
+  predicting the $t+1$ step in the series as the value of the step $t$.
+
 Elements to play with:
 
 * The size of the windows

@@ -67,3 +67,28 @@ Do the following:
 task
 * Study how the MSE of the predictions changes with the length of the predicted
 sequence
+
+
+##  What you have to do
+
+ Make a plan of the experiments that you want to perform. This does not mean that
+ the plan is written on stone, revise the plan as you see fit given the results or
+  extend/change the experiments when you judge that it is interesting given the results.
+
+  Execute the experiments and record all the results and decisions that you make
+
+ Write a report explaning:
+
+* The plan of the experiments that you have performed
+* What were you expecting with each experiment and what you actually obtained 
+(eg, did you think that some conditions of the experiment would improve the results 
+and the results were the same/worse?)
+* The interpretation of the results of the experiments:
+** what did work, what did not work (eg: to increase the number neurons up to a number does not give any gains, to use dropout makes think worse consistently, to predict more than one step in the future works with these data up to a limit)
+** what set up/architecture/data improves the baseline (just the wind from previous time instants)? some intuition about why?
+
+Use statistics and graphics to support your explanations.
+
+Deliver your report before December 15th using the raco.
+
+
