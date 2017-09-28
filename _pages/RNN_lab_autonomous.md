@@ -85,9 +85,9 @@ sequence
 and the results were the same/worse?)
 * The interpretation of the results of the experiments:
 
- * what did work, what did not work (eg: to increase the number neurons up to a number does not give any gains, to use dropout makes think worse consistently, to predict more than one step in the future works with these data up to a limit)
+	* what did work, what did not work (eg: to increase the number neurons up to a number does not give any gains, to use dropout makes think worse consistently, to predict more than one step in the future works with these data up to a limit)
 
- * what set up/architecture/data improves the baseline (just the wind from previous time instants)? some intuition about why?
+	* what set up/architecture/data improves the baseline (just the wind from previous time instants)? some intuition about why?
 
 Use statistics and graphics to support your explanations.
 
