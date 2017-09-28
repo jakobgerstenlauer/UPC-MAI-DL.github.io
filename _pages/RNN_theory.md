@@ -19,4 +19,5 @@ Additional material:
 * [The Unreasonable Effectiveness of RNNs](http://karpathy.github.io/2015/05/21/rnn-effectiveness/) by Andrej Karpathy
 * [Alex Graves, Abdel-rahman Mohamed, and Geoffrey Hinton, Speech Recognition with Deep Recurrent Neural Networks, arXiv:1303.5778 / ICASSP 2013](http://www.cs.toronto.edu/%7Efritz/absps/RNN13.pdf)
 * [Rafal Jozefowicz, Wojciech Zaremba, Ilya Sutskever, An Empirical Exploration of Recurrent Network Architectures, ICML, 2015.](http://jmlr.org/proceedings/papers/v37/jozefowicz15.pdf)
+*[Chung, J., Gulcehre, C., Cho, K., & Bengio, Y. (2014). Empirical evaluation of gated recurrent neural networks on sequence modeling. arXiv preprint arXiv:1412.3555.](https://arxiv.org/pdf/1412.3555)
 
