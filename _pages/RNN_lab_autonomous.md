@@ -91,6 +91,6 @@ and the results were the same/worse?)
 
 Use statistics and graphics to support your explanations.
 
-Deliver your report before December 15th using the raco.
+Deliver your report before **December 15th** using the raco.
 
 
