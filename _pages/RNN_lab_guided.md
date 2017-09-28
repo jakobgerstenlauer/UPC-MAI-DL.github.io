@@ -35,8 +35,10 @@ stores all the data matrices. This object has the attribute `file` that tells
 you the name of the matrices. We are going to use the matrix `90-45142`.
 
 The code of the example is in the `WindPrediction.py` file. This code reads the
-matrix of the first site and splits the data in a training set with 200,000 data
-points and a test set with the rest.
+matrix of the first site and splits the data in a training set, a validation
+set and a test set. The script has a flag `--verbose` for verbose output, a 
+flag `--gpu` for using an implementation for the recurrent layer suitable for gpu
+and a flag `--config`  for the configuration file.
 
 Only the first variable (**wind speed**) is used. The data matrix is obtained
 generating windows of size `lag`+1 moving the window one step at a time. The first
@@ -55,11 +57,33 @@ The architecture for this task is composed by:
 * A dense layer with one neuron with linear activation, that is the one that
 computes the regression as output.
 
+ All the configuration for the network, the training and the split of the data is
+  read from a configuration file in JSON format like this:
+
+```javascript
+{
+  "datasize": 0000000,
+  "testsize": 000000, # Half validation, half test
+  "lag": 0,
+  "neurons": 000,
+  "drop": 0.0,
+  "nlayers": 0,
+  "activation": "relu", # relu, tanh, sigmoid
+  "activation_r": "sigmoid",
+  "rnn": "LSTM", # LSTM, GRU
+  "batch": 0000,
+  "epochs": 00
+}
+```
+
+
 The optimizer used is `RMSprop` (Keras documentation recommends it for for RNN),
 the loss function is the mean square error (MSE).
 
  In this problem we can use as baseline the MSE of the persistence model, that is,
   predicting the $t+1$ step in the series as the value of the step $t$.
+
+
 
 Elements to play with:
 
