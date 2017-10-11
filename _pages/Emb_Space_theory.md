@@ -6,8 +6,9 @@ This page contains the theoretical part of the Embedding Spaces topic for the De
 
 Table of Contents:
 
-- [Training Parameters](#training_params)
-    - [Epochs and Batch Size](#epochs_batch)
+- [Introduction](#intro)
+- [Word Embeddings](#wordemb)
+    - [word2vec](#word2vec)
 - [Bibliography](#bib)
 
 
@@ -27,7 +28,7 @@ In the context of feed-forward neural networks (FNN), embeddings are often explo
 One of the first approaches to embedding spaces were word embeddings, proposed by Bengio et.al. in [5]. Word embeddings transform words into high-dimensional vectors of numbers, with the goal of solving a simple task. This simple task can be, for example, discriminating between coherent sentences and incoherent ones. The following figure illustrates an example of such architecture. In it, each word is codified as a numerical vector W of fixed length (e.g., 300), which are fed to a classifier module R. The output S would determine, in this particular example, if the sentence is coherent or not. Training a model such as this is easy thanks to the large quantity of data available. One can easily collect millions of coherent sentences from digital sources, and shuffle words of those same sentences to produce incoherent ones.
 
 <div style="text-align:center">
-    <img src="/images/wordemb.png" width="450">
+    <img src="/images/wordemb.png" width="400">
 </div>
  <div><p style="text-align: center;">Schema of a system for learning word embeddings for a given purpose. Source [6].</p></div>
 
@@ -36,20 +37,23 @@ Although the task is to discriminate coherent sentences through R, what is more 
 After thorough training, such an embedding space containst a few interesting properties. For example, given a word v and its vector representation w, the words that have representations closer to w using the Euclidean metric are semantically close.
 
 <div style="text-align:center">
-    <img src="/images/wordtable.png" width="450">
+    <img src="/images/wordtable.png" width="500">
 </div>
  <div><p style="text-align: center;">Nearest neighbors of words according to vector embeddings learnt by a neural net. Source [7].</p></div>
 
 During training, the word embeddings W coverge towards a language that describes which words are coherent in which contexts. Given the limited amount of dimensions (e.g., 300) when compared to the size of the input (thousands of words), each of those features is optimized to capture a portion of the complex information that defines textual coherency.
 
 <div style="text-align:center">
-    <img src="/images/worddistrep.png" width="450">
+    <img src="/images/worddistrep.png" width="500">
 </div>
  <div><p style="text-align: center;">Illustration of how an embedding space captures word semantics. Source [11].</p></div>
 
+
+<a name='word2vec'></a>
 ### word2vec
 
 The most popular of word embedding approaches is the word2vec model. Word2vec was first proposed in [8], and its implementations were further detailed in [9]. The properties of word2vec were explored by the same authors in [10].
+
 
 <a name='bib'></a>
 ## Bibliography

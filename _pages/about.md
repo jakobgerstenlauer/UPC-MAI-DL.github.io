@@ -20,6 +20,7 @@ The Table of Contents:
 - [Lessons](#lessons)
     - [#1 Basic Neural Nets and Conv Nets](#mlp_convnets)
     - [#2 Recurrent Neural Nets](#rnn_nets)
+    - [#3 Embedding spaces](#embeddings)
 - [Papers of interest](#papers)
 
 
