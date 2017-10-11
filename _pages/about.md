@@ -81,6 +81,7 @@ Basic Neural Nets and Conv Nets
 - [Lab guided](mlp-convnets-lab-guided/)
 - [Lab autonomous](mlp-convnets-lab-autonomous/)
 
+
 <a name='rnn_nets'></a>
 #### Lesson 2
 Recurrent Neural Networks
@@ -88,6 +89,15 @@ Recurrent Neural Networks
 - [Theory](rnn-theory)
 - [Lab guided](rnn-lab-guided)
 - [Lab autonomous](rnn-lab-autonomous)
+
+
+<a name='embeddings'></a>
+#### Lesson 3
+Embedding spaces
+
+- [Theory](emb-space-theory)
+- [Lab guided]
+- [Lab autonomous]
 
 <a name='papers'></a>
 ### Papers of Interest
