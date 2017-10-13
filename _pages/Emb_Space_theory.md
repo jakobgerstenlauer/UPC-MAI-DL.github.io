@@ -15,7 +15,7 @@ Table of Contents:
 <a name='intro'></a>
 ## Introduction
 
-An embedding is a transformation of data, where any given data instance can become represented through an alternative set of features or characteristics. This set of features defines a representation space, i.e., an embedding space. Simply put, an embedding is a translation from one language (the source data representation, e.g., pixels for an image) to a different language (the target data representation). To generate an embedding, all that is needed is a function, which, when applied to a data instance, outputs the instance representation in the embedding space. The resulting embedding space may have a different dimentionality than the source representation space.
+An embedding is a transformation of data, used to represent a given data instance through an alternative set of features or characteristics. This set of features defines a representation space, i.e., an embedding space. Simply put, an embedding is a translation from one language (the source data representation, e.g., pixels for an image) to a different language (the target data representation). To generate an embedding, all that is needed is a function, which, when applied to a data instance, outputs the instance representation in the embedding space. The resulting embedding space may have a different dimentionality than the source representation space.
 
 The goal of defining and generating embeddings is to obtain representation spaces which satisfy certain desirable properties. For example, that distances within the embedding space are correlated with a similarity of some sort. In the context of Artificial Intelligence, this is interesting as it may result in distributed representations of symbols [1], closing the gap between sensing and thinking. For more details on symbolic vs sub-symbolic AI see [3,4].
 
@@ -52,7 +52,29 @@ During training, the word embeddings W coverge towards a language that describes
 <a name='word2vec'></a>
 ### word2vec
 
-The most popular of word embedding approaches is the word2vec model. Word2vec was first proposed in [8], and its implementations were further detailed in [9]. The properties of word2vec were explored by the same authors in [10].
+The most popular of word embedding approaches is the word2vec model. Word2vec was first proposed in [8], and its implementations were further detailed in [9]. The properties of word2vec were explored by the same authors in [10]. Word2vec includes various implementations of word embeddings. In here we will detail the two main ones: the Continuous Skip-gram model and the Continuous Bag-of-Words (CBOW) model. For more details, see [8,9,10,12,13,14].
+
+#### Skip-gram model
+
+The skip-gram models generates a vector representation of words to capture the context in which each word appears. In this model, the goal of the training is to learn the probability of a context of words given a source word. This context of words is defined using a sliding window of fixed length through a large corpus of text.
+ 
+<div style="text-align:center">
+    <img src="/images/skipgram_data.png" width="500">
+</div>
+ <div><p style="text-align: center;">Illustration of the training data for the skip-gram model. Source [12].</p></div>
+
+In the skip-gram model, each source word is inputted as a one-hot vector, and the output is the probability
+
+<div style="text-align:center">
+    <img src="/images/skip-gram.png" width="500">
+</div>
+ <div><p style="text-align: center;">Illustration of the skip-gram model. Source [11].</p></div>
+
+
+<div style="text-align:center">
+    <img src="/images/cbow.png" width="500">
+</div>
+ <div><p style="text-align: center;">Illustration of the CBOW model. Source [11].</p></div>
 
 
 <a name='bib'></a>
@@ -80,7 +102,13 @@ The most popular of word embedding approaches is the word2vec model. Word2vec wa
 
 [11] [the morning paper - The amazing power of word vectors](https://blog.acolyer.org/2016/04/21/the-amazing-power-of-word-vectors/)
 
-<>### Other uncited sources:
-<>
-<>[https://devblogs.nvidia.com/parallelforall/deep-learning-nutshell-core-concepts/](https://devblogs.nvidia.com/parallelforall/deep-learning-nutshell-core-concepts/)
+[12] [Chris McCormick - Word2Vec Tutorial - The Skip-Gram Model (Part 1 & 2)](http://mccormickml.com/2016/04/19/word2vec-tutorial-the-skip-gram-model/)
+
+[13] [Rong, Xin. "word2vec parameter learning explained." arXiv preprint arXiv:1411.2738 (2014).] (https://arxiv.org/pdf/1411.2738)
+
+[14] [Goldberg, Yoav, and Omer Levy. "word2vec Explained: deriving Mikolov et al.'s negative-sampling word-embedding method." arXiv preprint arXiv:1402.3722 (2014).] (https://arxiv.org/pdf/1402.3722)
+
+
+
+### Other uncited sources:
 
