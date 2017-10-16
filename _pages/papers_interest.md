@@ -97,8 +97,15 @@ The next three papers should be read and reviewed together
 
 - [Shwartz-Ziv, Ravid, and Naftali Tishby. "Opening the Black Box of Deep Neural Networks via Information."](https://arxiv.org/abs/1703.00810)
 
-- [] ()
+- [Neurosurgeon: Collaborative Intelligence Between the Cloud and Mobile Edge. ASPLOS 2017: 615-629] (http://web.eecs.umich.edu/~jahausw/publications/kang2017neurosurgeon.pdf)
 
-- [] ()
+- [Norman P. Jouppi, Cliff Young, Nishant Patil, David Patterson, et al. In-Datacenter Performance Analysis of a Tensor Processing Unit. ISCA 2017: 1-12] (https://arxiv.org/abs/1704.04760)
 
-- [] ()
+- [Tianshi Chen, Zidong Du, Ninghui Sun, Jia Wang, Chengyong Wu, Yunji Chen, Olivier Temam:
+DianNao: a small-footprint high-throughput accelerator for ubiquitous machine-learning. ASPLOS 2014: 269-284] (http://novel.ict.ac.cn/ychen/pdf/DianNao.pdf)
+
+- [Ammar Ahmad Awan, Khaled Hamidouche, Jahanzeb Maqbool Hashmi, Dhabaleswar K. Panda:
+S-Caffe: Co-designing MPI Runtimes and Caffe for Scalable Deep Learning on Modern GPU Clusters. PPOPP 2017: 193-205] (https://dl.acm.org/citation.cfm?id=3018769&dl=ACM&coll=DL&CFID=995532436&CFTOKEN=69605876)
+
+- [Muhammet Mustafa Ozdal, Serif Yesil, Taemin Kim, Andrey Ayupov, John Greth, Steven M. Burns, Özcan Özturk:
+Energy Efficient Architecture for Graph Analytics Accelerators. ISCA 2016: 166-177] (https://dl.acm.org/citation.cfm?id=3001155)
