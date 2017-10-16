@@ -56,14 +56,14 @@ The most popular of word embedding approaches is the word2vec model. Word2vec wa
 
 #### Skip-gram model
 
-The skip-gram models generates a vector representation of words to capture the context in which each word appears. In this model, the goal of the training is to learn the probability of a context of words given a source word. This context of words is defined using a sliding window of fixed length through a large corpus of text.
+The skip-gram model generates a vector representation of words to capture the context in which each word appears. In this model, the goal of the training is to learn the probability of a context of words given a source word. This context of words is defined using a sliding window of fixed length through a large corpus of text. 
  
 <div style="text-align:center">
     <img src="/images/skipgram_data.png" width="500">
 </div>
  <div><p style="text-align: center;">Illustration of the training data for the skip-gram model. Source [12].</p></div>
 
-In the skip-gram model, each source word is inputted as a one-hot vector, and the output is the probability
+In the skip-gram model, each source word is inputted as a one-hot vector, and the output is a list (of length equal to the sliding window) of multinomial distributions. These distributions correspond to the expected probability of words appearing in the context. Training such a model is expensive, due to the number of input variables (as many as words) and the number of training examples. In [9] the authors of word2vec provides some tricks to speed up training, such as negative sampling and subsampling frequent words (see Part 2 of [12] for an explanation). See also [15] for a commented version of the original skip-gram code.
 
 <div style="text-align:center">
     <img src="/images/skip-gram.png" width="500">
@@ -71,10 +71,48 @@ In the skip-gram model, each source word is inputted as a one-hot vector, and th
  <div><p style="text-align: center;">Illustration of the skip-gram model. Source [11].</p></div>
 
 
+In this model, words are inputed as one-hot vectors. Thus, each word will have a unique vector representation in the hidden layer of the skip-gram model. After training, the weights of the hidden layer corresponding to one particular word represent their embedding representation. See [16] for more details on the skip-gram model.
+
+
+#### Continuous Bag of Words (CBOW)
+
+The CBOW model is similar to the skip-gram model, but it uses an inverted training scheme. The training purpose of CBOW is to learn the probability distribution of words given their context. As such, the input of the model is a list of unordered words which define a context (hence bag of words), and the output is the word missing in the middle of this context. Similarly to how skip-gram training data is generated, CBOW contexts are also obtained using a sliding window.
+
 <div style="text-align:center">
     <img src="/images/cbow.png" width="500">
 </div>
  <div><p style="text-align: center;">Illustration of the CBOW model. Source [11].</p></div>
+
+The input of the CBOW model is a set of one-hot vectors. The output is a single multinomial distribution, trying to capture the probability of words being found within the context defined by the input. Simply put, while the skip-gram model tries to model words based on their context, the CBOW model tries to model context based on words. However, the goal of both models is the same; to learn dense and rich representations of words. See [17] for more details on the CBOW model.
+
+According to the authors of word2vec, skip-gram works well with little training data, and represents well rare words. CBOW is faster to train and has slightly higher accuracies for frequent words.
+
+#### GloVe
+
+Following word2vec, Pennington et.al. published GloVe [19], a method to learn word embeddings following the same goal than word2vec, but using matrix factorization methods, which is more computationally efficient. Additionally, GloVe takes into account full co-occurrence information, instead of a sliding window; it builds a full co-occurrence matrix prior to the learning phase. Authors claim, somewhat controversially, that this provides a boost in performance. See [18] for more details on the differences. [20] provides another explanation on the difference, and includes code to train both GloVe and word2vec. See [21] for the original sources of GloVe, pretrained word vectors and some further details from the authors.
+
+### Word Regularities
+
+Word embeddings generate representation spaces which encode certain semantics. The most basic of those semantics (as illustrated before) can be explored through distance measures; words with similar vectors (e.g., according to Euclidean measure) correpond to words with similar semantics. However, vector arithmetics can also be used to find offsets (i.e., vector differences) which correspond to semantic regularities.
+
+<div style="text-align:center">
+    <img src="/images/reg_capitals.png" width="500">
+</div>
+ <div><p style="text-align: center;">Illustration of the regularities between countries and capital cities, using skip-gram. Source [9].</p></div>
+
+By combining both vector arithmetics, and distance, we can find the closest words or phrases to the addition of two words.
+
+<div style="text-align:center">
+    <img src="/images/reg_comps.png" width="500">
+</div>
+ <div><p style="text-align: center;">Illustration of the vector compositionality. Source [9].</p></div>
+
+
+
+
+## Doc2vec
+
+https://rare-technologies.com/doc2vec-tutorial/
 
 
 <a name='bib'></a>
@@ -104,11 +142,25 @@ In the skip-gram model, each source word is inputted as a one-hot vector, and th
 
 [12] [Chris McCormick - Word2Vec Tutorial - The Skip-Gram Model (Part 1 & 2)](http://mccormickml.com/2016/04/19/word2vec-tutorial-the-skip-gram-model/)
 
-[13] [Rong, Xin. "word2vec parameter learning explained." arXiv preprint arXiv:1411.2738 (2014).] (https://arxiv.org/pdf/1411.2738)
+[13] [Rong, Xin. "word2vec parameter learning explained." arXiv preprint arXiv:1411.2738 (2014).](https://arxiv.org/pdf/1411.2738)
 
-[14] [Goldberg, Yoav, and Omer Levy. "word2vec Explained: deriving Mikolov et al.'s negative-sampling word-embedding method." arXiv preprint arXiv:1402.3722 (2014).] (https://arxiv.org/pdf/1402.3722)
+[14] [Goldberg, Yoav, and Omer Levy. "word2vec Explained: deriving Mikolov et al.'s negative-sampling word-embedding method." arXiv preprint arXiv:1402.3722 (2014).](https://arxiv.org/pdf/1402.3722)
 
+[15] [https://github.com/chrisjmccormick/word2vec_commented](https://github.com/chrisjmccormick/word2vec_commented)
+
+[16] [Alex Minnaar, Word2Vec Tutorial Part I: The Skip-Gram Model](http://mccormickml.com/assets/word2vec/Alex_Minnaar_Word2Vec_Tutorial_Part_I_The_Skip-Gram_Model.pdf)
+
+[17] [Alex Minnaar, Word2Vec Tutorial Part II: The Continuous Bag-of-Words Model](http://mccormickml.com/assets/word2vec/Alex_Minnaar_Word2Vec_Tutorial_Part_II_The_Continuous_Bag-of-Words_Model.pdf)
+
+[18] [the morning paper - GloVe: Global Vectors for Word Representation](https://blog.acolyer.org/2016/04/22/glove-global-vectors-for-word-representation/)
+
+[19] [Pennington, Jeffrey, Richard Socher, and Christopher Manning. "Glove: Global vectors for word representation." Proceedings of the 2014 conference on empirical methods in natural language processing (EMNLP). 2014.](http://www.aclweb.org/anthology/D14-1162)
+
+[20] [Radim Rehurek - Making sense of word2vec](https://rare-technologies.com/making-sense-of-word2vec/)
+
+[21] [GloVe: Global Vectors for Word Representation](https://nlp.stanford.edu/projects/glove/)
 
 
 ### Other uncited sources:
 
+[Socher - Stanford CS224d: Deep Learning for Natural Language Processing](http://cs224d.stanford.edu/syllabus.html)

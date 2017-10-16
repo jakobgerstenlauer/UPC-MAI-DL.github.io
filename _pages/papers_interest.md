@@ -10,38 +10,38 @@ For the evaluation of the theoretical aspects of the course, we offer a list of 
 <a name='history'></a>
 ### Convolutional Neural Networks
 
-- [Krizhevsky, Alex, Ilya Sutskever, and Geoffrey E. Hinton. "Imagenet classification with deep convolutional neural networks." Advances in neural information processing systems. 2012.] (http://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf)
+- [Krizhevsky, Alex, Ilya Sutskever, and Geoffrey E. Hinton. "Imagenet classification with deep convolutional neural networks." Advances in neural information processing systems. 2012.](http://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf)
 
-- [Zeiler, Matthew D., and Rob Fergus. "Visualizing and understanding convolutional networks." European conference on computer vision. Springer, Cham, 2014.] (https://arxiv.org/pdf/1311.2901v3.pdf)
+- [Zeiler, Matthew D., and Rob Fergus. "Visualizing and understanding convolutional networks." European conference on computer vision. Springer, Cham, 2014.](https://arxiv.org/pdf/1311.2901v3.pdf)
 
-- [Simonyan, Karen, and Andrew Zisserman. "Very deep convolutional networks for large-scale image recognition." arXiv preprint arXiv:1409.1556 (2014).] (https://arxiv.org/pdf/1409.1556v6.pdf)
+- [Simonyan, Karen, and Andrew Zisserman. "Very deep convolutional networks for large-scale image recognition." arXiv preprint arXiv:1409.1556 (2014).](https://arxiv.org/pdf/1409.1556v6.pdf)
 
-- [Lin, Min, Qiang Chen, and Shuicheng Yan. "Network in network." arXiv preprint arXiv:1312.4400 (2013).] (https://arxiv.org/pdf/1312.4400v3.pdf)
+- [Lin, Min, Qiang Chen, and Shuicheng Yan. "Network in network." arXiv preprint arXiv:1312.4400 (2013).](https://arxiv.org/pdf/1312.4400v3.pdf)
 
-- [Szegedy, Christian, et al. "Going deeper with convolutions." Proceedings of the IEEE conference on computer vision and pattern recognition. 2015.] (http://www.cv-foundation.org/openaccess/content_cvpr_2015/papers/Szegedy_Going_Deeper_With_2015_CVPR_paper.pdf)
+- [Szegedy, Christian, et al. "Going deeper with convolutions." Proceedings of the IEEE conference on computer vision and pattern recognition. 2015.](http://www.cv-foundation.org/openaccess/content_cvpr_2015/papers/Szegedy_Going_Deeper_With_2015_CVPR_paper.pdf)
 
-- [He, Kaiming, et al. "Deep residual learning for image recognition." Proceedings of the IEEE conference on computer vision and pattern recognition. 2016.] (https://arxiv.org/pdf/1512.03385v1.pdf)
+- [He, Kaiming, et al. "Deep residual learning for image recognition." Proceedings of the IEEE conference on computer vision and pattern recognition. 2016.](https://arxiv.org/pdf/1512.03385v1.pdf)
 
-- [Jaderberg, Max, Karen Simonyan, and Andrew Zisserman. "Spatial transformer networks." Advances in Neural Information Processing Systems. 2015.] (https://arxiv.org/pdf/1506.02025.pdf)
+- [Jaderberg, Max, Karen Simonyan, and Andrew Zisserman. "Spatial transformer networks." Advances in Neural Information Processing Systems. 2015.](https://arxiv.org/pdf/1506.02025.pdf)
 
 ---
 The next three papers should be read and reviewed together
 
-- [Girshick, Ross, et al. "Rich feature hierarchies for accurate object detection and semantic segmentation." Proceedings of the IEEE conference on computer vision and pattern recognition. 2014.] (https://arxiv.org/pdf/1311.2524v5.pdf)
+- [Girshick, Ross, et al. "Rich feature hierarchies for accurate object detection and semantic segmentation." Proceedings of the IEEE conference on computer vision and pattern recognition. 2014.](https://arxiv.org/pdf/1311.2524v5.pdf)
 
-- [Girshick, Ross. "Fast r-cnn." Proceedings of the IEEE international conference on computer vision. 2015.] (https://arxiv.org/pdf/1504.08083.pdf)
+- [Girshick, Ross. "Fast r-cnn." Proceedings of the IEEE international conference on computer vision. 2015.](https://arxiv.org/pdf/1504.08083.pdf)
 
-- [Ren, Shaoqing, et al. "Faster R-CNN: Towards real-time object detection with region proposal networks." Advances in neural information processing systems. 2015.] (http://arxiv.org/pdf/1506.01497v3.pdf)
+- [Ren, Shaoqing, et al. "Faster R-CNN: Towards real-time object detection with region proposal networks." Advances in neural information processing systems. 2015.](http://arxiv.org/pdf/1506.01497v3.pdf)
 
 ---
 
 ### Generative Adversarial Networks
 
-- [Szegedy, Christian, et al. "Intriguing properties of neural networks." arXiv preprint arXiv:1312.6199 (2013).] (https://arxiv.org/pdf/1312.6199v4.pdf)
+- [Szegedy, Christian, et al. "Intriguing properties of neural networks." arXiv preprint arXiv:1312.6199 (2013).](https://arxiv.org/pdf/1312.6199v4.pdf)
 
-- [Goodfellow, Ian, et al. "Generative adversarial nets." Advances in neural information processing systems. 2014.] (http://papers.nips.cc/paper/5423-generative-adversarial-nets.pdf)
+- [Goodfellow, Ian, et al. "Generative adversarial nets." Advances in neural information processing systems. 2014.](http://papers.nips.cc/paper/5423-generative-adversarial-nets.pdf)
 
-- [Radford, Alec, Luke Metz, and Soumith Chintala. "Unsupervised representation learning with deep convolutional generative adversarial networks." arXiv preprint arXiv:1511.06434 (2015).] (https://arxiv.org/pdf/1511.06434.pdf)
+- [Radford, Alec, Luke Metz, and Soumith Chintala. "Unsupervised representation learning with deep convolutional generative adversarial networks." arXiv preprint arXiv:1511.06434 (2015).](https://arxiv.org/pdf/1511.06434.pdf)
 
 ### Embedding spaces
 
@@ -54,25 +54,29 @@ The next three papers should be read and reviewed together
 - [Mikolov, Tomas, Wen-tau Yih, and Geoffrey Zweig. "Linguistic regularities in continuous space word representations." hlt-Naacl. Vol. 13. 2013.](http://www.aclweb.org/anthology/N13-1090)
 --------------
 
-- [Rong, Xin. "word2vec parameter learning explained." arXiv preprint arXiv:1411.2738 (2014).] (https://arxiv.org/pdf/1411.2738)
+- [Rong, Xin. "word2vec parameter learning explained." arXiv preprint arXiv:1411.2738 (2014).](https://arxiv.org/pdf/1411.2738)
 
-- [Goldberg, Yoav, and Omer Levy. "word2vec Explained: deriving Mikolov et al.'s negative-sampling word-embedding method." arXiv preprint arXiv:1402.3722 (2014).] (https://arxiv.org/pdf/1402.3722)
+- [Goldberg, Yoav, and Omer Levy. "word2vec Explained: deriving Mikolov et al.'s negative-sampling word-embedding method." arXiv preprint arXiv:1402.3722 (2014).](https://arxiv.org/pdf/1402.3722)
+
+- [Pennington, Jeffrey, Richard Socher, and Christopher Manning. "Glove: Global vectors for word representation." Proceedings of the 2014 conference on empirical methods in natural language processing (EMNLP). 2014.](https://nlp.stanford.edu/pubs/glove.pdfi)
+
+- [Levy, Omer, and Yoav Goldberg. "Linguistic regularities in sparse and explicit word representations." Proceedings of the eighteenth conference on computational natural language learning. 2014.](http://www.aclweb.org/anthology/W14-1618)
 
 ### Multimodal Pipelines
 
-- [Karpathy, Andrej, and Li Fei-Fei. "Deep visual-semantic alignments for generating image descriptions." Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition. 2015.] (https://arxiv.org/pdf/1412.2306v2.pdf)
+- [Karpathy, Andrej, and Li Fei-Fei. "Deep visual-semantic alignments for generating image descriptions." Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition. 2015.](https://arxiv.org/pdf/1412.2306v2.pdf)
 
-- [Vinyals, Oriol, et al. "Show and tell: A neural image caption generator." Proceedings of the IEEE conference on computer vision and pattern recognition. 2015.] (http://www.cv-foundation.org/openaccess/content_cvpr_2015/papers/Vinyals_Show_and_Tell_2015_CVPR_paper.pdf)
+- [Vinyals, Oriol, et al. "Show and tell: A neural image caption generator." Proceedings of the IEEE conference on computer vision and pattern recognition. 2015.](http://www.cv-foundation.org/openaccess/content_cvpr_2015/papers/Vinyals_Show_and_Tell_2015_CVPR_paper.pdf)
 
-- [Kiros, Ryan, Ruslan Salakhutdinov, and Richard S. Zemel. "Unifying visual-semantic embeddings with multimodal neural language models." arXiv preprint arXiv:1411.2539 (2014).] (https://arxiv.org/pdf/1411.2539)
+- [Kiros, Ryan, Ruslan Salakhutdinov, and Richard S. Zemel. "Unifying visual-semantic embeddings with multimodal neural language models." arXiv preprint arXiv:1411.2539 (2014).](https://arxiv.org/pdf/1411.2539)
 
-- [Vendrov, Ivan, et al. "Order-embeddings of images and language." arXiv preprint arXiv:1511.06361 (2015).] (https://arxiv.org/pdf/1511.06361.pdf)
+- [Vendrov, Ivan, et al. "Order-embeddings of images and language." arXiv preprint arXiv:1511.06361 (2015).](https://arxiv.org/pdf/1511.06361.pdf)
 
 ### Transfer Learning
 
-- [Yosinski, Jason, et al. "How transferable are features in deep neural networks?." Advances in neural information processing systems. 2014.] (https://arxiv.org/pdf/1411.1792v1.pdf)
+- [Yosinski, Jason, et al. "How transferable are features in deep neural networks?." Advances in neural information processing systems. 2014.](https://arxiv.org/pdf/1411.1792v1.pdf)
 
-- [Sharif Razavian, Ali, et al. "CNN features off-the-shelf: an astounding baseline for recognition." Proceedings of the IEEE conference on computer vision and pattern recognition workshops. 2014.] (https://arxiv.org/pdf/1403.6382.pdf)
+- [Sharif Razavian, Ali, et al. "CNN features off-the-shelf: an astounding baseline for recognition." Proceedings of the IEEE conference on computer vision and pattern recognition workshops. 2014.](https://arxiv.org/pdf/1403.6382.pdf)
 
 ### Recurrent Neural Networks
 
@@ -97,8 +101,8 @@ The next three papers should be read and reviewed together
 
 - [Shwartz-Ziv, Ravid, and Naftali Tishby. "Opening the Black Box of Deep Neural Networks via Information."](https://arxiv.org/abs/1703.00810)
 
-- [] ()
+- []()
 
-- [] ()
+- []()
 
-- [] ()
+- []()
