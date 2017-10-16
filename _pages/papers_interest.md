@@ -45,15 +45,16 @@ The next three papers should be read and reviewed together
 
 ### Embedding spaces
 
-The next three papers should be read and reviewed together
-
 ---
+The next four papers should be read and reviewed together
 
 - [Mikolov, Tomas, et al. "Efficient estimation of word representations in vector space." arXiv preprint arXiv:1301.3781 (2013).](https://arxiv.org/pdf/1301.3781.pdf)
  
 - [Mikolov, Tomas, et al. "Distributed representations of words and phrases and their compositionality." Advances in neural information processing systems. 2013.](https://papers.nips.cc/paper/5021-distributed-representations-of-words-and-phrases-and-their-compositionality.pdf)
  
 - [Mikolov, Tomas, Wen-tau Yih, and Geoffrey Zweig. "Linguistic regularities in continuous space word representations." hlt-Naacl. Vol. 13. 2013.](http://www.aclweb.org/anthology/N13-1090)
+
+- [Mikolov, Tomas, Quoc V. Le, and Ilya Sutskever. "Exploiting similarities among languages for machine translation." arXiv preprint arXiv:1309.4168 (2013).](https://arxiv.org/pdf/1309.4168v1.pdf)
 
 ---
 
@@ -65,7 +66,9 @@ The next three papers should be read and reviewed together
 
 - [Levy, Omer, and Yoav Goldberg. "Linguistic regularities in sparse and explicit word representations." Proceedings of the eighteenth conference on computational natural language learning. 2014.](http://www.aclweb.org/anthology/W14-1618)
 
-### Multimodal Pipelines
+- [Zou, Will Y., et al. "Bilingual word embeddings for phrase-based machine translation." Proceedings of the 2013 Conference on Empirical Methods in Natural Language Processing. 2013.](http://ai.stanford.edu/~wzou/emnlp2013_ZouSocherCerManning.pdf)
+
+### Multimodal Approaches
 
 - [Karpathy, Andrej, and Li Fei-Fei. "Deep visual-semantic alignments for generating image descriptions." Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition. 2015.](https://arxiv.org/pdf/1412.2306v2.pdf)
 
@@ -74,6 +77,8 @@ The next three papers should be read and reviewed together
 - [Kiros, Ryan, Ruslan Salakhutdinov, and Richard S. Zemel. "Unifying visual-semantic embeddings with multimodal neural language models." arXiv preprint arXiv:1411.2539 (2014).](https://arxiv.org/pdf/1411.2539)
 
 - [Vendrov, Ivan, et al. "Order-embeddings of images and language." arXiv preprint arXiv:1511.06361 (2015).](https://arxiv.org/pdf/1511.06361.pdf)
+
+- [Socher, Richard, et al. "Zero-shot learning through cross-modal transfer." Advances in neural information processing systems. 2013.](https://nlp.stanford.edu/~socherr/SocherGanjooManningNg_NIPS2013.pdf)
 
 ### Transfer Learning
 
@@ -85,7 +90,6 @@ The next three papers should be read and reviewed together
 
 -  [Alex Graves Generating Sequences With Recurrent Neural Networks](https://arxiv.org/pdf/1308.0850)
 
-
 - [Kyunghyun Cho, Bart van Berrienboer, Caglar Gulcehre, Dzmitry Bahdanau, Fethi Bougares, Holger Schwenk, and Yoshua Bengio, Learning Phrase Representations using RNN Encoder-Decoder for Statistical Machine Translation, arXiv:1406.1078 / EMNLP 2014](http://arxiv.org/pdf/1406.1078)
 
  - [Ilya Sutskever, Oriol Vinyals, and Quoc V. Le, Sequence to Sequence Learning with Neural Networks, arXiv:1409.3215 / NIPS 2014](http://papers.nips.cc/paper/5346-sequence-to-sequence-learning-with-neural-networks.pdf)
@@ -94,11 +98,15 @@ The next three papers should be read and reviewed together
 
  - [Mike Schuster and Kuldip K. Paliwal, Bidirectional Recurrent Neural Networks, Trans. on Signal Processing 1997](http://www.di.ufpe.br/%7Efnj/RNA/bibliografia/BRNN.pdf)
 
-  - [Nal Kalchbrenner, Ivo Danihelka, and Alex Graves, Grid Long Short-Term Memory, arXiv:1507.01526](http://arxiv.org/pdf/1507.01526)
+ - [Nal Kalchbrenner, Ivo Danihelka, and Alex Graves, Grid Long Short-Term Memory, arXiv:1507.01526](http://arxiv.org/pdf/1507.01526)
 
-  - [Kai Sheng Tai, Richard Socher, and Christopher D. Manning, Improved Semantic Representations From Tree-Structured Long Short-Term Memory Networks, arXiv:1503.00075 / ACL 2015](http://arxiv.org/pdf/1503.00075)
+ - [Kai Sheng Tai, Richard Socher, and Christopher D. Manning, Improved Semantic Representations From Tree-Structured Long Short-Term Memory Networks, arXiv:1503.00075 / ACL 2015](http://arxiv.org/pdf/1503.00075)
 
-  - [Ankit Kumar, Ozan Irsoy, Peter Ondruska, Mohit Iyyer, James Bradbury, Ishaan Gulrajani, Victor Zhong, Romain Paulus, Richard Socher, "Ask Me Anything: Dynamic Memory Networks for Natural Language Processing"](http://arxiv.org/abs/1506.07285)
+ - [Ankit Kumar, Ozan Irsoy, Peter Ondruska, Mohit Iyyer, James Bradbury, Ishaan Gulrajani, Victor Zhong, Romain Paulus, Richard Socher, "Ask Me Anything: Dynamic Memory Networks for Natural Language Processing"](http://arxiv.org/abs/1506.07285)
+
+ - [Cho, Kyunghyun, et al. "Learning phrase representations using RNN encoder-decoder for statistical machine translation." arXiv preprint arXiv:1406.1078 (2014).](https://arxiv.org/pdf/1406.1078)
+
+ - [Zaremba, Wojciech, Ilya Sutskever, and Oriol Vinyals. "Recurrent neural network regularization." arXiv preprint arXiv:1409.2329 (2014).](https://arxiv.org/pdf/1409.2329.pdf)
 
 ### Theory of Deep Learning
 
@@ -106,15 +114,15 @@ The next three papers should be read and reviewed together
 
 ### High Performance Aspects of Deep Learning
 
-- [Neurosurgeon: Collaborative Intelligence Between the Cloud and Mobile Edge. ASPLOS 2017: 615-629] (http://web.eecs.umich.edu/~jahausw/publications/kang2017neurosurgeon.pdf)
+- [Neurosurgeon: Collaborative Intelligence Between the Cloud and Mobile Edge. ASPLOS 2017: 615-629](http://web.eecs.umich.edu/~jahausw/publications/kang2017neurosurgeon.pdf)
 
-- [Norman P. Jouppi, Cliff Young, Nishant Patil, David Patterson, et al. In-Datacenter Performance Analysis of a Tensor Processing Unit. ISCA 2017: 1-12] (https://arxiv.org/abs/1704.04760)
+- [Norman P. Jouppi, Cliff Young, Nishant Patil, David Patterson, et al. In-Datacenter Performance Analysis of a Tensor Processing Unit. ISCA 2017: 1-12](https://arxiv.org/abs/1704.04760)
 
 - [Tianshi Chen, Zidong Du, Ninghui Sun, Jia Wang, Chengyong Wu, Yunji Chen, Olivier Temam:
-DianNao: a small-footprint high-throughput accelerator for ubiquitous machine-learning. ASPLOS 2014: 269-284] (http://novel.ict.ac.cn/ychen/pdf/DianNao.pdf)
+DianNao: a small-footprint high-throughput accelerator for ubiquitous machine-learning. ASPLOS 2014: 269-284](http://novel.ict.ac.cn/ychen/pdf/DianNao.pdf)
 
 - [Ammar Ahmad Awan, Khaled Hamidouche, Jahanzeb Maqbool Hashmi, Dhabaleswar K. Panda:
-S-Caffe: Co-designing MPI Runtimes and Caffe for Scalable Deep Learning on Modern GPU Clusters. PPOPP 2017: 193-205] (https://dl.acm.org/citation.cfm?id=3018769&dl=ACM&coll=DL&CFID=995532436&CFTOKEN=69605876)
+S-Caffe: Co-designing MPI Runtimes and Caffe for Scalable Deep Learning on Modern GPU Clusters. PPOPP 2017: 193-205](https://dl.acm.org/citation.cfm?id=3018769&dl=ACM&coll=DL&CFID=995532436&CFTOKEN=69605876)
 
 - [Muhammet Mustafa Ozdal, Serif Yesil, Taemin Kim, Andrey Ayupov, John Greth, Steven M. Burns, Özcan Özturk:
-Energy Efficient Architecture for Graph Analytics Accelerators. ISCA 2016: 166-177] (https://dl.acm.org/citation.cfm?id=3001155)
+Energy Efficient Architecture for Graph Analytics Accelerators. ISCA 2016: 166-177](https://dl.acm.org/citation.cfm?id=3001155)

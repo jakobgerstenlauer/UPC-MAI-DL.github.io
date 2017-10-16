@@ -9,6 +9,10 @@ Table of Contents:
 - [Introduction](#intro)
 - [Word Embeddings](#wordemb)
     - [word2vec](#word2vec)
+        - [skipgram](#skipgram)
+        - [CBOW](#cbow)
+        - [GloVe](#glove)
+    - [Word Regularities](#regularities)
 - [Bibliography](#bib)
 
 
@@ -54,6 +58,7 @@ During training, the word embeddings W coverge towards a language that describes
 
 The most popular of word embedding approaches is the word2vec model. Word2vec was first proposed in [8], and its implementations were further detailed in [9]. The properties of word2vec were explored by the same authors in [10]. Word2vec includes various implementations of word embeddings. In here we will detail the two main ones: the Continuous Skip-gram model and the Continuous Bag-of-Words (CBOW) model. For more details, see [8,9,10,12,13,14].
 
+<a name='skipgram'></a>
 #### Skip-gram model
 
 The skip-gram model generates a vector representation of words to capture the context in which each word appears. In this model, the goal of the training is to learn the probability of a context of words given a source word. This context of words is defined using a sliding window of fixed length through a large corpus of text. 
@@ -74,6 +79,7 @@ In the skip-gram model, each source word is inputted as a one-hot vector, and th
 In this model, words are inputed as one-hot vectors. Thus, each word will have a unique vector representation in the hidden layer of the skip-gram model. After training, the weights of the hidden layer corresponding to one particular word represent their embedding representation. See [16] for more details on the skip-gram model.
 
 
+<a name='cbow'></a>
 #### Continuous Bag of Words (CBOW)
 
 The CBOW model is similar to the skip-gram model, but it uses an inverted training scheme. The training purpose of CBOW is to learn the probability distribution of words given their context. As such, the input of the model is a list of unordered words which define a context (hence bag of words), and the output is the word missing in the middle of this context. Similarly to how skip-gram training data is generated, CBOW contexts are also obtained using a sliding window.
@@ -87,10 +93,12 @@ The input of the CBOW model is a set of one-hot vectors. The output is a single 
 
 According to the authors of word2vec, skip-gram works well with little training data, and represents well rare words. CBOW is faster to train and has slightly higher accuracies for frequent words.
 
+<a name='glove'></a>
 #### GloVe
 
 Following word2vec, Pennington et.al. published GloVe [19], a method to learn word embeddings following the same goal than word2vec, but using matrix factorization methods, which is more computationally efficient. Additionally, GloVe takes into account full co-occurrence information, instead of a sliding window; it builds a full co-occurrence matrix prior to the learning phase. Authors claim, somewhat controversially, that this provides a boost in performance. See [18] for more details on the differences. [20] provides another explanation on the difference, and includes code to train both GloVe and word2vec. See [21] for the original sources of GloVe, pretrained word vectors and some further details from the authors.
 
+<a name='regularities'></a>
 ### Word Regularities
 
 Word embeddings generate representation spaces which encode certain semantics. The most basic of those semantics (as illustrated before) can be explored through distance measures; words with similar vectors (e.g., according to Euclidean measure) correpond to words with similar semantics. However, vector arithmetics can also be used to find offsets (i.e., vector differences) which correspond to semantic regularities.
@@ -103,16 +111,39 @@ Word embeddings generate representation spaces which encode certain semantics. T
 By combining both vector arithmetics, and distance, we can find the closest words or phrases to the addition of two words.
 
 <div style="text-align:center">
-    <img src="/images/reg_comps.png" width="500">
+    <img src="/images/reg_comp.png" width="500">
 </div>
  <div><p style="text-align: center;">Illustration of the vector compositionality. Source [9].</p></div>
 
+Gender regularities also emerge. This results in the famous equation "King - Men + Women = Queen"
 
+<div style="text-align:center">
+    <img src="/images/queen.png" width="500">
+</div>
+ <div><p style="text-align: center;">Illustration of gender regularities. Source [10].</p></div>
+
+In fact, all sort of regularities are found within word embedding spaces: People's professions, countries' presidents, chemicals' symbols, companies' products, and even countries' popular foods.
+
+<div style="text-align:center">
+    <img src="/images/reg_all.png" width="500">
+</div>
+ <div><p style="text-align: center;">Illustration of all sorts of regularities. Source [9].</p></div>
+
+Word embeddings can also be used for automatic translation, as presented by the same authors of word2vec.
+
+<div style="text-align:center">
+    <img src="/images/translation.png" width="500">
+</div>
+ <div><p style="text-align: center;">Illustration of language translation. Source [23].</p></div>
 
 
 ## Doc2vec
 
-https://rare-technologies.com/doc2vec-tutorial/
+The doc2vec model extends the word embedding approach to learn representations of large blocks of text (e.g., paragraphs or documents). To do so, it correlates labels and words (unlike words and words, like word2vec).
+
+
+Doc2Vec learns representations for words and labels simultaneously. 
+
 
 
 <a name='bib'></a>
@@ -160,7 +191,14 @@ https://rare-technologies.com/doc2vec-tutorial/
 
 [21] [GloVe: Global Vectors for Word Representation](https://nlp.stanford.edu/projects/glove/)
 
+[22] [DL4J - Neural Word Embeddings](https://deeplearning4j.org/doc2vec)
+
+[23] [Mikolov, Tomas, Quoc V. Le, and Ilya Sutskever. "Exploiting similarities among languages for machine translation." arXiv preprint arXiv:1309.4168 (2013).](https://arxiv.org/pdf/1309.4168v1.pdf)
 
 ### Other uncited sources:
 
 [Socher - Stanford CS224d: Deep Learning for Natural Language Processing](http://cs224d.stanford.edu/syllabus.html)
+
+[Doc2vec tutorial using gensim](https://rare-technologies.com/doc2vec-tutorial/)
+
+[Spanish Billion Word Corpus and Embeddings](http://crscardellino.me/SBWCE/)
