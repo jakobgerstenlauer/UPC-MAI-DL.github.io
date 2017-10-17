@@ -19,7 +19,7 @@ Table of Contents:
 <a name='intro'></a>
 ## Introduction
 
-An embedding is a transformation of data, used to represent a given data instance through an alternative set of features or characteristics. This set of features defines a representation space, i.e., an embedding space. Simply put, an embedding is a translation from one language (the source data representation, e.g., pixels for an image) to a different language (the target data representation). To generate an embedding, all that is needed is a function, which, when applied to a data instance, outputs the instance representation in the embedding space. The resulting embedding space may have a different dimentionality than the source representation space.
+An embedding is a transformation of data, used to represent a given data instance through an alternative set of features or characteristics. This set of features defines a representation space, i.e., an embedding space. Simply put, an embedding is a translation from one language (the source data representation, e.g., pixels for an image, or words in text) to a different language (e.g., numerical values). To generate an embedding, all that is needed is a function, which, when applied to a data instance, outputs the instance representation in the embedding space. The resulting embedding space may have a different dimentionality than the source representation space. Notice that an embedding does not require an activation function, as we are not trying to find non-linear features defining the input. Instead, we are just trying to find an alternative representation of a given input which we can tune and addapt for a given task.
 
 The goal of defining and generating embeddings is to obtain representation spaces which satisfy certain desirable properties. For example, that distances within the embedding space are correlated with a similarity of some sort. In the context of Artificial Intelligence, this is interesting as it may result in distributed representations of symbols [1], closing the gap between sensing and thinking. For more details on symbolic vs sub-symbolic AI see [3,4].
 
@@ -108,19 +108,19 @@ Word embeddings generate representation spaces which encode certain semantics. T
 </div>
  <div><p style="text-align: center;">Illustration of the regularities between countries and capital cities, using skip-gram. Source [9].</p></div>
 
-By combining both vector arithmetics, and distance, we can find the closest words or phrases to the addition of two words.
+By combining both vector arithmetics, and distance, we can find the closest words or phrases to the addition of two words. First we add the vector representation of those two words, and then we find which is the closest (word) vector representation to the result. 
 
 <div style="text-align:center">
     <img src="/images/reg_comp.png" width="500">
 </div>
  <div><p style="text-align: center;">Illustration of the vector compositionality. Source [9].</p></div>
 
-Gender regularities also emerge. This results in the famous equation "King - Men + Women = Queen"
+Gender regularities also emerge. Using the representation of both Man and Woman, we can swap the gender of any word, just by substracting the vector representation of Men and adding the vector representation of Women. This results in the famous equation "King - Man + Woman = Queen", which is only the result of the analogy "King - Man = Queen - Woman".
 
 <div style="text-align:center">
-    <img src="/images/queen.png" width="500">
+    <img src="/images/queen2.png" width="500">
 </div>
- <div><p style="text-align: center;">Illustration of gender regularities. Source [10].</p></div>
+ <div><p style="text-align: center;">Illustration of gender regularities. King is to Queen like Man is to Woman. Source [24].</p></div>
 
 In fact, all sort of regularities are found within word embedding spaces: People's professions, countries' presidents, chemicals' symbols, companies' products, and even countries' popular foods.
 
@@ -139,7 +139,7 @@ Word embeddings can also be used for automatic translation, as presented by the 
 
 ## Doc2vec
 
-The doc2vec model extends the word embedding approach to learn representations of large blocks of text (e.g., paragraphs or documents). To do so, it correlates labels and words (unlike words and words, like word2vec).
+The doc2vec model [25] (also known as Paragraph Vector) extends the word embedding approach to learn representations of blocks of text (e.g., sentences, paragraphs or documents). To do so, it correlates labels and words (unlike word2vec which correlates words with words). In the BOW model of word2vec, vector representations of words are concatenated 
 
 
 Doc2Vec learns representations for words and labels simultaneously. 
@@ -195,6 +195,10 @@ Doc2Vec learns representations for words and labels simultaneously.
 
 [23] [Mikolov, Tomas, Quoc V. Le, and Ilya Sutskever. "Exploiting similarities among languages for machine translation." arXiv preprint arXiv:1309.4168 (2013).](https://arxiv.org/pdf/1309.4168v1.pdf)
 
+[24] [A gentle introduction to Doc2Vec](https://medium.com/towards-data-science/a-gentle-introduction-to-doc2vec-db3e8c0cce5e). An explanation of doc2vec plus an example of addapting the model for a usecase of industry.
+
+[25] [Le, Quoc, and Tomas Mikolov. "Distributed representations of sentences and documents." Proceedings of the 31st International Conference on Machine Learning (ICML-14). 2014.](https://arxiv.org/pdf/1405.4053.pdf)
+
 ### Other uncited sources:
 
 [Socher - Stanford CS224d: Deep Learning for Natural Language Processing](http://cs224d.stanford.edu/syllabus.html)
@@ -202,3 +206,4 @@ Doc2Vec learns representations for words and labels simultaneously.
 [Doc2vec tutorial using gensim](https://rare-technologies.com/doc2vec-tutorial/)
 
 [Spanish Billion Word Corpus and Embeddings](http://crscardellino.me/SBWCE/)
+
