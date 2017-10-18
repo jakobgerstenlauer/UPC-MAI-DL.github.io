@@ -13,6 +13,7 @@ Table of Contents:
         - [CBOW](#cbow)
         - [GloVe](#glove)
     - [Word Regularities](#regularities)
+- [Doc2vec](#doc2vec)
 - [Bibliography](#bib)
 
 
@@ -129,7 +130,7 @@ In fact, all sort of regularities are found within word embedding spaces: People
 </div>
  <div><p style="text-align: center;">Illustration of all sorts of regularities. Source [9].</p></div>
 
-Word embeddings can also be used for automatic translation, as presented by the same authors of word2vec.
+Word embeddings can also be used for automatic translation [23], as presented by the same authors of word2vec.
 
 <div style="text-align:center">
     <img src="/images/translation.png" width="500">
@@ -137,14 +138,27 @@ Word embeddings can also be used for automatic translation, as presented by the 
  <div><p style="text-align: center;">Illustration of language translation. Source [23].</p></div>
 
 
+<a name='doc2vec'></a>
 ## Doc2vec
 
-The doc2vec model [25] (also known as Paragraph Vector) extends the word embedding approach to learn representations of blocks of text (e.g., sentences, paragraphs or documents). To do so, it correlates labels and words (unlike word2vec which correlates words with words). In the BOW model of word2vec, vector representations of words are concatenated 
+The doc2vec model [25] (also known as Paragraph Vector) extends the word embedding approach to learn representations of blocks of text (e.g., sentences, paragraphs or documents). To do so, it correlates labels and words (unlike word2vec which correlates words with words). In the BOW model of word2vec, vector representations of words are concatenated to predict the next word. In doc2vec, blocks of text are also assigned a unique representation, and are also concatenated to predict following words. Sets of unordered words are fed to the system, with the corresponding text block representation fixed. As such, the text block representation will eventually learn to capture part of the topic information of that block of text. The first of the doc2vec models strongly resembles the BOW architecture, and is called the Distributed Memory Model of Paragraph Vectors (PV-DM).
+
+<div style="text-align:center">
+    <img src="/images/pv-dm.png" width="500">
+</div>
+ <div><p style="text-align: center;">Scheme of the Distributed Memory Model of Paragraph Vectors. Source [25].</p></div>
+
+By inputing both the representations of text blocks and words, PV-DM learns learns representations for words and blocks simultaneously. Once all represenations are learnt, this model can be used to generate representations for new blocks of text. By fixing the word representations and training the new block vector until convergence through gradient descent. The document embedding space defined by the representations of the blocks of text can be used to detect similarities between documents.
+
+The PV-DM model take into consideration the word order within the documents, as only consecutive words in the document are used (unordered) to train the representation of the document. A second proposed doc2vec model does not consider word order, instead it samples random words from the document and tries to predict those words. This scheme, know as Distributed Bag of Words model of Paragraph vector (PV-DBOW) looks very similar to the original skip-gram model.
 
 
-Doc2Vec learns representations for words and labels simultaneously. 
+<div style="text-align:center">
+    <img src="/images/pv-dbow.png" width="500">
+</div>
+ <div><p style="text-align: center;">Scheme of the Distributed Bag of Words Model of Paragraph Vectors. Source [25].</p></div>
 
-
+Doc2vec authors recomend to use a concatenation of both models for building paragraph vectors: Both the PV-DM and the PV-DBOW. However their acknowledge that PV-DM is the best model on its own.
 
 <a name='bib'></a>
 ## Bibliography
