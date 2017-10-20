@@ -46,13 +46,13 @@ This course provides an applied approach to Deep Learning. The course is structu
 <a name='theory'></a>
 #### Theory
 
-The theory part of a block provides a review of the basic concepts of Deep Learning, but is intended only as an introduction. Multiple references are given in the theory section, and the interested student should read further from those references to learn more details of the introduced topics. Beyond the cited works, there are lots of materials online of Deep Learning, although it is recommended to read more than one source, as many sources explain only one aspect or interpretation of a certain topic. A good reference for most topics is the "Deep Learning Book" by Ian Goodfellow and Yoshua Bengio and Aaron Courville.
+The theory part of a block provides a review of the basic concepts of Deep Learning, but is intended only as an introduction. Multiple references are given in the theory section, and the interested student should read further from those references to learn more details of the introduced topics. Beyond the cited works, there are lots of materials online of Deep Learning, although it is recommended to read more than one source, as many sources explain only one aspect or interpretation of a certain topic. A good reference for most topics is the "Deep Learning Book" by Ian Goodfellow and Yoshua Bengio and Aaron Courville. There is a physical copy of the book in the UPC library, and it can also be found online.
 
 
 <a name='guided'></a>
 #### Guided Laboratory
 
-The guided laboratory provides working code that can serve as a starting point for students. These codes are well commented, and show a variety of algorithmic solutions. The guided laboratory will be reviewed and discussed in class with students.
+The guided laboratory provides working code that can serve as a starting point for students. These codes are commented, and show a variety of algorithmic solutions. The guided laboratory will be reviewed and discussed in class with students.
 
 <a name='autonomous'></a>
 #### Autonomous Laboratory
