@@ -18,9 +18,10 @@ The Table of Contents:
     - [Autonomous Laboratory](#autonomous)
 - [Course Evaluation](#evaluation)
 - [Lessons](#lessons)
-    - [#1 Basic Neural Nets and Conv Nets](#mlp_convnets)
+    - [#1 Feedforward Nets and Conv Nets](#mlp_convnets)
     - [#2 Recurrent Neural Nets](#rnn_nets)
     - [#3 Embedding spaces](#embeddings)
+- [Code and Lab Resources](#code)
 - [Papers of interest](#papers)
 
 
@@ -77,7 +78,7 @@ The experimental evaluation will be based on reports written by the student for 
 
 <a name='mlp_convnets'></a>
 #### Lesson 1
-Basic Neural Nets and Conv Nets
+Feedforward Nets and Conv Nets (lecturer: Dario Garcia)
 - [Theory](mlp-convnets-theory/)
 - [Lab guided](mlp-convnets-lab-guided/)
 - [Lab autonomous](mlp-convnets-lab-autonomous/)
@@ -85,7 +86,7 @@ Basic Neural Nets and Conv Nets
 
 <a name='rnn_nets'></a>
 #### Lesson 2
-Recurrent Neural Networks
+Recurrent Neural Networks (lecturer: Javier Bejar)
 
 - [Theory](rnn-theory)
 - [Lab guided](rnn-lab-guided)
@@ -94,11 +95,21 @@ Recurrent Neural Networks
 
 <a name='embeddings'></a>
 #### Lesson 3
-Embedding spaces
+Embedding spaces (lecturer: Dario Garcia)
 
 - [Theory](emb-space-theory)
 - [Lab guided]
 - [Lab autonomous]
+
+
+<a name='code'></a>
+### Code and Lab Resources
+
+The codes used in the lab sessions can be downloaded from the following locations:
+- [Lesson 1: Feedforward Neural Nets and Conv Nets](https://github.com/UPC-MAI-DL/UPC-MAI-DL.github.io/tree/master/_codes/1.FNN-CNN)
+- [Lesson 2: Recurrent Neural Networks](https://github.com/UPC-MAI-DL/UPC-MAI-DL.github.io/tree/master/_codes/2.RNN)
+
+
 
 <a name='papers'></a>
 ### Papers of Interest
