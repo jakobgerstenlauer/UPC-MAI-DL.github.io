@@ -21,7 +21,7 @@ Table of Contents:
 <a name='intro'></a>
 ## Introduction
 
-An embedding is a transformation of data, used to represent a given data instance through an alternative set of features or characteristics. This set of features defines a representation space, i.e., an embedding space. Simply put, an embedding is a translation from one language (the source data representation, e.g., pixels for an image, or words in text) to a different language (e.g., numerical values). To generate an embedding, all that is needed is a function, which, when applied to a data instance, outputs the instance representation in the embedding space. The resulting embedding space may have a different dimentionality than the source representation space. Notice that an embedding does not require an activation function, as we are not trying to find non-linear features defining the input. Instead, we are just trying to find an alternative representation of a given input which we can tune and addapt for a given task.
+An embedding is a transformation of data, used to represent a given data instance through an alternative set of features or characteristics. This set of features defines a representation space, i.e., an embedding space. Simply put, an embedding is a translation from one language (the source data representation, e.g., pixels for an image, or words in text) to a different language (e.g., numerical values). To generate an embedding, all that is needed is a function, which, when applied to a data instance, outputs the instance representation in the embedding space. The resulting embedding space may have a different dimentionality than the source representation space. Notice that an embedding does not require an activation function, as we are not trying to find non-linear features defining the input. Instead, we are just trying to find an alternative representation of a given input which we can tune and adapt for a given task.
 
 The goal of defining and generating embeddings is to obtain representation spaces which satisfy certain desirable properties. For example, that distances within the embedding space are correlated with a similarity of some sort. In the context of Artificial Intelligence, this is interesting as it may result in distributed representations of symbols [1], closing the gap between sensing and thinking. For more details on symbolic vs sub-symbolic AI see [3,4].
 
@@ -40,7 +40,7 @@ One of the first approaches to embedding spaces were word embeddings, proposed b
 
 Although the task is to discriminate coherent sentences through R, what is more interesting of this architecture is the vector representation that are being learnt during training. W defines an embedding space with a fixed number of dimensions (equal to the length of W). The vector learnt for each word corresponds to the representation of that word within the embedding space.
 
-After thorough training, such an embedding space containst a few interesting properties. For example, given a word v and its vector representation w, the words that have representations closer to w using the Euclidean metric are semantically close.
+After thorough training, such an embedding space contains a few interesting properties. For example, given a word v and its vector representation w, the words that have representations closer to w using the Euclidean metric are semantically close.
 
 <div style="text-align:center">
     <img src="/images/wordtable.png" width="500">
@@ -170,7 +170,10 @@ Word embeddings are trained using a one-hot vector encoding for words. This mean
 
 The motivation behind image embedding is as follows. Given a complex vision challenge with a large training set (e.g., ImageNet2012 with its 1,000 classes) and a powerful deep learning model (e.g., VGG19 architecture, with its 19 layers of depth), the model resulting from such training should contain a large and rich visual representation language. A language that could be used for other problems beyond the original training purpose (e.g., classifying indoor scenes), just by training and applying a non-deep learning classifier (e.g., a SVM) using the obtained vector representation.
 
-One of the first works exploring the extraction and reuse of deep network activations was DeCAF [26]. In this work, the AlexNet architecture (which includes 5 convolutional layers and 3 fully-connected) is trained for the ImageNet 2012 challenge.
+One of the first works exploring the extraction and reuse of deep network activations was DeCAF [26]. In this work, the AlexNet architecture (which includes 5 convolutional layers and 3 fully-connected) is trained for the ImageNet 2012 challenge. Then, authors propose to focus on another task involving another dataset of the same nature (in this case, images), and reuse the trained model to preprocess images. Images from this target dataset are passed through the model and last layer activations are considered as the new representation of images, so converting the image representation of the instances to an embedding representation based on the language learnt by the model.
+
+The new representation of instances and its corresponding labels are used to feed the target dataset into an SVM model and, afterwards, evaluate the accuracy of the methodology. Authors evaluate the process on a variety of datasets including different domains such as object recognition, subcategory recognition or scene recognition. Results obtained demonstrates the viability of presented methodology in some specific cases, especially when dataset has not enough images to train complex models as deep learning ones.
+
 
 
 
