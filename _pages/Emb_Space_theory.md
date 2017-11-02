@@ -177,12 +177,22 @@ The motivation behind image embedding is as follows. Given a complex vision chal
 
 One of the first works exploring the extraction and reuse of deep network activations was DeCAF [26]. In this work, the AlexNet architecture (which includes 5 convolutional layers and 3 fully-connected) is trained for the ImageNet 2012 challenge. Then, authors propose to focus on another task involving another dataset of the same nature (i.e., images), and reuse the trained model to preprocess images. Images from this target dataset are passed through the model and last layer activations are considered as the new representation of images, so converting the image representation of instances to an embedding representation based on the language learnt by the model.
 
+<div style="text-align:center">
+    <img src="/images/decaf_img_emb_tsne.png" width="500">
+</div>  
+ <div><p style="text-align: center;">Images from SUN-397 dataset colored based on their class. Their position correponds to the embedding space previously learnt. Source [26].</p></div>
+
 The new representation of instances and its corresponding labels are used to feed the target dataset into simple linear classifier (SVM and Logistic Regression) and, afterwards, evaluate the accuracy of the model. Authors evaluate the process on a variety of datasets, one for each of the following domains: object recognition, domain adaptation, subcategory recognition and scene recognition. Results showed that proposed methodology outperformed previous state-of-the-art approaches based on multi-kernel learning techniques with traditional hand-crafted features.
+
+<div style="text-align:center">
+    <img src="/images/decaf_vs_surf.png" width="500">
+</div>  
+ <div><p style="text-align: center;">Images from scissors class in the embedding space learnt by DeCAF against the embedding space generated with hand-crafted SURF features. Source [26].</p></div>
 
 On the same year (2014), a similar work titled CNN Features off-the-shell was published [27]. Authors make a deeper study of the methodology proposed by Donahue et al. [26] by increasing the number of experiments. In this work, they propose the same methodology but using the OverFeat architecture (formed by 6 convolutional layers and 3 fully-connected) trained on the ImageNet2012 dataset. They make use the first fully-connected layer activations as the embedding representation of images and then datasets are trained on linear SVM models, analoguously to previous work. Nevertheless, authors include new stuff to the process, the use of data augmentation by cropping and rotating samples and the L2 normalization of resulting embeddings. 
 
 <div style="text-align:center">
-    <img src="/images/feature_extraction.png" width="500">
+    <img src="/images/feature_extraction.png" width="800">
 </div>  
  <div><p style="text-align: center;">Scheme of transfer learning for feature extraction following methodology from [27].</p></div>
 
@@ -190,10 +200,15 @@ In this second work, authors report results of the proposed technique over 11 da
 
 On the same research line of transfer learning, Yosinki et al. [28] published a work where they study the effect of another specific kind of transfer learning called transfer learning for fine-tunning. This kind of transfer learning is based on the idea of partially reuse a pre-trained deep model by randomizing the weights of n last layer and following the training procedure using a new dataset. So, layers that have not been randomized may encode a rich visual language that might be of interest for the new task and has not to be learnt again from scratch. In this work, authors study the impact of chosing the number of last layers to randomize (i.e., n), consequently chosing the number of initial layer to be kept in terms of trained weights.
 
+<div style="text-align:center">
+    <img src="/images/fine_tunning_layers_study.png" width="500">
+</div>  
+ <div><p style="text-align: center;">TODO .Source [28].</p></div>
+
 Going back to transfer learning for feature extraction and image embedding representations, one of the follwoing works in the field [29] focused on how should deep models be trained to allow better representations for tranfer learning. Authors define a set of factors that control the transferability of representations to different tasks, factors like network architecture, early stopping at training phase, dimensionality reduction in the embedding representaion, etc.
 
 <div style="text-align:center">
-    <img src="/images/factors_transferability.png" width="500">
+    <img src="/images/factors_transferability.png" width="800">
 </div>  
  <div><p style="text-align: center;">Scheme of transfer learning for feature extraction and some detailed factors of transferability defined at [29].</p></div>
 
