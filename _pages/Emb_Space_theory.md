@@ -183,10 +183,18 @@ On the same year (2014), a similar work titled CNN Features off-the-shell was pu
 
 In this second work, authors report results of the proposed technique over 11 datasets divided in 4 domains: Image classification, Object detection, Attribute detection and Visual instance retrieval. Reporting results of this methodology on 11 datasets instead of the previous 4 datasets supposes an important extension on experiments, providing more insights on the viability of using image embeddings when datasets have not enough images for training deep models directly. Furthermore, authors included a brief study about the usage of different layers to obtain the image embedding, where they conclude that last layers encode more appropiate image representations for applying transfer learning for feature extraction.
 
-On the same research line of transfer learning, Yosinki et al. [28] published a work where they study the effect of another specific kind of transfer learning called trasnfer learning for fine-tunning. This kind of transfer learning is based on the idea of reusing partially a pre-trained deep model by randomizing the weights of n last layer and following the training procedure using a new dataset. In this work, authors study the impact of chosing the number of last layers to randomize (i.e., n).
+On the same research line of transfer learning, Yosinki et al. [28] published a work where they study the effect of another specific kind of transfer learning called transfer learning for fine-tunning. This kind of transfer learning is based on the idea of partially reuse a pre-trained deep model by randomizing the weights of n last layer and following the training procedure using a new dataset. So, layers that have not been randomized may encode a rich visual language that might be of interest for the new task and has not to be learnt again from scratch. In this work, authors study the impact of chosing the number of last layers to randomize (i.e., n), consequently chosing the number of initial layer to be kept in terms of trained weights.
 
+Going back to transfer learning for feature extraction and image embedding representations, one of the follwoing works in the field [29] focused on how should deep models be trained to allow better representations for tranfer learning. Authors define a set of factors that control the transferability of representations to different tasks, factors like network architecture, early stopping at training phase, dimensionality reduction in the embedding representaion, etc.
 
+v style="text-align:center">
+    <img src="/images/factors_transferability.png" width="500">
+</div>  
+ <div><p style="text-align: center;">Scheme of transfer learning for feature extraction and some detailed factors of transferability defined at [29].</p></div>
 
+In this work, authors make use of 17 datasets to demonstrate, through experimental evidences, how factors should be set given a target task (i.e., labeled dataset different from the one used to pre-train the deep model).
+
+Last but not least, ...
 
 
 
