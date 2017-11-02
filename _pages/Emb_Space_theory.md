@@ -170,7 +170,7 @@ Word embeddings are trained using a one-hot vector encoding for words. This mean
 
 The motivation behind image embedding is as follows. Given a complex vision challenge with a large training set (e.g., ImageNet2012 with its 1,000 classes) and a powerful deep learning model (e.g., VGG19 architecture, with its 19 layers of depth), the model resulting from such training should contain a large and rich visual representation language. A language that could be used for other problems beyond the original training purpose (e.g., classifying indoor scenes), just by training and applying a non-deep learning classifier (e.g., a SVM) using the obtained vector representation. The process of reusing knowledge learnt on one model for another purpose is known as transfer learning. Specifically, the kind of transfer learning proposed here is called transfer learning for feature extraction (or feature representation transfer according to notation defined by Pans et al. [xx]).
 
-v style="text-align:center">
+<div style="text-align:center">
     <img src="/images/image-embedding-space.png" width="500">
 </div>  
  <div><p style="text-align: center;">Image embedding space encoding a rich visual representation language learnt by training over a large dataset.</p></div>
@@ -187,7 +187,7 @@ On the same research line of transfer learning, Yosinki et al. [28] published a 
 
 Going back to transfer learning for feature extraction and image embedding representations, one of the follwoing works in the field [29] focused on how should deep models be trained to allow better representations for tranfer learning. Authors define a set of factors that control the transferability of representations to different tasks, factors like network architecture, early stopping at training phase, dimensionality reduction in the embedding representaion, etc.
 
-v style="text-align:center">
+<div style="text-align:center">
     <img src="/images/factors_transferability.png" width="500">
 </div>  
  <div><p style="text-align: center;">Scheme of transfer learning for feature extraction and some detailed factors of transferability defined at [29].</p></div>
