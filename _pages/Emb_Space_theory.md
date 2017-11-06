@@ -45,7 +45,7 @@ After thorough training, such an embedding space contains a few interesting prop
 <div style="text-align:center">
     <img src="/images/wordtable.png" width="500">
 </div>
- <div><p style="text-align: center;">Nearest neighbors of words according to vector embeddings learnt by a neural net. Source [7].</p></div>
+ <div><p style="text-align: center;">Nearest neighbours of words according to vector embeddings learnt by a neural net. Source [7].</p></div>
 
 During training, the word embeddings W converge towards a language that describes which words are coherent in which contexts. Given the limited amount of dimensions (e.g., 300) when compared to the size of the input (thousands of words), each of those features is optimized to capture a portion of the complex information that defines textual coherency.
 
@@ -70,7 +70,7 @@ The skip-gram model generates a vector representation of words to capture the co
 </div>
  <div><p style="text-align: center;">Illustration of the training data for the skip-gram model. Source [12].</p></div>
 
-In the skip-gram model, each source word is inputted as a one-hot vector, and the output is a list (of length equal to the sliding window) of multinomial distributions. These distributions correspond to the expected probability of words appearing in the context. Training such a model is expensive, due to the number of input variables (as many as words) and the number of training examples. In [9] the authors of word2vec provides some tricks to speed up training, such as negative sampling and subsampling frequent words (see Part 2 of [12] for an explanation). See also [15] for a commented version of the original skip-gram code.
+In the skip-gram model, each source word is inputed as a one-hot vector, and the output is a list (of length equal to the sliding window) of multinomial distributions. These distributions correspond to the expected probability of words appearing in the context. Training such a model is expensive, due to the number of input variables (as many as words) and the number of training examples. In [9] the authors of word2vec provides some tricks to speed up training, such as negative sampling and subsampling frequent words (see Part 2 of [12] for an explanation). See also [15] for a commented version of the original skip-gram code.
 
 <div style="text-align:center">
     <img src="/images/skip-gram.png" width="500">
@@ -98,7 +98,7 @@ According to the authors of word2vec, skip-gram works well with little training 
 <a name='glove'></a>
 #### GloVe
 
-Following word2vec, Pennington et.al. published GloVe [19], a method to learn word embeddings following the same goal than word2vec, but using matrix factorization methods, which is more computationally efficient. Additionally, GloVe takes into account full co-occurrence information, instead of a sliding window; it builds a full co-occurrence matrix prior to the learning phase. Authors claim, somewhat controversially, that this provides a boost in performance. See [18] for more details on the differences. [20] provides another explanation on the difference, and includes code to train both GloVe and word2vec. See [21] for the original sources of GloVe, pretrained word vectors and some further details from the authors.
+Following word2vec, Pennington et.al. published GloVe [19], a method to learn word embeddings following the same goal than word2vec, but using matrix factorization methods, which is more computationally efficient. Additionally, GloVe takes into account full co-occurrence information, instead of a sliding window; it builds a full co-occurrence matrix prior to the learning phase. Authors claim, somewhat controversially, that this provides a boost in performance. See [18] for more details on the differences. [20] provides another explanation on the difference, and includes code to train both GloVe and word2vec. See [21] for the original sources of GloVe, pre-trained word vectors and some further details from the authors.
 
 <a name='regularities'></a>
 ### Word Regularities
@@ -173,55 +173,77 @@ Word embeddings are trained using a one-hot vector encoding for words. This mean
 </div>  
  <div><p style="text-align: center;">Image embedding space encoding a rich visual representation language.</p></div>
 
-The motivation behind image embedding is as follows. Given a complex vision challenge with a large training set (e.g., ImageNet2012 with its 1,000 classes) and a powerful deep learning model (e.g., VGG19 architecture, with its 19 layers of depth), the model resulting from such training should contain a large and rich visual representation language. A language that could be used for other problems beyond the original training purpose (e.g., classifying indoor scenes), just by training and applying a non-deep learning classifier (e.g., a SVM) using the obtained vector representation. This process of reusing knowledge learnt in one model for another task is known as transfer learning. In fact, this is known as an specific kind of transfer learning defined as feature representation transfer by Pans et al. [xx] (although in the literature, some people call it transfer learning for feature extraction). Pans et al. defined as source task the one used to originally train the model, and target task the one that takes advantage from knowledge already learnt by the trained model.
+The motivation behind image embedding is as follows. Given a complex vision challenge with a large training set (e.g., ImageNet2012 with its 1,000 classes) and a powerful deep learning model (e.g., VGG19 architecture, with its 19 layers of depth), the model resulting from such training should contain a large and rich visual representation language. A language that could be used for other problems beyond the original training purpose (e.g., classifying indoor scenes), just by training and applying a non-deep learning classifier (e.g., a SVM) using the obtained vector representation. This process of reusing knowledge learnt in one model for another task is known as transfer learning. In fact, this is known as an specific kind of transfer learning defined as feature representation transfer by Pans et al. [26] (although in the literature, some people call it transfer learning for feature extraction). Pans et al. defined as source task the one used to originally train the model, and target task the one that takes advantage from knowledge already learnt by the trained model.
 
 <div style="text-align:center">
     <img src="/images/pans_transfer_learning.png" width="500">
 </div>  
- <div><p style="text-align: center;">General scheme of transfer learning procedure. Source [xx]..</p></div>
+ <div><p style="text-align: center;">General scheme of transfer learning procedure. Source [26].</p></div>
 
-One of the first works exploring the extraction and reuse of deep network activations was DeCAF [26]. In this work, the AlexNet architecture (which includes 5 convolutional layers and 3 fully-connected) is trained for the ImageNet 2012 challenge (source task). Authors feed-forward pass images from target datasets through the pre-trained AlexNet architecture, extracting activations from previous to last layer (just before logits) as the new representation of images. These activations are an embedding representation that encodes image information based on the visual language learnt by the model. One of the target datasets used is the SUN-397 dataset, which contains scene images. Qualitatively, we can evaluate the advantage of encoding images based on the visual language previously learnt in the figure below. Classes are grouped quite well only by using the proposed encoding.
+One of the first works exploring the extraction and reuse of deep network activations was DeCAF [27]. In this work, the AlexNet architecture (which includes 5 convolutional layers and 3 fully-connected) is trained for the ImageNet 2012 challenge (source task). Authors feed-forward pass images from target datasets through the pre-trained AlexNet architecture, extracting activations from previous to last layer (just before logits) as the new representation of images. These activations are an embedding representation that encodes image information based on the visual language learnt by the model. One of the target datasets used is the SUN-397 dataset, which contains scene images. Qualitatively, we can evaluate the advantage of encoding images based on the visual language previously learnt in the figure below. Classes are grouped quite well only by using the proposed encoding.
 
 <div style="text-align:center">
     <img src="/images/decaf_img_emb_tsne.png" width="500">
 </div>  
- <div><p style="text-align: center;">Images from SUN-397 dataset colored based on their class. Their position corresponds to the embedding space previously learnt. Source [26].</p></div>
+ <div><p style="text-align: center;">Images from SUN-397 dataset colored based on their class. Their position corresponds to the embedding space previously learnt. Source [27].</p></div>
 
 The new representation of instances and its corresponding labels are used to feed the target dataset into simple linear classifier (SVM and/or Logistic Regression). Authors evaluate the process on 4 datasets, one for each of the following domains: object recognition, domain adaptation, subcategory recognition and scene recognition. Results showed that proposed methodology outperformed previous state-of-the-art approaches based on multi-kernel learning techniques with traditional hand-crafted features.
 
 <div style="text-align:center">
     <img src="/images/decaf_vs_surf.png" width="800">
 </div>  
- <div><p style="text-align: center;">Images from scissors class in the embedding space learnt by DeCAF against the embedding space generated with hand-crafted SURF features. Source [26].</p></div>
+ <div><p style="text-align: center;">Images from scissors class in the embedding space learnt by DeCAF against the embedding space generated with hand-crafted SURF features. Source [27].</p></div>
 
-A similar work titled "CNN Features off-the-shell" [27] was published the same year with the goal of extending the research line. Authors decided to make a deeper study of the methodology proposed by Donahue et al. [26], mainly by increasing the experimental evidences. The methodology proposed is analogous, using the Overfeat architecture (formed by 6 convolutional layers and 3 fully-connected), training on the ImageNet2012 dataset, using as embedding representation the activations from a fully-connected layer, and training a simpler linear SVM model for the target task. Nevertheless, authors included a couple of new variables to the process: usage of data augmentation (cropping and rotating samples) and the L2 normalization of the embedding representations.
+A similar work titled "CNN Features off-the-shell" [28] was published the same year with the goal of extending the research line. Authors decided to make a deeper study of the methodology proposed by Donahue et al. [27], mainly by increasing the experimental evidences. The methodology proposed is analogous, using the Overfeat architecture (formed by 6 convolutional layers and 3 fully-connected), training on the ImageNet2012 dataset, using as embedding representation the activations from a fully-connected layer, and training a simpler linear SVM model for the target task. Nevertheless, authors included a couple of new variables to the process: usage of data augmentation (cropping and rotating samples) and the L2 normalization of the embedding representations.
 
 <div style="text-align:center">
     <img src="/images/feature_extraction.png" width="800">
 </div>  
- <div><p style="text-align: center;">Scheme of transfer learning for feature extraction following methodology from [27].</p></div>
+ <div><p style="text-align: center;">Scheme of transfer learning for feature extraction following methodology from [28].</p></div>
 
 In this second work, authors report results of the proposed technique over 11 datasets divided in 4 domains: Image classification, Object detection, Attribute detection and Visual instance retrieval. Reporting results of this methodology on 11 datasets instead of the previous 4 datasets supposes an important extension on experiments, providing more insights on the goodness of using this methodology (in cases where datasets have not enough images for training deep models from scratch) against using hand-crafted features approaches. Additionally, authors included a brief study about the usage of different layers to obtain the image embedding, where they conclude that last layers encode more appropriate image representations for applying transfer learning for feature extraction.
 
-On the same research line of transfer learning, Yosinki et al. [28] published a work where they study the effect of another specific kind of transfer learning called transfer learning for fine-tunning. This kind of transfer learning is based on the idea of partially reuse a pre-trained deep model by keeping weights from some beginning layers and randomizing the rest of layer weights. So, layers that have not been randomized may encode a rich visual language that might be of interest for the new target task, avoiding to learn it again from scratch. In this work, authors study the impact of choosing a different number of last layers to randomize, keeping more visual language or less. This might seem an irrelevant decision by itself, but it is in fact a trade-off considering the fact that the visual language learnt in first layers is generic to the nature of images and the one in last layers is much more specific to the source tasks.
+On the same research line of transfer learning, Yosinki et al. [29] published a work where they study the effect of another specific kind of transfer learning called transfer learning for fine-tunning. This kind of transfer learning is based on the idea of partially reuse a pre-trained deep model by keeping weights from some beginning layers and randomizing the rest of layer weights. So, layers that have not been randomized may encode a rich visual language that might be of interest for the new target task, avoiding to learn it again from scratch. In this work, authors study the impact of choosing a different number of last layers to randomize, keeping more visual language or less. This might seem an irrelevant decision by itself, but it is in fact a trade-off considering the fact that the visual language learnt in first layers is generic to the nature of images and the one in last layers is much more specific to the source tasks.
 
 <div style="text-align:center">
     <img src="/images/fine_tunning_layers_study.png" width="600">
 </div>  
- <div><p style="text-align: center;">Accuracy results of different fine-tuned models. A and B are tasks (e.g., ImageNet2012). baseX refers to training the deep architecture from scratch using task X. XnY+ refers to the process of training the deep architecture using task Y, then keep the weights from n first layers and randomize the rest and, finally re-train the architecture using task X. If XnY does not have the + sign, it means that n first layer weights are frozen and can not be modified afterwards by the re-training process using task X. For more information check source [28].</p></div>
+ <div><p style="text-align: center;">Accuracy results of different fine-tuned models. A and B are tasks (e.g., ImageNet2012). baseX refers to training the deep architecture from scratch using task X. XnY+ refers to the process of training the deep architecture using task Y, then keep the weights from n first layers and randomize the rest and, finally re-train the architecture using task X. If XnY does not have the + sign, it means that n first layer weights are frozen and can not be modified afterwards by the re-training process using task X. For more information check source [29].</p></div>
 
-Going back to transfer learning for feature extraction, one interesting work was published in 2015 [29]. Authors of this work argue that usually we train a deep architecture to maximize the performance on a source task, however, someone could want to maximize the performance of the embedding representations for a particular target task. In that case, how should we train those embedding representations using source task to allow better representations for an specific target task?
+Going back to transfer learning for feature extraction, one interesting work was published in 2015 [30]. Authors of this work argue that usually we train a deep architecture to maximize the performance on a source task, however, someone could want to maximize the performance of the embedding representations for a particular target task. In that case, how should we train those embedding representations using source task to allow better representations for an specific target task?
 
-In order to bound the problem, authors define a set of factors that affect the transferability of representations between specific source and target tasks. These factors go from the deep architecture used, passing through the decision of applying or not early stopping, to making use of dimensionality reduction on the resulting embedding representation, among some other factors defined in [29]. In this work, authors make use of 17 datasets to demonstrate, through experimental evidences, how factors should be set given a source and target task (i.e., labeled dataset different from the one used to pre-train the deep model).
+In order to bound the problem, authors define a set of factors that affect the transferability of representations between specific source and target tasks. These factors go from the deep architecture used, passing through the decision of applying or not early stopping, to making use of dimensionality reduction on the resulting embedding representation, among some other factors defined in [30].
 
 <div style="text-align:center">
-    <img src="/images/factors_transferability.png" width="800">
+    <img src="/images/factors_transferability.png" width="700">
 </div>  
- <div><p style="text-align: center;">Scheme of transfer learning for feature extraction and some detailed factors of transferability defined at [29].</p></div>
+ <div><p style="text-align: center;">Scheme of transfer learning for feature extraction and some detailed factors of transferability defined at [30].</p></div>
 
-Last but not least, ... TODO: FNE
+In this work, authors make use of 17 datasets to demonstrate, through experimental evidences, how factors should be set given a source and target task (i.e., labeled dataset different from the one used to pre-train the deep model). These 17 datasets are ordered by authors based on the similitude with source task used (i.e., ImageNet2012). Based on how far the target task is from source task, authors also generalize an interesting table defining best practices relating some transfer factors.
 
+<div style="text-align:center">
+    <img src="/images/factors_datasets.png" width="1000">
+</div>  
+ <div><p style="text-align: center;">Range of 15 target tasks sorted categorically by their similarity to ImageNet12 object image classification task. Source [30].</p></div>
 
+<div style="text-align:center">
+    <img src="/images/factors_table.png" width="500">
+</div>  
+ <div><p style="text-align: center;">Best practices to transfer a ConvNet representation trained for the source task of ImageNet to a target tasks summarizing some factors. Source [30].</p></div>
+
+Last but not least, a recent work proposed to build an image embedding representation that extracts information from the entire network. While previous contributions to feature extraction propose embeddings based on a single layer of the network, in this work, authors propose a full-network
+embedding which successfully integrates convolutional and fully connected features, coming from all layers of a deep convolutional neural network.
+
+Since extracting all activations directly from convolutional layers is unfeasible due to high dimensionality, authors propose to apply an average pooling to reduce the positional dimensionality of convolutional feature activations to a single value. Then, convolutional layer activations and fully-connected ones are concatenated forming a raw embedding with a  reasonable dimensionality that encodes the visual language already learnt by the pre-trained deep model.
+
+<div style="text-align:center">
+    <img src="/images/fne_scheme.png" width="800">
+</div>  
+ <div><p style="text-align: center;">Overview of the proposed out-of-the-box full-network embedding generation workflow. Source [31].</p></div>
+
+Full-networks embedding introduce the leverage of information encoded in all features of the CNN (i.e., all features from the raw embedding) based on a couple of techniques, the feature standardization and a novel feature discretization methodology. The former provides context-dependent embeddings, which adapt the representations to the target task. The later reduces noise and regularizes the embedding space while keeping the size of the original representation language.
+
+The resultant full-network embedding is shown to outperform single-layer embeddings in several classification tasks. Specially, experiments show that the full-network is more robust that single-layer embeddings when an appropriate source model is not available.
 
 
 
@@ -281,17 +303,17 @@ Last but not least, ... TODO: FNE
 
 [25] [Le, Quoc, and Tomas Mikolov. "Distributed representations of sentences and documents." Proceedings of the 31st International Conference on Machine Learning (ICML-14). 2014.](https://arxiv.org/pdf/1405.4053.pdf)
 
-[xx] [Pan, Sinno Jialin, and Qiang Yang. "A survey on transfer learning." IEEE Transactions on knowledge and data engineering 22.10 (2010): 1345-1359.](https://www.cse.ust.hk/~qyang/Docs/2009/tkde_transfer_learning.pdf)
+[26] [Pan, Sinno Jialin, and Qiang Yang. "A survey on transfer learning." IEEE Transactions on knowledge and data engineering 22.10 (2010): 1345-1359.](https://www.cse.ust.hk/~qyang/Docs/2009/tkde_transfer_learning.pdf)
 
-[26] [Donahue, Jeff, et al. "Decaf: A deep convolutional activation feature for generic visual recognition." International conference on machine learning. 2014.](http://proceedings.mlr.press/v32/donahue14.pdf)
+[27] [Donahue, Jeff, et al. "Decaf: A deep convolutional activation feature for generic visual recognition." International conference on machine learning. 2014.](http://proceedings.mlr.press/v32/donahue14.pdf)
 
-[27] [Sharif Razavian, Ali, et al. "CNN features off-the-shelf: an astounding baseline for recognition." Proceedings of the IEEE conference on computer vision and pattern recognition workshops. 2014.](http://www.cv-foundation.org/openaccess/content_cvpr_workshops_2014/W15/papers/Razavian_CNN_Features_Off-the-Shelf_2014_CVPR_paper.pdf)
+[28] [Sharif Razavian, Ali, et al. "CNN features off-the-shelf: an astounding baseline for recognition." Proceedings of the IEEE conference on computer vision and pattern recognition workshops. 2014.](http://www.cv-foundation.org/openaccess/content_cvpr_workshops_2014/W15/papers/Razavian_CNN_Features_Off-the-Shelf_2014_CVPR_paper.pdf)
 
-[28] [Yosinski, Jason, et al. "How transferable are features in deep neural networks?." Advances in neural information processing systems. 2014.](http://papers.nips.cc/paper/5347-how-transferable-are-features-in-deep-neural-networks.pdf)
+[29] [Yosinski, Jason, et al. "How transferable are features in deep neural networks?." Advances in neural information processing systems. 2014.](http://papers.nips.cc/paper/5347-how-transferable-are-features-in-deep-neural-networks.pdf)
 
-[29] [Azizpour, Hossein, et al. "Factors of transferability for a generic convnet representation." IEEE transactions on pattern analysis and machine intelligence 38.9 (2016): 1790-1802.](https://arxiv.org/pdf/1406.5774.pdf)
+[30] [Azizpour, Hossein, et al. "Factors of transferability for a generic convnet representation." IEEE transactions on pattern analysis and machine intelligence 38.9 (2016): 1790-1802.](https://arxiv.org/pdf/1406.5774.pdf)
 
-[30] [Garcia-Gasulla, Dario, et al. "An Out-of-the-box Full-network Embedding for Convolutional Neural Networks." arXiv preprint arXiv:1705.07706 (2017).](https://arxiv.org/pdf/1705.07706)
+[31] [Garcia-Gasulla, Dario, et al. "An Out-of-the-box Full-network Embedding for Convolutional Neural Networks." arXiv preprint arXiv:1705.07706 (2017).](https://arxiv.org/pdf/1705.07706)
 
 ### Other uncited sources:
 
