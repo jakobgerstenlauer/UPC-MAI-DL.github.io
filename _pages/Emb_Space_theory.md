@@ -217,6 +217,66 @@ In this work, authors make use of 17 datasets to demonstrate, through experiment
 Last but not least, ...
 
 
+## Multimodal Embeddings
+### Introduction
+Think for a moment on the first time you went to the beach. What comes into your mind? Do you remember the scene?
+<div style="text-align:center">
+    <img src="/images/beach-1525755_1920.jpg" width="800">
+</div>  
+ <div><p style="text-align: center;">Browsing for happiness.</p></div>
+
+Do you remember the view?
+Did the waves sound loud?
+Was the water cold?
+Did it taste salty?
+How did it smell?
+Was it windy?
+Was it sunny?
+What about the sand?
+How did it feel?
+Could you get rid of it?
+
+When you think about the concept beach what comes into your mind?
+Is it just the image of the beach, or also the feel of the sand and the sound of the sea?
+
+**When our brain creates ideas or concepts usually we combine different channels of perception to form our mental image.** 
+In humans the senses convey most of the information.
+We talk about the traditional five senses:
+
+1. Sight (vision)
+2. Hearing (audition)
+3. Taste (gustation)
+4. Smell (olfaction)
+5. Touch (somatosensation)
+
+    But also about not so well known ones:
+
+6. Temperature (thermoception)
+7. Kinesthetic sense (proprioception)
+8. Pain (nociception)
+9. Balance (equilibrioception)
+10. Vibration (mechanoreception)
+11. Internal stimuly (e.g. the different chemoreceptors for detecting salt and carbon dioxide concentrations in the blood, or sense of hunger and sense of thirst)
+
+**If we want to represent really complex ideas, we need to include in the representation  information from different channels.**
+
+But, can it be the same representation?
+This is still an open question and an active field of research.
+
+### Image and Text Multimodal emmbeddings
+We can understand the language as a channel of information. Actually the channel would be the stream of sound, or the visual input of characters, but we can take a shortcut and use the string of characters itself as the input in the same way we use image pixel values as a representation of a visual input without getting into details on human visual information preprocessing.
+
+The input for an image and text multimodal emmbedding is a pair of an image and an associated string of text. The output would be a representation where both inputs are represented as a unique entity (or close enough). This common representation is (as usual) a multidimensional vector (or a point in the multimodal embedding space).
+
+Given that an image and a text are different modalities of information, their original representations are different as well. An image is codified as a 3D vector of pixel intensity values and the text as a string of characters. Thus, different embeddings are required to map different modalities to a common embedding space.
+
+The most common problem tackled in this setting is the image captioning. In this problem the input we have is an image and a short caption describing the image. We want to represent both as a unique (or close enough) vector. 
+
+<div style="text-align:center">
+    <img src="/images/mme_space.png" width="800">
+</div>  
+ <div><p style="text-align: center;">Multimodal emmbedding.</p></div>
+
 
 
 
@@ -285,6 +345,12 @@ Last but not least, ...
 [29] [Azizpour, Hossein, et al. "Factors of transferability for a generic convnet representation." IEEE transactions on pattern analysis and machine intelligence 38.9 (2016): 1790-1802.](https://arxiv.org/pdf/1406.5774.pdf)
 
 [30] [Garcia-Gasulla, Dario, et al. "An Out-of-the-box Full-network Embedding for Convolutional Neural Networks." arXiv preprint arXiv:1705.07706 (2017).](https://arxiv.org/pdf/1705.07706)
+
+
+
+
+
+[32] First cite
 
 ### Other uncited sources:
 
