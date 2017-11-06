@@ -15,6 +15,13 @@ Table of Contents:
     - [Word Regularities](#regularities)
     - [Doc2vec](#doc2vec)
 - [Image Embeddings](#imgemb)
+- [Multimodal Embeddings](#mme)
+    - [Introduction](#mme:intro)
+    - [Image and Text Multimodal Embeddings](#mme:imgtxt)
+        - [Two separate embeddings](#mme:2emb)
+        - [Pairwise Ranking Loss](mme:rank)
+        - [Available datasets for Image Captioning](mme:datasets)
+        - [Applications today](#mme:app) 
 - [Bibliography](#bib)
 
 
@@ -245,9 +252,9 @@ Full-networks embedding introduce the leverage of information encoded in all fea
 
 The resultant full-network embedding is shown to outperform single-layer embeddings in several classification tasks. Specially, experiments show that the full-network is more robust that single-layer embeddings when an appropriate source model is not available.
 
-
-## Multimodal Embeddings
-### Introduction
+<a name='mme'></a>
+## Multimodal Embeddings 
+### Introduction <a name='mme:intro'></a>
 Think for a moment on the first time you went to the beach. What comes into your mind? Do you remember the scene?
 <div style="text-align:center">
     <img src="/images/beach-1525755_1920.jpg" width="800">
@@ -278,7 +285,7 @@ We talk about the traditional five senses:
 4. Smell (olfaction)
 5. Touch (somatosensation)
 
-    But also about not so well known ones:
+But also about not so well known ones:
 
 6. Temperature (thermoception)
 7. Kinesthetic sense (proprioception)
@@ -292,23 +299,128 @@ We talk about the traditional five senses:
 But, can it be the same representation?
 This is still an open question and an active field of research.
 
-### Image and Text Multimodal emmbeddings
-We can understand the language as a channel of information. Actually the channel would be the stream of sound, or the visual input of characters, but we can take a shortcut and use the string of characters itself as the input in the same way we use image pixel values as a representation of a visual input without getting into details on human visual information preprocessing.
+<a name='mme:imgtxt'></a>
+### Image and Text Multimodal Embeddings
+We can understand the language as a channel of information. Actually, the channel would be the stream of sound, or the visual input of characters, but we can take a shortcut and use the string of characters itself as the input in the same way we use image pixel values as a representation of a visual input without getting into details on human visual information preprocessing.
 
-The input for an image and text multimodal emmbedding is a pair of an image and an associated string of text. The output would be a representation where both inputs are represented as a unique entity (or close enough). This common representation is (as usual) a multidimensional vector (or a point in the multimodal embedding space).
+The input for an image and text multimodal embedding is a pair of an image and an associated string of text. The output would be a representation where both inputs are represented as a unique entity (or close enough). This common representation is (as usual) a multidimensional vector (or a point in the multimodal embedding space).
 
 Given that an image and a text are different modalities of information, their original representations are different as well. An image is codified as a 3D vector of pixel intensity values and the text as a string of characters. Thus, different embeddings are required to map different modalities to a common embedding space.
 
-The most common problem tackled in this setting is the image captioning. In this problem the input we have is an image and a short caption describing the image. We want to represent both as a unique (or close enough) vector. 
+The most common problem tackled in this setting is the **image captioning**. In this problem the input we have is an image and a short caption describing the image. We want to represent both as a unique (or close enough) vector. To achieve it we train one embedding for the image and another embedding for the caption. We want hose embeddings to output the same (or similar) point in the multimodal embedding space while keeping unrelated images or captions embeddings far away. In order to achieve this representation we use a specific loss function: [Pairwise Ranking Loss](#mme:rank).
 
 <div style="text-align:center">
     <img src="/images/mme_space.png" width="800">
 </div>  
- <div><p style="text-align: center;">Multimodal emmbedding.</p></div>
+ <div><p style="text-align: center;">Multimodal embedding.</p></div>
 
 
+<a name='mme:2emb'></a>
+#### Two separate embeddings
+As introduced before, the most common way to learn a multimodal embedding is to learn two separate embeddings, for image and text. Using embeddings based on Neural Networks is very convenient since the error computed in the Ranking Loss imposed to the multimodal embedding can be easily back-propagated to the NN parameters of both embeddings.
+
+<div style="text-align:center">
+    <img src="/images/img-txt1.png" width="800">
+</div>  
+ <div><p style="text-align: center;">Example of image and text embeddings to form a multimodal embedding[41].</p></div>
+
+These embeddings can be fully trained on the image captioning dataset or only partially. Given the sizes of the [publicly available datasets](#mme:datasets) on Image Captioning (and the difficulty on building one) usually the image embedding is pre-trained on an image classification task (ImageNet) and partially or completely fine-tuned on the multimodal embedding. Similarly happens for the text embedding but in this case it is more usual to fully train the embedding since its complexity use to be several orders of magnitude lower.
+
+For **image embeddings** the CNN embedding is the "standard". Different works propose different variations on the previously explained versions of [image embeddings](#imgemb), but all share the same basic methodology:
+1. Define a CNN architecture
+2. Pre-train the CNN on ImageNet
+3. Use CNN features as an initial image embedding. (There will be no more training on CNN)
+4. Add a trainable transformation from this image embedding to the multimodal embedding. (Can be one or several NN layer)
+
+<div style="text-align:center">
+    <img src="/images/img-txt2.png" width="800">
+</div>  
+ <div><p style="text-align: center;">Example of image embedding using the Full Network Embedding (FNE) to form a multimodal embedding [41].</p></div>
+
+Most usually in step 3 only the features from the last layer of the CNN are selected, although any kind of representation can be used in this step. In the examples we use the Full Network Embedding (FNE) to form a multimodal embedding [41], a solution shown to improve results over a one-layer CNN embedding.
+
+In step 4 different variants have been proposed. Word2VisualVec [42] uses no transformation in this point so the multimodal embedding space coincide with the visual embedding. The most common approach is to allow some adaptation using an affine transformation (i.e., a fully connected layer without non-linear activation function). Using a transformation allow for different dimensionalities for the multimodal space and the image embedding.
+
+The **text embedding** is conceptually similar to the [Doc2vec](#doc2vec) explained previously but present some additional difficulties:
+- The whole text need to be encoded in a single vector
+- The length of the text can be variable.
+- There may be rare words in the vocabulary used in the text (difficult to learn their meaning from few examples)
+- We do not have a large corpus to train on.
+
+Thus, the solutions usually implemented are different. In this case the text embedding is most usually obtained through a Recurrent Neural Network. The text is feeded to the network, one work at every time step and the hidden state of the network at the last time step is used as the text embedding. This approach can deal without problems with texts of different length. Gated Recurrent Units (GRU) Neural Network are a common choice since they obtain a high performance while being less complex than Long Short Term Memories (LSTM).
+
+<div style="text-align:center">
+    <img src="/images/img-txt3.png" width="800">
+</div>  
+ <div><p style="text-align: center;">Example of **image embedding** using a Gated Recurrent Units Neural Network to form a multimodal embedding [41].</p></div>
+
+A previous step required is to map the vocabulary into GRU's input vectors. A lookup table (i.e., a word dictionary with one-hot vector encoding) can be enough, but other encodings, like the ones explained in [word2vec](#word2vec), help to achieve better results.
+
+It is possible to add a transformation between the text embedding of the last hidden state of the RNN and the multimodal embedding. This transformation can be one or several fully connected layers and allow more flexibility in the text embedding part. However, GRU NN already have a high capacity to adapt (and we can increase it increasing the number of neurons) so such a transformation would be mainly motivated to allow for a dimensionality change between GRU hidden state and the MME.
+
+<div style="text-align:center">
+    <img src="/images/FN_multimodal.png" width="800">
+</div>  
+ <div><p style="text-align: center;">Full schema of a multimodal embedding [41]. The parts in orange are trained for the multimodal embedding.</p></div>
+
+<a name='mme:rank'></a>
+#### Pairwise Ranking Loss
+As introduced before, our objective is to obtain a common representation for inputs from different channels in the multimodal embedding space. To achieve it we define a loss in the MME space that forces associated items to be represented close to each other and not related items to be **farther**. It is important to notice that we do not want not related items to very far away, just farther than the related one. We still want other similarities arising from the embeddings to be encoded in the position of samples in the embedding space. To force it we use a pairwise ranking loss. Following we explain it for the example case of image captioning, for which we have only 2 different channels.
+
+In this case the training procedure consist on the optimization of the pairwise ranking loss between the correct image-caption pair and a random pair. Assuming that a correct pair of elements should be closer in the multimodal space than a random pair. The loss can be formally defined as follows:
+
+<div style="text-align:center">
+    <img src="/images/Pairwise_ranking_loss.jpg" width="600">
+</div>  
+ 
+
+Where **_i_** is an image vector, **_c_** is its correct caption vector, and _**i**<sub>k</sub>_ and _**c**<sub>k</sub>_ are sets of random images and captions respectively. The operator _s(·,·)_ defines the cosine similarity. This formulation includes a margin term _alpha_ to avoid pulling the image and caption closer once their distance is smaller than the margin. This makes the optimization focus on distant pairs instead of improving the ones that are already close.
+
+Other losses can be used to define multimodal embeddings with different properties. An interesting work is _Order-Embeddings of Images and Language_ [43]. Here authors propose an **Order Embedding** to represent hierarchy using an order-violation penalty. Authors apply it at the image captioning problem considering that images are in a lower hierarchy level of the corresponding captions.
 
 
+<a name='mme:datasets'></a>
+#### Available datasets for Image Captioning
+The most commonly used datasets in image captioning are:
+
+- The [Flickr8K](http://nlp.cs.illinois.edu/HockenmaierGroup/8k-pictures.html) dataset [37] contains 8,000 hand-selected images from Flickr, depicting actions and events. Five correct captions are provided for each image.
+- The [Flickr30K](http://shannon.cs.illinois.edu/DenotationGraph/) dataset [38] is an extension of Flickr8K. It contains 31,783 photographs of everyday activities, events and scenes. Five correct captions are provided for each image.
+- The [MSCOCO](http://cocodataset.org/#download) dataset [39] includes images of everyday scenes containing common objects in their natural context. For captioning, 82,783 images and 413,915 captions are available for training, while 40,504 images and 202,520 captions are available for validation. Captions from the test set are not publicly available.
+- The [SPEECH-COCO](http://cocodataset.org/#download) dataset [40] is an extension of MSCOCO where speech is added to image and text. Speech captions are generated using text-to-speech (TTS) synthesis resulting in 616,767 spoken captions (more than 600h) paired with images.
+
+Their main drawback is the size of the dataset (compared to the million-images labelled datasets for image classification) and the difficulty to obtain sentences of the same style from crowd sourcing.
+
+<a name='mme:app'></a>
+#### Applications today
+The multimodal embeddings obtained encode simultaneously the visual information obtained from the image and semantic information obtained from the text. Numerous problems can benefit from this embedding richer than a single image or text embedding. The first and "obvious" application is the symmetric problem of caption/image retrieval. 
+
+<div style="text-align:center">
+    <img src="/images/prob2.png" width="400">
+</div>  
+ <div><p style="text-align: center;">**Caption Retrieval**. A.K.A. Image Annotation.
+ For a given image, find the caption that best describe the image from a set of defined captions.</p></div>
+
+<div style="text-align:center">
+    <img src="/images/prob1.png" width="400">
+</div>  
+ <div><p style="text-align: center;">**Image Retrieval**. A.K.A. Image Search.
+ For a given caption, find the image that is best described by the caption from a set of given images.</p></div>
+
+Once build the multimodal embedding space representing the query image(caption) and all the captions(images) in the set to look into, we just need to find the nearest neighbour.
+
+It has been shown that multimodal embeddings are capable to encode multimodal linguistic regularities on visual and textual features similar to the [word regularities](#regularities) explained previously.
+
+<div style="text-align:center">
+    <img src="/images/car-red.png" width="600">
+</div>  
+ <div><p style="text-align: center;">Example of multimodal linguistic regularities.</p></div>
+
+Nowadays multimodal embeddings are the first step for several successful **image caption generation** approaches [32],[33],[34]. In this case the multimodal embedding is used as a representation of the query image to feed in a text generation network. Results indicate that linguistic information encoded in this image representation help produce "better" captions.
+
+<div style="text-align:center">
+    <img src="/images/Caption_generation_samples.jpg" width="800">
+</div>  
+ <div><p style="text-align: center;">Example of captions generated from a multimodal embedding [32].</p></div>
 
 
 <a name='bib'></a>
@@ -376,11 +488,29 @@ The most common problem tackled in this setting is the image captioning. In this
 
 [31] [Garcia-Gasulla, Dario, et al. "An Out-of-the-box Full-network Embedding for Convolutional Neural Networks." arXiv preprint arXiv:1705.07706 (2017).](https://arxiv.org/pdf/1705.07706)
 
+[32] [Ryan Kiros, Ruslan Salakhutdinov, and Richard S Zemel. Unifying visual-semantic embeddings with multimodal neural language models. arXiv preprint arXiv:1411.2539, 2014.](https://arxiv.org/abs/1411.2539)
 
+[33] [Ryan Kiros, Ruslan Salakhutdinov, and Rich Zemel. Multimodal neural language models. In Proceedings of the 31st International Conference on Machine Learning (ICML-14), pages 595–603, 2014.](http://www.cs.toronto.edu/~rkiros/papers/mnlm2014.pdf)
 
+[34] [Qing Sun, Stefan Lee, and Dhruv Batra. Bidirectional beam search: Forward-backward inference in neural sequence models for fill-in-the-blank image captioning. arXiv preprint arXiv:1705.08759, 2017.](https://arxiv.org/abs/1705.08759)
 
+[35] [Benjamin Klein, Guy Lev, Gil Sadeh, and Lior Wolf. Associating neural word embeddings with deep image representations using fisher vectors. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, pages 4437–4446, 2015.](http://ieeexplore.ieee.org/document/7299073/)
 
-[32] First cite
+[36] [Karen Simonyan and Andrew Zisserman. Very deep convolutional networks for large-scale image recognition. arXiv preprint arXiv:1409.1556, 2014.](http://www.robots.ox.ac.uk/~vgg/research/very_deep/)
+
+[37] [Cyrus Rashtchian, Peter Young, Micah Hodosh, and Julia Hockenmaier. Collecting image annotations using amazon’s mechanical turk. In Proceedings of the NAACL HLT 2010 Workshop on Creating Speech and Language Data with Amazon’s Mechanical Turk, pages 139–147. Association for Computational Linguistics, 2010.](http://nlp.cs.illinois.edu/HockenmaierGroup/8k-pictures.html)
+
+[38] [Peter Young, Alice Lai, Micah Hodosh, and Julia Hockenmaier. From image descriptions to visual denotations: New similarity metrics for semantic inference over event descriptions. Transactions of the Association for Computational Linguistics, 2:67–78, 2014.](http://shannon.cs.illinois.edu/DenotationGraph/)
+
+[39] [Tsung-Yi Lin, Michael Maire, Serge Belongie, Lubomir Bourdev, Ross Girshick, James Hays, Pietro Perona, Deva Ramanan, C Lawrence Zitnick, and Piotr Dollar. Microsoft coco: Common objects in context. arXiv preprint arXiv:1405.0312, 2014.](http://cocodataset.org/#download)
+
+[40] [Havard, William, Laurent Besacier, and Olivier Rosec. "SPEECH-COCO: 600k Visually Grounded Spoken Captions Aligned to MSCOCO Data Set." arXiv preprint arXiv:1707.08435 (2017).](https://arxiv.org/abs/1707.08435)
+
+[41] [Vilalta, Armand, et al. "Full-Network Embedding in a Multimodal Embedding Pipeline." Proceedings of the 2nd Workshop on Semantic Deep Learning (SemDeep-2). 2017.](http://www.aclweb.org/anthology/W/W17/W17-7304.pdf)
+
+[42] [Dong, Jianfeng, Xirong Li, and Cees GM Snoek. "Word2VisualVec: Cross-media retrieval by visual feature prediction." arXiv preprint arXiv:1604.06838 (2016).](https://pdfs.semanticscholar.org/de22/8875bc33e9db85123469ef80fc0071a92386.pdf)
+
+[43] [Vendrov, Ivan, et al. "Order-embeddings of images and language." arXiv preprint arXiv:1511.06361 (2015).](https://arxiv.org/abs/1511.06361)
 
 ### Other uncited sources:
 
