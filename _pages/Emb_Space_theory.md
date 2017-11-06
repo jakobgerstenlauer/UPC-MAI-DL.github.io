@@ -15,6 +15,14 @@ Table of Contents:
     - [Word Regularities](#regularities)
     - [Doc2vec](#doc2vec)
 - [Image Embeddings](#imgemb)
+    - [Single layer embeddings](#single-layer-emb)
+        - [DeCAF](#decaf)
+        - [CNN Features off-the-shell](#feat-shell)
+    - [Studies of transferability](#stud-trans)
+        - [Transferability of features](#trans-feat)
+        - [Factors of transferability](#fact-trans)
+    - [Multiple layer embeddings](#mult-layer-emb)
+        - [Full-Network embedding](#full-net-emb)
 - [Bibliography](#bib)
 
 
@@ -180,6 +188,12 @@ The motivation behind image embedding is as follows. Given a complex vision chal
 </div>  
  <div><p style="text-align: center;">General scheme of transfer learning procedure. Source [26].</p></div>
 
+<a name='single-layer-emb'></a>
+### Single layer embeddings
+
+<a name='decaf'></a>
+#### DeCAF
+
 One of the first works exploring the extraction and reuse of deep network activations was DeCAF [27]. In this work, the AlexNet architecture (which includes 5 convolutional layers and 3 fully-connected) is trained for the ImageNet 2012 challenge (source task). Authors feed-forward pass images from target datasets through the pre-trained AlexNet architecture, extracting activations from previous to last layer (just before logits) as the new representation of images. These activations are an embedding representation that encodes image information based on the visual language learnt by the model. One of the target datasets used is the SUN-397 dataset, which contains scene images. Qualitatively, we can evaluate the advantage of encoding images based on the visual language previously learnt in the figure below. Classes are grouped quite well only by using the proposed encoding.
 
 <div style="text-align:center">
@@ -194,6 +208,9 @@ The new representation of instances and its corresponding labels are used to fee
 </div>  
  <div><p style="text-align: center;">Images from scissors class in the embedding space learnt by DeCAF against the embedding space generated with hand-crafted SURF features. Source [27].</p></div>
 
+<a name='feat-shell'></a>
+#### CNN Features off-the-shell
+
 A similar work titled "CNN Features off-the-shell" [28] was published the same year with the goal of extending the research line. Authors decided to make a deeper study of the methodology proposed by Donahue et al. [27], mainly by increasing the experimental evidences. The methodology proposed is analogous, using the Overfeat architecture (formed by 6 convolutional layers and 3 fully-connected), training on the ImageNet2012 dataset, using as embedding representation the activations from a fully-connected layer, and training a simpler linear SVM model for the target task. Nevertheless, authors included a couple of new variables to the process: usage of data augmentation (cropping and rotating samples) and the L2 normalization of the embedding representations.
 
 <div style="text-align:center">
@@ -203,12 +220,21 @@ A similar work titled "CNN Features off-the-shell" [28] was published the same y
 
 In this second work, authors report results of the proposed technique over 11 datasets divided in 4 domains: Image classification, Object detection, Attribute detection and Visual instance retrieval. Reporting results of this methodology on 11 datasets instead of the previous 4 datasets supposes an important extension on experiments, providing more insights on the goodness of using this methodology (in cases where datasets have not enough images for training deep models from scratch) against using hand-crafted features approaches. Additionally, authors included a brief study about the usage of different layers to obtain the image embedding, where they conclude that last layers encode more appropriate image representations for applying transfer learning for feature extraction.
 
+<a name='stud-trans'></a>
+### Studies of transferability
+
+<a name='trans-feat'></a>
+#### Transferability of features
+
 On the same research line of transfer learning, Yosinki et al. [29] published a work where they study the effect of another specific kind of transfer learning called transfer learning for fine-tunning. This kind of transfer learning is based on the idea of partially reuse a pre-trained deep model by keeping weights from some beginning layers and randomizing the rest of layer weights. So, layers that have not been randomized may encode a rich visual language that might be of interest for the new target task, avoiding to learn it again from scratch. In this work, authors study the impact of choosing a different number of last layers to randomize, keeping more visual language or less. This might seem an irrelevant decision by itself, but it is in fact a trade-off considering the fact that the visual language learnt in first layers is generic to the nature of images and the one in last layers is much more specific to the source tasks.
 
 <div style="text-align:center">
     <img src="/images/fine_tunning_layers_study.png" width="600">
 </div>  
  <div><p style="text-align: center;">Accuracy results of different fine-tuned models. A and B are tasks (e.g., ImageNet2012). baseX refers to training the deep architecture from scratch using task X. XnY+ refers to the process of training the deep architecture using task Y, then keep the weights from n first layers and randomize the rest and, finally re-train the architecture using task X. If XnY does not have the + sign, it means that n first layer weights are frozen and can not be modified afterwards by the re-training process using task X. For more information check source [29].</p></div>
+
+<a name='fact-trans'></a>
+#### Factors of transferability
 
 Going back to transfer learning for feature extraction, one interesting work was published in 2015 [30]. Authors of this work argue that usually we train a deep architecture to maximize the performance on a source task, however, someone could want to maximize the performance of the embedding representations for a particular target task. In that case, how should we train those embedding representations using source task to allow better representations for an specific target task?
 
@@ -231,6 +257,12 @@ In this work, authors make use of 17 datasets to demonstrate, through experiment
 </div>  
  <div><p style="text-align: center;">Best practices to transfer a ConvNet representation trained for the source task of ImageNet to a target tasks summarizing some factors. Source [30].</p></div>
 
+<a name='mult-layer-emb'></a>
+### Multiple layer embeddings
+
+<a name='full-net-emb'></a>
+### Full-Network embedding
+
 Last but not least, a recent work proposed to build an image embedding representation that extracts information from the entire network. While previous contributions to feature extraction propose embeddings based on a single layer of the network, in this work, authors propose a full-network
 embedding which successfully integrates convolutional and fully connected features, coming from all layers of a deep convolutional neural network.
 
@@ -246,6 +278,38 @@ Full-networks embedding introduce the leverage of information encoded in all fea
 The resultant full-network embedding is shown to outperform single-layer embeddings in several classification tasks. Specially, experiments show that the full-network is more robust that single-layer embeddings when an appropriate source model is not available.
 
 
+
+
+
+
+
+
+
+
+
+### Other multimodal combinations
+
+Focusing in an extended version of multimodal embeddings, Kaiser et al. [xx] present a multimodal setting called MultiModel, that yields good results on a variety of tasks of different nature. Although previous multimodal settings work with 2 modalities, MultiModel works with 4 modalities. It is capable of treating single tasks regarding text, images, audio, categorical data or combinations of them.
+
+Authors follow a 2 steps strategy:
+
+ - First step consist of unifying all nature representations through a set of modality-specific sub-networks. These sub-networks are called modality nets because they are specific to each modality (e.g., image, text or audio) and define transformations between these external domains and a unified representation. Modality nets are designed to be computationally minimal, authors only want to obtain a rich feature representation from these nets, letting the major computation effort on the second step. 
+
+ - Second step consist on a trainable model capable of dealing with all embedding representations as input. This model is formed by three main blocks: Encoder, Input-Output Mixer and Decoder. The Encoder codifies the input embeddings from all modality nets and outputs the encoded input. The Input-Output Mixer takes as input the encoded input and decoded output to evaluate the encoded output. Lastly, the Decoder takes as input the encoded input and encoded output to generate the decoded output. These three blocks architecture is analogous to an state machine, where there is an input managed by the Encoder block, and output managed by the Decoder block and a state managed by the I/O Mixer.
+
+<div style="text-align:center">
+    <img src="/images/omlta_overview.png" width="500">
+</div>  
+ <div><p style="text-align: center;">The MultiModel, with modality-nets, an Encoder, an I/O Mixer, and an autoregressive Decoder. Source [xx].</p></div>
+
+The MultiModel core blocks (i.e., Encoder, I/O Mixer and Decoder) are composed by smaller blocks: Convolutional blocks, Attentional blocks and Mixture-of-Experts blocks. All blocks provide a different set of properties. Convolutional and Attentional blocks are trivial: a Convolutional block performs local computation while an Attentional block allows to focus on content based on its position. However, a Mixture-of-Experts block may not be that trivial. It is formed by a set of simple feed-forward neural networks (experts) and a trainable gating network responsible of selecting a sparse combination of experts based on the input. So, this block is responsible of specific knowledge computation.
+
+<div style="text-align:center">
+    <img src="/images/omlta_blocks.png" width="1000">
+</div>  
+ <div><p style="text-align: center;">Architecture of the MultiModel divided by blocks. Source [xx].</p></div>
+
+Authors demonstrate, for the first time, that a single deep learning model can jointly learn a number of large-scale tasks from multiple domains. A really interesting feature of that model is that we can extract a 4-modal embedding representation from the encoding block to work with.
 
 
 
