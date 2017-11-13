@@ -98,7 +98,7 @@ Recurrent Neural Networks (lecturer: Javier Bejar)
 Embedding spaces (lecturer: Dario Garcia)
 
 - [Theory](emb-space-theory)
-- [Lab guided]
+- [Lab guided](embedding-spaces-lab-guided)
 - [Lab autonomous]
 
 
