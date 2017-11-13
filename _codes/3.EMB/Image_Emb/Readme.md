@@ -20,7 +20,7 @@ scp vgg16_weights_tf_dim_ordering_tf_kernels.h5 USERNAME@dt01.bsc.es:.keras/mode
 On the other hand, we have to also download MIT-67 datatset and copy it into GPFS:
 
 ```
-wget URL/mit67_img_train.tar.gz
+wget http://147.83.200.110:8000/static/ferran/mit67_img_train.tar.gz
 scp mit67_img_train.tar.gz USERNAME@dt01.bsc.es:.
 ```
 

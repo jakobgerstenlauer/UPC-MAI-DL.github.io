@@ -39,22 +39,24 @@ sys.stdout.flush()
 # Define a custom model that given an input, outputs activations from requested layer.
 model = Model(input=base_model.input, output=base_model.get_layer('fc2').output)
 
-# Defining variables where to save dataset embeddings and labels
+# Defining variables where to iteratively save dataset embeddings and labels.
 dataset_emb = np.zeros((0,4096))
 dataset_lab = []
 
 print 'Processing image embeddings through batches of 10 images per step.'
 sys.stdout.flush()
+# Create a list containing all image_paths. 
 image_files = glob('~/mit67_img_train/*/*')
 step = 0
 tot = len(image_files)/10
 if len(image_files)%10 > 0:
     tot += 1
+# Batching loop.
 for x_batch, y_batch in input_pipeline(image_files, 10):
     t0 = time.time()
     # Preprocessing input images for the vgg16 model.
     x = preprocess_input(x_batch)
-    # Obtain the embeddings of current batch of images
+    # Obtain the embeddings of current batch of images.
     batch_emb = model.predict(x)
     dataset_emb = np.concatenate((dataset_emb, batch_emb))
     dataset_lab += y_batch
