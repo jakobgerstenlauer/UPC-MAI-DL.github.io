@@ -23,6 +23,8 @@ for idx, _lab in enumerate(_uniq):
     lab_range[_lab] = [offset, offset+part_emb.shape[0]]
     offset += part_emb.shape[0]
 print 'subsets_emb shape:', subsets_emb.shape
+
+# Apply a dimensionality reduction technique to visualize 2 dimensions.
 vis_matrix = TSNE(n_components=2).fit_transform(subsets_emb)
 
 # Using matplotlib to create the plot and show it!
