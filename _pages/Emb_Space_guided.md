@@ -309,3 +309,13 @@ Tutorial of word2vec using TensorFlow: [Vector Representations of Words](https:/
 ### Gensim
 
 [Official gensim tutorials](https://radimrehurek.com/gensim/tutorial.html)
+
+### Multimodal embeddings
+[GitHub of Jamie Ryan Kiros](https://github.com/ryankiros)
+**visual-semantic-embedding** Implementation of the image-sentence embedding method described in "Unifying Visual-Semantic Embeddings with Multimodal Neural Language Models"
+**multimodal-neural-language-models** A bare-bones NumPy implementation of "Multimodal Neural Language Models" (Kiros et al, ICML 2014)
+**skip-thoughts** Sent2Vec encoder and training code from the paper "Skip-Thought Vectors"
+**neural-storyteller** A recurrent neural network for generating little stories about images
+
+[Pinterest Multimodal Dataset ToolBox](https://github.com/mjhucla/P-Multimodal-Dataset-Toolbox)
+This is a toolbox to download and manage the released part of the Pinterest40M multimodal dataset introduced in the paper [Training and Evaluating Multimodal Word Embeddings with Large-scale Web Annotated Images](https://papers.nips.cc/paper/6590-training-and-evaluating-multimodal-word-embeddings-with-large-scale-web-annotated-images). More information can be found on the [Project Page](http://www.stat.ucla.edu/~junhua.mao/multimodal_embedding.html).
