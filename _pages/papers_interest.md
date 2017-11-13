@@ -68,6 +68,9 @@ The next four papers should be read and reviewed together
 
 - [Zou, Will Y., et al. "Bilingual word embeddings for phrase-based machine translation." Proceedings of the 2013 Conference on Empirical Methods in Natural Language Processing. 2013.](http://ai.stanford.edu/~wzou/emnlp2013_ZouSocherCerManning.pdf)
 
+- [Szegedy, Christian, et al. "Intriguing properties of neural networks." arXiv preprint arXiv:1312.6199 (2013).](https://arxiv.org/pdf/1312.6199.pdf) 
+Limitations of neuron semantics, and introduction to adversarial examples.
+
 ### Multimodal Approaches
 
 - [Karpathy, Andrej, and Li Fei-Fei. "Deep visual-semantic alignments for generating image descriptions." Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition. 2015.](https://arxiv.org/pdf/1412.2306v2.pdf)
