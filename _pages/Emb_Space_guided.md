@@ -130,27 +130,8 @@ from glob import glob
 
 # Define a dataset iterator by batches of an specific size.
 def input_pipeline(image_files, batch_size):
-    end_flag = False
-    for n in range(len(image_files)):
-        x_batch = np.zeros((0,224,224,3))
-        y_batch = []
-        for i in range(batch_size):
-            try:
-                img_path = image_files.pop(0)
-            except IndexError:
-                end_flag = True
-                break
-            img = image.load_img(img_path, target_size=(224, 224))
-            x = image.img_to_array(img)
-            x = np.expand_dims(x, axis=0)
-            x_batch = np.concatenate((x_batch, x), axis=0)
-            y = img_path.split('/')[-2]
-            y_batch.append(y)
-        if end_flag:
-            if batch.shape[0]>0:
-                yield x_batch, y_batch
-        else:
-            yield x_batch, y_batch
+    ...
+    yield x_batch, y_batch
 
 # Create a list containing all image_paths. 
 image_files = glob('~/mit67_img_train/*/*')
