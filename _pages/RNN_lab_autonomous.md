@@ -10,6 +10,7 @@ prediction example that we used in the previous session.
 
 Deliver your report before **December 22th** using the raco.
 
+
 In the original example we predicted one step of the future wind (next 15 minutes)
 using a window of previous measurements. We can extend the problem in different
 ways:
