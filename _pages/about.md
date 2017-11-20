@@ -18,8 +18,10 @@ The Table of Contents:
     - [Autonomous Laboratory](#autonomous)
 - [Course Evaluation](#evaluation)
 - [Lessons](#lessons)
-    - [#1 Basic Neural Nets and Conv Nets](#mlp_convnets)
+    - [#1 Feedforward Nets and Conv Nets](#mlp_convnets)
     - [#2 Recurrent Neural Nets](#rnn_nets)
+    - [#3 Embedding spaces](#embeddings)
+- [Code and Lab Resources](#code)
 - [Papers of interest](#papers)
 
 
@@ -44,13 +46,13 @@ This course provides an applied approach to Deep Learning. The course is structu
 <a name='theory'></a>
 #### Theory
 
-The theory part of a block provides a review of the basic concepts of Deep Learning, but is intended only as an introduction. Multiple references are given in the theory section, and the interested student should read further from those references to learn more details of the introduced topics. Beyond the cited works, there are lots of materials online of Deep Learning, although it is recommended to read more than one source, as many sources explain only one aspect or interpretation of a certain topic. A good reference for most topics is the "Deep Learning Book" by Ian Goodfellow and Yoshua Bengio and Aaron Courville.
+The theory part of a block provides a review of the basic concepts of Deep Learning, but is intended only as an introduction. Multiple references are given in the theory section, and the interested student should read further from those references to learn more details of the introduced topics. Beyond the cited works, there are lots of materials online of Deep Learning, although it is recommended to read more than one source, as many sources explain only one aspect or interpretation of a certain topic. A good reference for most topics is the "Deep Learning Book" by Ian Goodfellow and Yoshua Bengio and Aaron Courville. There is a physical copy of the book in the UPC library, and it can also be found online.
 
 
 <a name='guided'></a>
 #### Guided Laboratory
 
-The guided laboratory provides working code that can serve as a starting point for students. These codes are well commented, and show a variety of algorithmic solutions. The guided laboratory will be reviewed and discussed in class with students.
+The guided laboratory provides working code that can serve as a starting point for students. These codes are commented, and show a variety of algorithmic solutions. The guided laboratory will be reviewed and discussed in class with students.
 
 <a name='autonomous'></a>
 #### Autonomous Laboratory
@@ -76,18 +78,38 @@ The experimental evaluation will be based on reports written by the student for 
 
 <a name='mlp_convnets'></a>
 #### Lesson 1
-Basic Neural Nets and Conv Nets
+Feedforward Nets and Conv Nets (lecturer: Dario Garcia)
 - [Theory](mlp-convnets-theory/)
 - [Lab guided](mlp-convnets-lab-guided/)
 - [Lab autonomous](mlp-convnets-lab-autonomous/)
 
+
 <a name='rnn_nets'></a>
 #### Lesson 2
-Recurrent Neural Networks
+Recurrent Neural Networks (lecturer: Javier Bejar)
 
 - [Theory](rnn-theory)
 - [Lab guided](rnn-lab-guided)
 - [Lab autonomous](rnn-lab-autonomous)
+
+
+<a name='embeddings'></a>
+#### Lesson 3
+Embedding spaces (lecturer: Dario Garcia)
+
+- [Theory](emb-space-theory)
+- [Lab guided](embedding-spaces-lab-guided)
+- [Lab autonomous]
+
+
+<a name='code'></a>
+### Code and Lab Resources
+
+The codes used in the lab sessions can be downloaded from the following locations:
+- [Lesson 1: Feedforward Neural Nets and Conv Nets](https://github.com/UPC-MAI-DL/UPC-MAI-DL.github.io/tree/master/_codes/1.FNN-CNN)
+- [Lesson 2: Recurrent Neural Networks](https://github.com/UPC-MAI-DL/UPC-MAI-DL.github.io/tree/master/_codes/2.RNN)
+
+
 
 <a name='papers'></a>
 ### Papers of Interest
