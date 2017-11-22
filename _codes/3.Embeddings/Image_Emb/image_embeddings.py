@@ -30,6 +30,9 @@ def input_pipeline(image_files, batch_size):
         else:
             yield x_batch, y_batch
 
+if len(sys.argv) == 1:
+    print 'usage: image_embeddings.py fc1'
+    sys.exit()
 
 #Read the layer name from the command line (it is the second argument, the first argument is the scriptname).
 layer_name=sys.argv[1]
