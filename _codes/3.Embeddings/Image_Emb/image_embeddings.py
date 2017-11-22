@@ -46,13 +46,14 @@ dataset_lab = []
 print 'Processing image embeddings through batches of 10 images per step.'
 sys.stdout.flush()
 # Create a list containing all image_paths. 
-image_files = glob('~/mit67_img_train/*/*')
+image_files = glob('./mit67_img_train/*/*')
 step = 0
 tot = len(image_files)/10
 if len(image_files)%10 > 0:
     tot += 1
 # Batching loop.
 for x_batch, y_batch in input_pipeline(image_files, 10):
+    #print image_files
     t0 = time.time()
     # Preprocessing input images for the vgg16 model.
     x = preprocess_input(x_batch)
