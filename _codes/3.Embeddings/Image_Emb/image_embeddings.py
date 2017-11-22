@@ -31,13 +31,16 @@ def input_pipeline(image_files, batch_size):
             yield x_batch, y_batch
 
 
+#Read the layer name from the command line (it is the second argument, the first argument is the scriptname).
+layer_name=sys.argv[1]
+
 # Load the vgg16 architecture with pre-trained weights using ImageNet2012 dataset.
 base_model = VGG16(weights='imagenet')
 print 'Layers of vgg16 architecture:', [x.name for x in base_model.layers]
-print 'We are building the embedding using activations from layer fc2 (i.e., second fully-connected).'
+print 'We are building the embedding using activations from layer :'+layer_name
 sys.stdout.flush()
 # Define a custom model that given an input, outputs activations from requested layer.
-model = Model(input=base_model.input, output=base_model.get_layer('fc2').output)
+model = Model(input=base_model.input, output=base_model.get_layer(layer_name).output)
 
 # Defining variables where to iteratively save dataset embeddings and labels.
 dataset_emb = np.zeros((0,4096))
@@ -70,5 +73,4 @@ print 'Dataset embedding shape:', dataset_emb.shape
 print 'Length of dataset labels', len(dataset_lab)
 print 'Saving dataset embeddings into mit67_embeddings.npz file...'
 sys.stdout.flush()
-np.savez('mit67_embeddings.npz', embeddings=dataset_emb, labels=dataset_lab)
-
+np.savez('mit67_embeddings_'+layer_name+'.npz', embeddings=dataset_emb, labels=dataset_lab)
