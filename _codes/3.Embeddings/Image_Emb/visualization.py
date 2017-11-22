@@ -1,14 +1,33 @@
 import numpy as np
+import sys
 from sklearn.manifold import TSNE
 from matplotlib import pyplot as plt
 
+n_labels = 5
+
+if len(sys.argv) == 1:
+    print 'usage: visualization.py fileName.npz itemsToVisualize'
+    sys.exit()
+
+if len(sys.argv) == 2:
+    print 'Using default of 5 items to visualize.'
+    print 'If you want to visualize more or less items: visualization.py fileName.npz itemsToVisualize'
+
+if len(sys.argv) == 3:
+    n_labels = int(sys.argv[2])
+
+#Read the name of the file with the embededding from the command line (it is the second argument, the first argument is the scriptname).
+fileName=sys.argv[1]
+
 # Load dataset embeddings and labels.
-obj = np.load('mit67_embeddings.npz')
+obj = np.load(fileName)
 labels = obj['labels']
+print labels
+print labels.shape
+print n_labels
 embeddings = obj['embeddings']
 
 # Set up the subset of labels to visualize.
-n_labels = 5
 _uniq = np.unique(labels)[:n_labels]
 print 'The {n} labels selected to visualize:'.format(n=n_labels), _uniq
 
