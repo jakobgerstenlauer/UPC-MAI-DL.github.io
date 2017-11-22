@@ -25,7 +25,7 @@ def input_pipeline(image_files, batch_size):
             y = img_path.split('/')[-2]
             y_batch.append(y)
         if end_flag:
-            if batch.shape[0]>0:
+            if x_batch.shape[0]>0:
                 yield x_batch, y_batch
         else:
             yield x_batch, y_batch

@@ -8,6 +8,9 @@ This session is for exploring the effects of the different elements of
 RNNs using a specific dataset. In this case we are going to extend the Wind
 prediction example that we used in the previous session.
 
+Deliver your report before **December 22th** using the raco.
+
+
 In the original example we predicted one step of the future wind (next 15 minutes)
 using a window of previous measurements. We can extend the problem in different
 ways:
@@ -92,6 +95,7 @@ because of *insert reason here* and the results were the same/worse)
 
 Use statistics and graphics to support your explanations.
 
-Deliver your report before **December 15th** using the raco.
+
+Deliver your report before **December 22th** using the raco.
 
 

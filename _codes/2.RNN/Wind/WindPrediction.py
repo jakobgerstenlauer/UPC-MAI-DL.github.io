@@ -67,7 +67,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--config', default='config', help='Experiment configuration')
     parser.add_argument('--verbose', help="Verbose output (enables Keras verbose output)", action='store_true', default=False)
-    parser.add_argument('--gpu', help="Use LSTM/GRU grpu implementation", action='store_true', default=False)
+    parser.add_argument('--gpu', help="Use LSTM/GRU gru implementation", action='store_true', default=False)
     args = parser.parse_args()
 
     verbose = 1 if args.verbose else 0
@@ -77,7 +77,7 @@ if __name__ == '__main__':
 
     print("Starting:", time.ctime())
 
-    ############################################
+    ###########################################
     # Data
 
     vars = {0: 'wind_speed', 1: 'air_density', 2: 'temperature', 3: 'pressure'}
