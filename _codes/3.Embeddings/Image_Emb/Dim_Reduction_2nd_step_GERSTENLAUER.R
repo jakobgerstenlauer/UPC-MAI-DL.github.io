@@ -105,10 +105,10 @@ Xs <- as.matrix(scale(X, center = TRUE, scale = FALSE))
 #*****************************************************************************
 
 library(pls)
-m1.pls2 <- plsr(Y ~ Xs, ncomp=500, validation = "none")
+m1.pls2 <- plsr(Y ~ Xs, ncomp=700, validation = "none")
 #summary(m1.pls2)
-setwd(dataDir)
-save(m1.pls2, file="m1.pls2.Unstandardized.70percent")
+#setwd(dataDir)
+#save(m1.pls2, file="m1.pls2.Unstandardized.70percent")
 
 # Plot of R2 for each digit 
 #setwd(plotDir)
@@ -118,15 +118,15 @@ save(m1.pls2, file="m1.pls2.Unstandardized.70percent")
 
 #Inspect the object:
 dim(R2(m1.pls2)$val[1,,])
-#[1]  67 501
+#[1]  67 701
 #rows: response
 #columns: cumulative number of components
 
 #calculate the mean R2 over all digits for an increasing number of components:
 r2.mean<-apply(R2(m1.pls2)$val[1,,],2,mean)
 
-barplot(r2.mean[1:500])
-#It seems that 500 components are sufficient.
+barplot(r2.mean)
+#It seems that 700 components are even better than 500.
 
 
 ###################################################################################################################
@@ -154,14 +154,14 @@ X.test <- as.matrix(d.test[,1:4096])
 #https://stackoverflow.com/questions/13901153/converting-r-factors-into-binary-matrix-values#13901840
 Y.test<-model.matrix( ~ 0 + class, d.test)
 dim(Y.test)
-#[1] 3573 67
+#[1] 1612 67
 
 #assign useful names to the column names:
 dimnames(Y.test)[[2]]<-classLabels
 Y.test.mean<-apply(Y.test,2,mean)
 
 #Using the predict function:
-predictions.test<-predict(m1.pls2, ncomp = 500, newdata = as.matrix(X.test))
+predictions.test<-predict(m1.pls2, ncomp = 150, newdata = as.matrix(X.test))
 dim(predictions.test)
 dim(predictions.test)<-c(1612,67)
 
@@ -210,7 +210,14 @@ empirical_class <- as.numeric(d.test$class)
 confusionMatrix <- table(predicted_class, empirical_class)
 correctPredictions<-sum(diag(confusionMatrix))
 Accuracy<-correctPredictions/sum(confusionMatrix)
-#[1] 0.5626551 (70% training set, results without standardization)
+#[1] 0.6526055 (training set, 150 components, results without standardization)
+#[1] 0.6532258 (training set, 200 components, results without standardization)
+#[1] 0.630273 (training set, 300 components, results without standardization)
+#[1] 0.5880893 (training set, 400 components, results without standardization)
+#[1] 0.5366005 (70% training set, 600 components, results without standardization)
+#[1] 0.498139  (70% training set, 700 components, results without standardization)
+#[1] 0.5626551 (70% training set, 500 components, results without standardization)
+#
 #[1] 0.5242093 (33% training set, results without standardization)
 #[1] 0.5320459 (33% training set, results with standardization of both input and output matrix)
 
