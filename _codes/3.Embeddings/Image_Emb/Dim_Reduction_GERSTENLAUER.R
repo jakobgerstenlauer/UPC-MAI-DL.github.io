@@ -16,8 +16,9 @@
 rm(list=ls(all=TRUE))
 
 #proportion of observations included in training set
-train.prop<-0.3333
-
+#TODO: train.prop<-0.3333
+train.prop<-0.7
+  
 #utility function
 glue<-function(...){paste(...,sep="")}
 
@@ -105,7 +106,7 @@ Xs <- as.matrix(scale(X, center = TRUE, scale = FALSE))
 #*****************************************************************************
 
 library(pls)
-m1.pls2 <- plsr(Y ~ Xs, validation = "none")
+m1.pls2 <- plsr(Y ~ Xs, ncomp=500, validation = "none")
 #summary(m1.pls2)
 setwd(dataDir)
 save(m1.pls2, file="m1.pls2.Standardized")
