@@ -30,12 +30,16 @@ def input_pipeline(image_files, batch_size):
         else:
             yield x_batch, y_batch
 
+
+
+#Read the layer name from the command line (it is the second argument, the first argument is the scriptname).
+layer_name = sys.argv[1]
+
+print 'Name of layer to process: ' + layer_name
+
 if len(sys.argv) == 1:
     print 'usage: image_embeddings.py fc1'
     sys.exit()
-
-#Read the layer name from the command line (it is the second argument, the first argument is the scriptname).
-layer_name=sys.argv[1]
 
 # Load the vgg16 architecture with pre-trained weights using ImageNet2012 dataset.
 base_model = VGG16(weights='imagenet')
